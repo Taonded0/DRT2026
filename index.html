@@ -2770,23 +2770,7 @@ function checkTryCondition() {
     return false;
 }
 
-  
 
-  
-document.getElementById('log').innerText = `🎉 TRY!! ${currentAttacker === 'P1' ? 'YOU' : 'COM'} トライ！！`;
-  
-scheduleGameTimeout(() => { resetKickOff(); }, 2000);
-  
-return true;
-  
-}
-  
-return false;
-  
-}
-  
-
-  
 function switchTurn(reasonText) {
   
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
