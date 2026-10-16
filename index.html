@@ -2693,25 +2693,83 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
   
 
   
-function checkTryCondition() {
-  
-if ((currentAttacker === 'P1' && ballY <= 0) || (currentAttacker === 'COM' && ballY >= TOTAL_LINES - 1)) {
-  
-playTrySound();
-  
-if (currentAttacker === 'P1') p1Tries++; else comTries++;
-  
-document.getElementById('score-text').innerText = `${p1Tries} - ${comTries}`;
-  
 
-  
-if (p1Tries >= WINNING_TRIES || comTries >= WINNING_TRIES) {
-  
-showGameSetModal(p1Tries >= WINNING_TRIES ? 'P1' : 'COM');
-  
-return true;
-  
+function checkTryCondition() {
+    if (
+        (currentAttacker === 'P1' && ballY <= 0) ||
+        (currentAttacker === 'COM' && ballY >= TOTAL_LINES - 1)
+    ) {
+        // 既存のトライ音を再生
+        playTrySound();
+
+        // 既存の得点処理
+        if (currentAttacker === 'P1') {
+            p1Tries++;
+        } else {
+            comTries++;
+        }
+
+        document.getElementById('score-text').innerText =
+            `${p1Tries} - ${comTries}`;
+
+        // 5トライ目かどうかを判定
+        const isFinal =
+            p1Tries >= WINNING_TRIES ||
+            comTries >= WINNING_TRIES;
+
+        // YOU / COM に応じた演出色とメッセージ
+        const isP1 = currentAttacker === 'P1';
+        const winner = isP1 ? 'P1' : 'COM';
+
+        const celebration = document.getElementById('try-celebration');
+        const title = celebration.querySelector('.try-title');
+        const subtitle = celebration.querySelector('.try-subtitle');
+
+        celebration.style.setProperty(
+            '--try-color',
+            isP1 ? '#00f2fe' : '#ff2a6d'
+        );
+
+        if (isFinal) {
+            title.innerText = isP1 ? 'VICTORY!!' : 'DEFEAT...';
+            subtitle.innerText = 'FULL TIME';
+            celebration.style.setProperty(
+                '--try-color',
+                isP1 ? '#ffeaa7' : '#ff2a6d'
+            );
+        } else {
+            title.innerText = 'TRY!!';
+            subtitle.innerText = isP1 ? 'YOU SCORED!' : 'COM SCORED!';
+        }
+
+        // アニメーションを毎回最初から再生
+        celebration.classList.remove('show');
+        void celebration.offsetWidth;
+        celebration.classList.add('show');
+
+        if (isFinal) {
+            // 演出後に既存の試合終了モーダルを表示
+            scheduleGameTimeout(() => {
+                showGameSetModal(winner);
+            }, 1700);
+
+            return true;
+        }
+
+        // 通常トライは従来どおり2秒後にキックオフ
+        document.getElementById('log').innerText =
+            `🎉 TRY!! ${isP1 ? 'YOU' : 'COM'} トライ！！`;
+
+        scheduleGameTimeout(() => {
+            resetKickOff();
+        }, 2000);
+
+        return true;
+    }
+
+    return false;
 }
+
   
 
   
