@@ -3148,5 +3148,35 @@ window.addEventListener('DOMContentLoaded', () => {
 setupBoard();
   
 });
-  
+ 
+/* ===== スマホ画面消灯時の停止処理 ===== */
+
+function stopGameOnHidden() {
+    if (document.visibilityState === 'hidden') {
+        // COMなどの予約済み処理を停止
+        if (typeof clearGameTimers === 'function') {
+            clearGameTimers();
+        }
+
+        // 効果音を一時停止
+        if (
+            typeof audioCtx !== 'undefined' &&
+            audioCtx &&
+            audioCtx.state !== 'closed'
+        ) {
+            audioCtx.suspend().catch(() => {});
+        }
+    }
+}
+
+document.addEventListener(
+    'visibilitychange',
+    stopGameOnHidden
+);
+
+window.addEventListener(
+    'pagehide',
+    stopGameOnHidden
+);
+ 
 </script></body></html>
