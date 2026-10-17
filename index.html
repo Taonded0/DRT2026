@@ -5017,11 +5017,7 @@ return;
 
 }
 
-  
 
-
-
-  
 
 let cpuWantsJackal = false;
 
@@ -5032,10 +5028,6 @@ let cpuWantsJackal = false;
   
 
 const isMidOrLateGame = (p1Tries >= 3 || comTries >= 3 || (p1Tries + comTries) >= 4);
-
-  
-
-
 
   
 
@@ -5057,11 +5049,7 @@ else if (targetY <= 2 && Math.random() < 0.7) cpuWantsJackal = true;
 
 }
 
-  
 
-
-
-  
 
 if (cpuWantsJackal) {
 
@@ -5077,11 +5065,7 @@ return;
 
 }
 
-  
 
-
-
-  
 
 if (isTO) {
 
@@ -5101,11 +5085,7 @@ return;
 
 }
 
-  
 
-
-
-  
 
 if (isOffload) {
 
@@ -5165,11 +5145,6 @@ if (opTargetY < 0) opTargetY = 0;
 
 if (opTargetY >= TOTAL_LINES) opTargetY = TOTAL_LINES - 1;
 
-  
-
-
-
-  
 
 playGainSound(true);
 
@@ -5185,11 +5160,7 @@ ballY = opTargetY;
 
 document.getElementById('ball-token').style.top = linePositionsY[ballY] + '%';
 
-  
 
-
-
-  
 
 scheduleGameTimeout(() => {
 
@@ -5223,10 +5194,6 @@ return;
 
   
 
-
-
-  
-
 nextPhase();
 
   
@@ -5236,9 +5203,6 @@ nextPhase();
   
 
 }
-
-  
-
 
 
   
@@ -5269,19 +5233,13 @@ return;
 
 }
 
-  
-
 
 
   
 
 document.getElementById('phase-num').innerText = currentPhase + '/5';
 
-  
 
-
-
-  
 
 if (currentAttacker === 'P1') {
 
@@ -5310,12 +5268,6 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 
   
-
-
-
-  
-
-
 
 function checkTryCondition() {
 
@@ -5555,10 +5507,6 @@ document.getElementById('log').innerText = `あなたの攻撃ターン！`;
 
   
 
-
-
-  
-
 function switchTurnToGoalLine(reasonText) {
 
   
@@ -5581,19 +5529,11 @@ ballY = (currentAttacker === 'COM') ? TOTAL_LINES - 3 : 2;
 
 ballX = 2;
 
-  
 
-
-
-  
 
 document.getElementById('log').innerText = reasonText;
 
-  
 
-
-
-  
 
 scheduleGameTimeout(() => {
 
@@ -5609,11 +5549,7 @@ updateDisplayImmediate();
 
 updateAvailableChannels();
 
-  
 
-
-
-  
 
 if (currentAttacker === 'COM') {
 
@@ -5653,15 +5589,7 @@ document.getElementById('log').innerText = `相手ゴール付近からのトラ
 
 }
 
-  
 
-
-
-  
-
-
-
-  
 
 function resetKickOff(nextAttacker = null) {
 
@@ -5677,11 +5605,7 @@ function resetKickOff(nextAttacker = null) {
 
     currentPhase = 1;
 
-  
 
-
-
-  
 
     // 指定があればその攻撃側で開始。
 
@@ -5697,11 +5621,6 @@ function resetKickOff(nextAttacker = null) {
 
         (currentAttacker === 'P1' ? 'COM' : 'P1');
 
-  
-
-
-
-  
 
     pendingPlayData = null;
 
@@ -5713,11 +5632,6 @@ function resetKickOff(nextAttacker = null) {
 
     window.jackalTimer = null;
 
-  
-
-
-
-  
 
     updateDisplayImmediate();
 
@@ -5725,11 +5639,7 @@ function resetKickOff(nextAttacker = null) {
 
     updateAvailableChannels();
 
-  
 
-
-
-  
 
     if (currentAttacker === 'COM') {
 
@@ -5745,11 +5655,6 @@ function resetKickOff(nextAttacker = null) {
 
             'COMのアタックで再開！';
 
-  
-
-
-
-  
 
         scheduleGameTimeout(() => {
 
@@ -5785,35 +5690,16 @@ function resetKickOff(nextAttacker = null) {
 
 }
 
-  
-
-
-
-  
-
-
-
-  
 
 function lockControls(isLock) {
 
-  
-
 document.getElementById('channel-select').disabled = isLock;
-
-  
 
 document.getElementById('roll-btn').disabled = isLock;//
 
-  
 
 }
 
-  
-
-
-
-  
 
 function showGameSetModal(winner) {
 
@@ -5829,19 +5715,9 @@ function showGameSetModal(winner) {
 
     isJackalWindowOpen = false;
 
-  
-
-
-
-  
 
     const modal = document.getElementById('modal-overlay');
 
-  
-
-  
-
-  
 
   // 安全装置：modal-headerが存在する場合のみ非表示にする
 
@@ -5856,14 +5732,7 @@ function showGameSetModal(winner) {
   
 
     modalHeader.style.display = 'none';
-
-  
-
   }
-
-  
-
-  
 
   
 
@@ -5879,19 +5748,11 @@ function showGameSetModal(winner) {
 
   
 
-  
-
-  
-
   const body = document.getElementById('modal-body');
 
   
 
   const isP1Win = (winner === 'P1');
-
-  
-
-
 
   
 
@@ -5945,15 +5806,6 @@ function showGameSetModal(winner) {
 
 }
 
-  
-
-
-
-  
-
-
-
-  
 
 function restartGame() {
 
@@ -5965,11 +5817,6 @@ function restartGame() {
 
     clearGameTimers();
 
-  
-
-
-
-  
 
     p1Tries = 0;
 
@@ -5985,11 +5832,7 @@ function restartGame() {
 
     comJackalCount = 2;
 
-  
 
-
-
-  
 
     currentAttacker = 'P1';
 
@@ -6006,22 +5849,12 @@ function restartGame() {
     isJackalWindowOpen = false;
 
   
-
-
-
-  
-
     document.getElementById('modal-overlay').style.display = 'none';
 
   
 
     restoreTutorialModalText();
 
-  
-
-
-
-  
 
     // 新しい試合は必ずYOUから開始
 
@@ -6032,16 +5865,6 @@ function restartGame() {
   
 
 }
-
-  
-
-
-
-  
-
-
-
-  
 
 function restoreTutorialModalText() {
 
@@ -6101,12 +5924,6 @@ document.getElementById('modal-body').innerHTML = `
 
 </div>
 
-  
-
-
-
-  
-
 <div class="tutorial-section">
 
   
@@ -6117,137 +5934,74 @@ document.getElementById('modal-body').innerHTML = `
 
 <p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時は不可）<br>
 
-  
-
 ・<strong>成功確率</strong>：-2は4/6、-1は3/6、0は2/6、前進時は1/6。<br>
 
-  
-
-・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
-
-  
+・<strong>成功時</strong>：権利消費なしでボール奪取！<br> 
 
 ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
 
-  
-
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 
-  
-
 </div>
-
-  
-
-
-
-  
 
 <div class="tutorial-section">
 
-  
-
 <h4>【勝利条件】</h4>
 
-  
-
 <p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！</p>
-
-  
+ 
 
 </div>
-
-  
+ 
 
 `;
-
-  
-
 }
-
-  
-
-
-
-  
 
 function openTutorialModal() {
 
-  
-
 restoreTutorialModalText();
 
-  
-
 document.getElementById('modal-overlay').style.display = 'flex';
-
-  
+ 
 
 }
-
-  
-
-
-
-  
 
 function closeTutorialModal(event) {
 
-  
-
 if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
-
-  
 
 document.getElementById('modal-overlay').style.display = 'none';
 
-  
-
 }
 
-  
-
 }
-
-  
-
-
-
-  
 
 window.addEventListener('DOMContentLoaded', () => {
 
-  
-
 setupBoard();
-
-  
 
 });
 
- 
-
 /* ===== スマホ画面消灯時の停止処理 ===== */
-
-
-
+function suspendGameAudio() {
+    if (
+        audioCtx &&
+        audioCtx.state !== 'closed'
+    ) {
+        audioCtx.suspend().catch(() => {});
+    }
+}
 
 function stopGameOnHidden() {
     if (document.visibilityState === 'hidden') {
-        // タイマーは消去しない。ゲームを一時停止させる
-        if (
-            typeof audioCtx !== 'undefined' &&
-            audioCtx &&
-            audioCtx.state !== 'closed'
-        ) {
-            audioCtx.suspend().catch(() => {});
-        }
+        // ゲーム用タイマーは消去せず、音声だけ停止する
+        suspendGameAudio();
     }
 }
 
 document.addEventListener('visibilitychange', stopGameOnHidden);
-window.addEventListener('pagehide', stopGameOnHidden);
 
- 
+// ページが離脱するときは、表示状態にかかわらず音声を停止
+window.addEventListener('pagehide', suspendGameAudio);
 
 </script></body></html>
