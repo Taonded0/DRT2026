@@ -1,1184 +1,2365 @@
 <!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.1, maximum-scale=1.1, user-scalable=no">
+
   <title>DICE RUGBY TACTICS - VS CPU</title>
+
   
+
 <style>
+
   
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Noto+Sans+JP:wght@500;700;900&display=swap');
+
 body {
+
   
+
 font-family: 'Orbitron', 'Noto Sans JP', -apple-system, sans-serif;
+
   
+
 background: #090a0f;
+
   
+
 background-image: 
+
   
+
 radial-gradient(circle at 50% 10%, rgba(0, 242, 254, 0.15) 0%, transparent 60%),
+
   
+
 radial-gradient(circle at 80% 80%, rgba(255, 42, 109, 0.08) 0%, transparent 50%);
+
   
+
 color: #e2e8f0;
+
   
+
 text-align: center;
+
   
+
 margin: 0;
+
   
+
 padding: 6px 2px;
+
   
+
 box-sizing: border-box;
+
   
+
 overflow: hidden;
+
   
+
 user-select: none;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 /* ヘッダー */
+
   
+
 #game-header {
+
   
+
 width: 285px;
+
   
+
 margin: 0 auto 4px auto;
+
   
+
 background: rgba(18, 24, 38, 0.75);
+
   
+
 backdrop-filter: blur(12px);
+
   
+
 -webkit-backdrop-filter: blur(12px);
+
   
+
 border-radius: 8px;
+
   
+
 border: 1px solid rgba(0, 242, 254, 0.3);
+
   
+
 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(0, 242, 254, 0.1);
+
   
+
 padding: 4px 8px;
-  
-box-sizing: border-box;
-  
-display: flex;
-  
-justify-content: space-between;
-  
-align-items: center;
-  
-}
-  
 
   
+
+box-sizing: border-box;
+
+  
+
+display: flex;
+
+  
+
+justify-content: space-between;
+
+  
+
+align-items: center;
+
+  
+
+}
+
+  
+
+
+
+  
+
 .header-spacer { width: 22px; flex-shrink: 0; }
-  
 
   
+
+
+
+  
+
 #game-title {
+
   
+
 font-size: 15px;
+
   
+
 color: #ffffff;
+
   
+
 font-weight: 800;
+
   
+
 letter-spacing: 0.5px;
+
   
+
 margin: 0;
+
   
+
 white-space: nowrap;
+
   
+
 text-align: center;
+
   
+
 flex-grow: 1;
+
   
+
 text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 .rule-btn {
+
   
+
 background: rgba(255, 255, 255, 0.05);
+
   
+
 color: #00f2fe;
+
   
+
 font-size: 12px;
+
   
+
 border-radius: 4px;
+
   
+
 border: 1px solid rgba(0, 242, 254, 0.4);
+
   
+
 cursor: pointer;
+
   
+
 font-weight: bold;
+
   
+
 flex-shrink: 0;
+
   
+
 width: 22px;
-  
-height: 20px;
-  
-display: flex;
-  
-align-items: center;
-  
-justify-content: center;
-  
-}
-  
 
   
+
+height: 20px;
+
+  
+
+display: flex;
+
+  
+
+align-items: center;
+
+  
+
+justify-content: center;
+
+  
+
+}
+
+  
+
+
+
+  
+
 #game-container {
+
   
+
 display: flex;
+
   
+
 flex-direction: column;
+
   
+
 align-items: center;
+
   
+
 max-width: 320px;
+
   
+
 margin: 0 auto;
+
   
+
 gap: 4px;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #board-wrapper {
+
   
+
 position: relative;
+
   
+
 width: 285px;
+
   
+
 height: 240px;
+
   
+
 background-color: #0c1421;
+
   
+
 background-image: 
+
   
+
 linear-gradient(rgba(0, 242, 254, 0.05) 1px, transparent 1px),
+
   
+
 linear-gradient(90deg, rgba(0, 242, 254, 0.05) 1px, transparent 1px);
+
   
+
 background-size: 10px 10px;
+
   
+
 border: 1px solid rgba(0, 242, 254, 0.4);
+
   
+
 box-shadow: 0 0 15px rgba(0, 0, 0, 0.8), 0 0 8px rgba(0, 242, 254, 0.15);
+
   
+
 box-sizing: border-box;
+
   
+
 margin: 0 auto;
+
   
+
 border-radius: 8px;
+
   
+
 display: flex;
+
   
+
 flex-direction: column;
+
   
+
 flex-shrink: 0;
+
   
+
 overflow: hidden;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 /* 上下インゴール */
+
   
+
 .ingoal-zone {
+
   
+
 width: 100%;
+
   
+
 height: 18px;
+
   
+
 position: relative;
+
   
+
 box-sizing: border-box;
+
   
+
 flex-shrink: 0;
+
   
+
 display: flex;
+
   
+
 align-items: center;
+
   
+
 justify-content: center;
+
   
+
 font-size: 10px;
+
   
+
 font-weight: 800;
+
   
+
 letter-spacing: 1px;
+
   
+
 }
+
   
+
 .ingoal-top {
+
   
+
 background: linear-gradient(180deg, rgba(0, 242, 254, 0.3) 0%, rgba(0, 242, 254, 0.05) 100%);
+
   
+
 border-bottom: 1.5px solid rgba(0, 242, 254, 0.8);
+
   
+
 color: #00f2fe;
+
   
+
 }
+
   
+
 .ingoal-bottom {
+
   
+
 background: linear-gradient(0deg, rgba(255, 42, 109, 0.3) 0%, rgba(255, 42, 109, 0.05) 100%);
+
   
+
 border-top: 1.5px solid rgba(255, 42, 109, 0.8);
+
   
+
 color: #ff2a6d;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #field-container {
+
   
+
 position: relative;
-  
-width: 100%;
-  
-flex-grow: 1;
-  
-}
-  
 
   
+
+width: 100%;
+
+  
+
+flex-grow: 1;
+
+  
+
+}
+
+  
+
+
+
+  
+
 .v-line {
+
   
+
 position: absolute;
+
   
+
 top: 0; bottom: 0;
+
   
+
 width: 1px;
-  
-background-color: rgba(255, 255, 255, 0.15);
-  
-z-index: 2;
-  
-}
-  
 
   
+
+background-color: rgba(255, 255, 255, 0.15);
+
+  
+
+z-index: 2;
+
+  
+
+}
+
+  
+
+
+
+  
+
 .h-line {
+
   
+
 position: absolute;
+
   
+
 left: 0; right: 0;
+
   
+
 height: 1px;
+
   
+
 background-color: rgba(255, 255, 255, 0.15);
+
   
+
 z-index: 2;
+
   
+
 }
+
   
+
 .h-line.center-line {
+
   
+
 border-top: 1px dashed rgba(255, 255, 255, 0.5);
+
   
+
 background: none;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #ball-token {
+
   
+
 position: absolute;
+
   
+
 width: 10px;
+
   
+
 height: 18px;
+
   
+
 border-radius: 50% / 50%;
+
   
+
 transition: left 0.25s linear, top 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
   
+
 transform: translate(-50%, -50%) rotate(-15deg);
+
   
+
 box-shadow: 0 0 10px #00f2fe, 0 0 20px #00f2fe;
+
   
+
 z-index: 10;
+
   
+
 background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #00f2fe 70%, #006699 100%);
+
   
+
 border: 1px solid #ffffff;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #ball-token.com-ball {
+
   
+
 box-shadow: 0 0 10px #ff2a6d, 0 0 20px #ff2a6d;
+
   
+
 background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #ff2a6d 70%, #990033 100%);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #controls {
+
   
+
 width: 285px;
+
   
+
 background: rgba(18, 24, 38, 0.75);
+
   
+
 backdrop-filter: blur(12px);
+
   
+
 -webkit-backdrop-filter: blur(12px);
+
   
+
 padding: 5px;
+
   
+
 border-radius: 8px;
+
   
+
 box-sizing: border-box;
+
   
+
 border: 1px solid rgba(255, 255, 255, 0.08);
+
   
+
 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 .control-row {
+
   
+
 display: flex;
+
   
+
 gap: 5px;
+
   
+
 margin-bottom: 3px;
+
   
+
 align-items: stretch;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 .control-col-left {
+
   
+
 width: 110px;
+
   
+
 background: rgba(10, 14, 23, 0.8);
+
   
+
 border: 1px solid rgba(255, 255, 255, 0.08);
+
   
+
 border-radius: 6px;
+
   
+
 padding: 3px 5px;
+
   
+
 font-size: 10px;
+
   
+
 display: flex;
+
   
+
 flex-direction: column;
+
   
+
 justify-content: space-around;
-  
-text-align: left;
-  
-box-sizing: border-box;
-  
-flex-shrink: 0;
-  
-}
-  
 
   
+
+text-align: left;
+
+  
+
+box-sizing: border-box;
+
+  
+
+flex-shrink: 0;
+
+  
+
+}
+
+  
+
+
+
+  
+
 .control-col-right {
+
   
+
 flex: 1;
+
   
+
 display: flex;
+
   
+
 flex-direction: column;
+
   
+
 text-align: left;
+
   
+
 background: rgba(10, 14, 23, 0.8);
+
   
+
 border: 1px solid rgba(255, 255, 255, 0.08);
-  
-border-radius: 6px;
-  
-padding: 4px 6px;
-  
-box-sizing: border-box;
-  
-}
-  
 
   
+
+border-radius: 6px;
+
+  
+
+padding: 4px 6px;
+
+  
+
+box-sizing: border-box;
+
+  
+
+}
+
+  
+
+
+
+  
+
 .status-item {
+
   
+
 display: flex;
+
   
+
 justify-content: space-between;
+
   
+
 align-items: center;
+
   
+
 color: #94a3b8;
-  
-width: 100%;
-  
-}
-  
 
   
+
+width: 100%;
+
+  
+
+}
+
+  
+
+
+
+  
+
 label { font-size: 10px; color: #00f2fe; font-weight: 700; letter-spacing: 0.5px; }
-  
 
   
+
+
+
+  
+
 select {
+
   
+
 font-family: inherit;
+
   
+
 font-size: 11px;
+
   
+
 font-weight: 700;
+
   
+
 padding: 2px 4px;
+
   
+
 border-radius: 4px;
+
   
+
 border: 1px solid rgba(0, 242, 254, 0.3);
+
   
+
 width: 100%;
+
   
+
 box-sizing: border-box;
+
   
+
 background: #0d131d;
+
   
+
 color: #ffffff;
+
   
+
 margin-bottom: 4px;
+
   
+
 outline: none;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #controls button#roll-btn {
+
   
+
 background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+
   
+
 color: #090a0f;
+
   
+
 font-family: 'Orbitron', sans-serif;
+
   
+
 font-size: 12px;
+
   
+
 font-weight: 900;
+
   
+
 cursor: pointer;
+
   
+
 padding: 6px;
+
   
+
 letter-spacing: 1px;
+
   
+
 border-radius: 4px;
+
   
+
 border: none;
+
   
+
 box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+
   
+
 transition: all 0.2s;
+
   
+
 margin-top: 4px;
+
   
+
 }
+
   
+
 #controls button#roll-btn.is-jackal {
+
   
+
 background: linear-gradient(135deg, #ff7675 0%, #d63031 100%);
+
   
+
 color: #ffffff;
+
   
+
 box-shadow: 0 0 12px rgba(255, 118, 117, 0.6);
+
   
+
 }
+
   
+
 #controls button#roll-btn:disabled {
+
   
+
 background: #1e293b;
+
   
+
 color: #475569;
+
   
+
 box-shadow: none;
+
   
+
 cursor: not-allowed;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #dice-result-container {
+
   
+
 display: flex;
+
   
+
 align-items: center;
+
   
+
 gap: 5px;
+
   
+
 width: 100%;
+
   
+
 margin: 3px 0;
-  
-box-sizing: border-box;
-  
-}
-  
 
   
+
+box-sizing: border-box;
+
+  
+
+}
+
+  
+
+
+
+  
+
 #dice-color-box {
+
   
+
 width: 105px;
+
   
+
 height: 20px;
+
   
+
 border-radius: 3px;
+
   
+
 border: 1px solid rgba(255, 255, 255, 0.2);
+
   
+
 background-color: #1e293b;
+
   
+
 flex-shrink: 0;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #dice-text-box {
+
   
+
 flex-grow: 1;
+
   
+
 height: 20px;
+
   
+
 border-radius: 3px;
+
   
+
 border: 1px solid rgba(255, 255, 255, 0.1);
+
   
+
 display: flex;
+
   
+
 align-items: center;
+
   
+
 justify-content: center;
+
   
+
 font-weight: 700;
+
   
+
 font-size: 15px;
+
   
+
 background-color: rgba(10, 14, 23, 0.9);
+
   
+
 color: #ffffff;
+
   
+
 letter-spacing: 0.5px;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 #log {
+
   
+
 font-size: 10.5px;
+
   
+
 font-weight: 500;
+
   
+
 color: #cbd5e1;
+
   
+
 min-height: 22px;
+
   
+
 background: rgba(10, 14, 23, 0.9);
+
   
+
 padding: 4px 6px;
-  
-border-radius: 4px;
-  
-border: 1px solid rgba(255, 255, 255, 0.05);
-  
-text-align: left;
-  
-box-sizing: border-box;
-  
-display: flex;
-  
-align-items: center;
-  
-}
-  
 
   
+
+border-radius: 4px;
+
+  
+
+border: 1px solid rgba(255, 255, 255, 0.05);
+
+  
+
+text-align: left;
+
+  
+
+box-sizing: border-box;
+
+  
+
+display: flex;
+
+  
+
+align-items: center;
+
+  
+
+}
+
+  
+
+
+
+  
+
 #channel-guide-panel {
+
   
+
 background: rgba(10, 14, 23, 0.8);
+
   
+
 border: 1px solid rgba(255, 255, 255, 0.05);
+
   
+
 border-radius: 6px;
+
   
+
 padding: 4px 5px;
+
   
+
 margin-top: 2px;
+
   
+
 box-sizing: border-box;
+
   
+
 text-align: left;
+
   
+
 }
+
   
+
 #channel-guide-title {
+
   
+
 font-size: 10px;
+
   
+
 color: #00f2fe;
+
   
+
 font-weight: 700;
+
   
+
 margin-bottom: 3px;
+
   
+
 border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
   
+
 }
+
   
+
 .channel-guide-item {
+
   
+
 display: flex;
+
   
+
 justify-content: space-between;
+
   
+
 align-items: center;
+
   
+
 margin-bottom: 2px;
+
   
+
 font-size: 11px;
+
   
+
 }
+
   
+
 .channel-guide-name { color: #ffffff; width: 88px; overflow: hidden; white-space: nowrap; font-weight: 500; }
+
   
+
 .channel-guide-colors { display: flex; gap: 1.5px; }
-  
 
   
+
+
+
+  
+
 #modal-overlay {
-  
-position: fixed;
-  
-top: 0; left: 0; width: 100%; height: 100%;
-  
-background: rgba(5, 7, 12, 0.85);
-  
-backdrop-filter: blur(8px);
-  
-display: none;
-  
-justify-content: center;
-  
-align-items: center;
-  
-z-index: 100;
-  
-}
-  
-#modal-content {
-  
-background: #0d131d;
-  
-border: 1px solid rgba(0, 242, 254, 0.4);
-  
-border-radius: 10px;
-  
-width: 90%;
-  
-max-width: 300px;
-  
-padding: 12px;
-  
-box-sizing: border-box;
-  
-display: flex;
-  
-flex-direction: column;
-  
-text-align: left;
-  
-}
-  
-#modal-header {
-  
-display: flex; justify-content: space-between; align-items: center;
-  
-border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 6px; margin-bottom: 8px;
-  
-}
-  
-#modal-title { font-size: 13px; color: #00f2fe; font-weight: 700; }
-  
-.close-btn { background: rgba(255, 255, 255, 0.05); color: #94a3b8; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; font-size: 10px; padding: 2px 8px; cursor: pointer; }
-  
-#modal-body { font-size: 10.5px; line-height: 1.5; color: #cbd5e1; }
-  
-.tutorial-section { margin-bottom: 8px; background: rgba(255, 255, 255, 0.03); padding: 6px; border-radius: 4px; border-left: 3px solid #00f2fe; }
-  
-.tutorial-section h4 { margin: 0 0 3px 0; color: #00f2fe; font-size: 11px; }
-  
-.tutorial-section p { margin: 0; }
-  
 
   
-.restart-btn {
+
+position: fixed;
+
   
-background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+
+top: 0; left: 0; width: 100%; height: 100%;
+
   
-color: #090a0f;
+
+background: rgba(5, 7, 12, 0.85);
+
   
-font-weight: bold;
+
+backdrop-filter: blur(8px);
+
   
-border: none;
+
+display: none;
+
   
-border-radius: 4px;
+
+justify-content: center;
+
   
-padding: 6px 12px;
+
+align-items: center;
+
   
-margin-top: 8px;
+
+z-index: 100;
+
   
-cursor: pointer;
-  
-font-family: inherit;
-  
-font-size: 12px;
-  
+
 }
+
+  
+
+#modal-content {
+
+  
+
+background: #0d131d;
+
+  
+
+border: 1px solid rgba(0, 242, 254, 0.4);
+
+  
+
+border-radius: 10px;
+
+  
+
+width: 90%;
+
+  
+
+max-width: 300px;
+
+  
+
+padding: 12px;
+
+  
+
+box-sizing: border-box;
+
+  
+
+display: flex;
+
+  
+
+flex-direction: column;
+
+  
+
+text-align: left;
+
+  
+
+}
+
+  
+
+#modal-header {
+
+  
+
+display: flex; justify-content: space-between; align-items: center;
+
+  
+
+border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 6px; margin-bottom: 8px;
+
+  
+
+}
+
+  
+
+#modal-title { font-size: 13px; color: #00f2fe; font-weight: 700; }
+
+  
+
+.close-btn { background: rgba(255, 255, 255, 0.05); color: #94a3b8; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 4px; font-size: 10px; padding: 2px 8px; cursor: pointer; }
+
+  
+
+#modal-body { font-size: 10.5px; line-height: 1.5; color: #cbd5e1; }
+
+  
+
+.tutorial-section { margin-bottom: 8px; background: rgba(255, 255, 255, 0.03); padding: 6px; border-radius: 4px; border-left: 3px solid #00f2fe; }
+
+  
+
+.tutorial-section h4 { margin: 0 0 3px 0; color: #00f2fe; font-size: 11px; }
+
+  
+
+.tutorial-section p { margin: 0; }
+
+  
+
+
+
+  
+
+.restart-btn {
+
+  
+
+background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+
+  
+
+color: #090a0f;
+
+  
+
+font-weight: bold;
+
+  
+
+border: none;
+
+  
+
+border-radius: 4px;
+
+  
+
+padding: 6px 12px;
+
+  
+
+margin-top: 8px;
+
+  
+
+cursor: pointer;
+
+  
+
+font-family: inherit;
+
+  
+
+font-size: 12px;
+
+  
+
+}
+
+
 
 /* ===== スマートフォン対応 ===== */
 
+
+
 * {
+
     box-sizing: border-box;
+
 }
+
+
 
 html {
+
     min-height: 100%;
+
     -webkit-text-size-adjust: 100%;
+
     text-size-adjust: 100%;
+
 }
+
+
 
 body {
+
     width: 100%;
+
     min-height: 100vh;
+
     min-height: 100dvh;
+
     padding: 6px 4px 16px;
+
     overflow-x: hidden;
+
     overflow-y: auto;
+
     -webkit-overflow-scrolling: touch;
+
 }
+
+
 
 #game-container {
+
     width: 100%;
+
     max-width: 320px;
+
     min-width: 0;
+
     margin-inline: auto;
+
     padding-bottom: 8px;
+
 }
+
+
 
 #game-header,
+
 #controls,
-#board-wrapper {
-    width: min(285px, calc(100vw - 16px));
-    max-width: 100%;
-}
 
 #board-wrapper {
-    height: 240px;
-    flex-shrink: 0;
+
+    width: min(285px, calc(100vw - 16px));
+
+    max-width: 100%;
+
 }
+
+
+
+#board-wrapper {
+
+    height: 240px;
+
+    flex-shrink: 0;
+
+}
+
+
 
 #game-title {
+
     min-width: 0;
+
     font-size: clamp(11px, 4vw, 15px);
+
     letter-spacing: 0.2px;
+
 }
+
+
 
 #controls {
+
     min-width: 0;
+
 }
+
+
 
 .control-row {
+
     min-width: 0;
+
 }
+
+
 
 .control-col-left {
+
     width: 40%;
+
     min-width: 0;
+
     flex-shrink: 0;
+
     overflow-wrap: anywhere;
+
 }
+
+
 
 .control-col-right {
+
     min-width: 0;
+
 }
+
+
 
 #channel-select,
+
 #roll-btn {
+
     min-height: 34px;
+
 }
+
+
 
 #controls button#roll-btn {
+
     touch-action: manipulation;
+
 }
+
+
 
 .rule-btn,
+
 .close-btn,
+
 .restart-btn {
+
     touch-action: manipulation;
+
     -webkit-tap-highlight-color: transparent;
+
 }
+
+
 
 /* チュートリアル・試合終了モーダル */
+
 #modal-overlay {
+
     position: fixed;
+
     inset: 0;
+
     width: 100%;
+
     height: 100%;
+
     height: 100dvh;
+
     padding: 12px;
+
     overflow-y: auto;
+
     -webkit-overflow-scrolling: touch;
+
     align-items: center;
+
     justify-content: center;
+
 }
+
+
 
 #modal-content {
+
     width: min(300px, 100%);
+
     max-width: 100%;
+
     max-height: calc(100vh - 24px);
+
     max-height: calc(100dvh - 24px);
+
     min-height: 0;
+
     overflow-y: auto;
+
     overscroll-behavior: contain;
+
     flex-shrink: 0;
+
 }
+
+
 
 #modal-body {
+
     overflow-wrap: anywhere;
+
 }
+
+
 
 .tutorial-section {
+
     overflow-wrap: anywhere;
+
 }
+
+
 
 @media (max-width: 300px) {
+
     #game-header,
+
     #controls,
+
     #board-wrapper {
+
         width: calc(100vw - 16px);
+
     }
+
+
 
     #controls {
+
         padding: 4px;
+
     }
+
+
 
     .control-row {
+
         gap: 4px;
+
     }
+
+
 
     .control-col-left {
+
         font-size: 9px;
+
         padding: 3px;
+
     }
+
+
 
     .control-col-right {
+
         padding: 4px;
+
     }
+
+
 
     #dice-color-box {
+
         width: 34%;
+
     }
+
+
 
     .channel-guide-name {
+
         width: 76px;
+
         font-size: 10px;
+
     }
+
+
 
     #channel-guide-list .channel-guide-item {
+
         min-width: 0;
+
     }
+
+
 
     #channel-guide-list .channel-guide-colors {
+
         gap: 1px;
+
         min-width: 0;
+
     }
+
+
 
     #channel-guide-list .channel-guide-colors span {
+
         width: 17px !important;
+
         padding-inline: 1px !important;
+
         font-size: 8px !important;
+
     }
+
+
 
     #modal-title {
+
         font-size: 11px;
+
     }
+
 }
+
+
 
 @media (max-height: 500px) {
+
     #modal-overlay {
+
         align-items: flex-start;
+
     }
 
+
+
     #modal-content {
+
         margin-block: auto;
+
     }
+
 }
+
+
+
 
 
 /* ===== スマートフォン：モーダルのスクロール修正 ===== */
 
+
+
 #modal-overlay {
+
     position: fixed;
+
     inset: 0;
+
     width: 100%;
+
     height: 100vh;
+
     height: 100dvh;
 
+
+
     box-sizing: border-box;
+
     padding: 12px 8px;
 
+
+
     display: none;
+
     overflow: hidden;
 
+
+
     align-items: center;
+
     justify-content: center;
 
+
+
     z-index: 100;
+
     touch-action: pan-y;
+
 }
 
+
+
 #modal-content {
+
     box-sizing: border-box;
 
+
+
     width: min(300px, 100%);
+
     max-width: 100%;
 
+
+
     max-height: calc(100vh - 24px);
+
     max-height: calc(100dvh - 24px);
+
+
 
     min-height: 0;
 
+
+
     display: flex;
+
     flex-direction: column;
 
+
+
     overflow-x: hidden;
+
     overflow-y: auto;
 
+
+
     -webkit-overflow-scrolling: touch;
+
     overscroll-behavior-y: contain;
+
     touch-action: pan-y;
 
+
+
     flex-shrink: 1;
+
     margin: 0;
+
 }
+
+
 
 #modal-header {
+
     flex-shrink: 0;
+
 }
+
+
 
 #modal-body {
+
     min-width: 0;
+
     overflow-wrap: anywhere;
+
 }
 
+
+
 .tutorial-section {
+
     overflow-wrap: anywhere;
+
 }
+
+
 
 /* ===== 修正ここまで ===== */
 
 
+
+
+
 /* ===== トライ・セレブレーション演出 ===== */
 
+
+
 #try-celebration {
+
     --try-color: #00f2fe;
 
+
+
     position: fixed;
+
     inset: 0;
+
     z-index: 90;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
+
+
     pointer-events: none;
+
     overflow: hidden;
+
     opacity: 0;
+
 }
+
+
 
 #try-celebration.show {
+
     animation: celebration-fade 1.4s ease-out both;
+
 }
+
+
 
 #try-celebration::before {
+
     content: "";
+
     position: absolute;
+
     width: 40px;
+
     height: 40px;
+
     border-radius: 50%;
 
+
+
     background: radial-gradient(
+
         circle,
+
         #ffffff 0%,
+
         var(--try-color) 15%,
+
         transparent 70%
+
     );
 
+
+
     box-shadow:
+
         0 0 35px 15px var(--try-color),
+
         0 0 90px 35px var(--try-color);
+
     opacity: 0;
+
 }
+
+
 
 #try-celebration.show::before {
+
     animation: celebration-burst 1.15s ease-out both;
+
 }
+
+
 
 #try-celebration .try-title {
+
     position: relative;
+
     z-index: 1;
+
+
 
     margin: 0;
+
     padding: 0 8px;
 
+
+
     color: #ffffff;
+
     font-family: 'Orbitron', sans-serif;
+
     font-size: clamp(36px, 12vw, 58px);
+
     font-weight: 900;
+
     font-style: italic;
+
     text-align: center;
+
     letter-spacing: 2px;
 
+
+
     -webkit-text-stroke: 1px var(--try-color);
+
     text-shadow:
+
         0 0 8px var(--try-color),
+
         0 0 22px var(--try-color),
+
         0 0 45px var(--try-color);
+
 }
+
+
 
 #try-celebration.show .try-title {
+
     animation: celebration-title 1.3s cubic-bezier(.16, 1, .3, 1) both;
+
 }
+
+
 
 #try-celebration .try-subtitle {
+
     position: relative;
+
     z-index: 1;
+
     margin-top: 8px;
+
     color: var(--try-color);
+
     font-size: 12px;
+
     font-weight: 900;
+
     letter-spacing: 3px;
+
     text-shadow: 0 0 12px var(--try-color);
+
 }
+
+
 
 @keyframes celebration-fade {
+
     0%   { opacity: 0; }
+
     12%  { opacity: 1; }
+
     65%  { opacity: 1; }
+
     100% { opacity: 0; }
+
 }
+
+
 
 @keyframes celebration-burst {
+
     0% {
+
         transform: scale(.2);
+
         opacity: 0;
+
     }
+
     15% {
+
         opacity: .95;
+
     }
+
     100% {
+
         transform: scale(18);
+
         opacity: 0;
+
     }
+
 }
+
+
 
 @keyframes celebration-title {
+
     0% {
+
         transform: scale(.25) rotate(-8deg);
+
         opacity: 0;
+
     }
+
     55% {
+
         transform: scale(1.15) rotate(2deg);
+
         opacity: 1;
+
     }
+
     75% {
+
         transform: scale(1);
+
         opacity: 1;
+
     }
+
     100% {
+
         transform: scale(1.08);
+
         opacity: 0;
+
     }
+
 }
+
+
 
 /* 動きを減らす設定の端末では演出を簡略化 */
+
 @media (prefers-reduced-motion: reduce) {
+
     #try-celebration.show,
+
     #try-celebration.show::before,
+
     #try-celebration.show .try-title {
+
         animation-duration: .5s;
+
     }
+
 }
 
+
+
 /* ===== セレブレーション演出ここまで ===== */
+
   
+
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
+
+
 
 </div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>SCORE</span> <span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff7675; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 
+
+
 <select id="channel-select"></select>
+
+
 
 <button id="roll-btn" onclick="handleMainButton()">EXECUTE!</button>
 
+
+
 </div></div><div id="channel-guide-panel"><div id="channel-guide-title">DICE MATRIX</div><div id="channel-guide-list"></div></div><div id="dice-result-container"><div id="dice-color-box"></div><div id="dice-text-box">-</div></div><div id="log">5トライ先取で勝利！</div></div></div><div id="modal-overlay" onclick="closeTutorialModal(event)"><div id="modal-content" onclick="event.stopPropagation()"><div id="modal-header"><span id="modal-title">DICE RUGBY TACTICS RULES</span>
+
+
 
 <button class="close-btn" onclick="closeTutorialModal()">✕ CLOSE</button>
 
+
+
 </div><div id="modal-body"><div class="tutorial-section"><h4>【対戦ルール】</h4><p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
+
+
 
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 
+
+
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
+
+
 
 ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
 
+
+
 ・<strong>「１！」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！
+
+
 
 その確率は、＋4が1/6、＋3が2/6、＋2が2/6、ハンドリングエラー（攻守交替）が1/6となります。</p>
 
+
+
 </div><div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時は不可）<br>・<strong>成功確率</strong>：-2は4/6、-1は3/6、0は2/6、前進時は1/6。<br>
+
+
 
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
 
+
+
 ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+
+
 
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 
+
+
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！</p></div></div></div></div>
+
   <div id="try-celebration" aria-hidden="true">
+
   <div class="try-title">TRY!!</div>
+
   <div class="try-subtitle">INCREDIBLE PLAY!</div>
+
 </div>
+
   <script>
-  
-let audioCtx = null;
-  
 
   
+
+let audioCtx = null;
+
+  
+
+
+
+  
+
 
 let gameTimers = new Set();
 let gameSessionId = 0;
@@ -1253,1905 +2434,3802 @@ function clearGameTimers() {
 
   
 
-  
-function initAudio() {
-  
-if (!audioCtx) {
-  
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-  
-audioCtx = new AudioContext();
-  
-}
-  
-if (audioCtx.state === 'suspended') {
-  
-audioCtx.resume();
-  
-}
-  
-}
-  
+
 
   
-// パス音
+
+function initAudio() {
+
   
+
+if (!audioCtx) {
+
+  
+
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+  
+
+audioCtx = new AudioContext();
+
+  
+
+}
+
+  
+
+if (audioCtx.state === 'suspended') {
+
+  
+
+audioCtx.resume();
+
+  
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
+// パス音
+
+  
+
 function playPassSound() {
+
 if (document.visibilityState === 'hidden') return;
 initAudio();
+
   
+
 const bufferSize = audioCtx.sampleRate * 0.12;
+
   
+
 const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+
   
+
 const output = buffer.getChannelData(0);
+
   
+
 for (let i = 0; i < bufferSize; i++) {
+
   
+
 output[i] = Math.random() * 2 - 1;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 const whiteNoise = audioCtx.createBufferSource();
+
   
+
 whiteNoise.buffer = buffer;
-  
 
   
+
+
+
+  
+
 const filter = audioCtx.createBiquadFilter();
+
   
+
 filter.type = 'bandpass';
+
   
+
 filter.Q.value = 3.0;
-  
 
   
-const now = audioCtx.currentTime;
+
+
+
   
+
+const now = audioCtx.currentTime;
+
+  
+
 filter.frequency.setValueAtTime(600, now);
+
   
+
 filter.frequency.exponentialRampToValueAtTime(2400, now + 0.06);
-  
 
   
+
+
+
+  
+
 const gainNode = audioCtx.createGain();
+
   
+
 gainNode.gain.setValueAtTime(0.01, now);
+
   
+
 gainNode.gain.linearRampToValueAtTime(0.25, now + 0.05);
+
   
+
 gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-  
 
   
+
+
+
+  
+
 whiteNoise.connect(filter);
+
   
+
 filter.connect(gainNode);
+
   
+
 gainNode.connect(audioCtx.destination);
-  
 
   
+
+
+
+  
+
 whiteNoise.start(now);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 // ゲイン音
+
   
+
 function playGainSound(isPositive) {
+
   if (document.visibilityState === 'hidden') return;
+
 initAudio();
+
   
+
 const osc = audioCtx.createOscillator();
+
   
+
 const gain = audioCtx.createGain();
-  
-const now = audioCtx.currentTime;
-  
 
   
+
+const now = audioCtx.currentTime;
+
+  
+
+
+
+  
+
 osc.type = 'sine';
+
   
+
 if (isPositive) {
+
   
+
 osc.frequency.setValueAtTime(220, now);
+
   
+
 osc.frequency.exponentialRampToValueAtTime(440, now + 0.15);
+
   
+
 } else {
+
   
+
 osc.frequency.setValueAtTime(350, now);
+
   
+
 osc.frequency.exponentialRampToValueAtTime(150, now + 0.2);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 gain.gain.setValueAtTime(0.2, now);
+
   
+
 gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-  
 
   
+
+
+
+  
+
 osc.connect(gain);
+
   
+
 gain.connect(audioCtx.destination);
+
   
+
 osc.start(now);
+
   
+
 osc.stop(now + 0.2);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 // 共通ホイッスル生成エンジン
+
   
+
 function generateWhistleSound(duration, isDoubleTone = false) {
+
   
-if (document.visibilityState === 'hidden') return;if (document.visibilityState === 'hidden') return;
+if (document.visibilityState === 'hidden') return;
 initAudio();
+
   
+
 const now = audioCtx.currentTime;
-  
 
   
+
+
+
+  
+
 function playSingleWhistle(startTime, dur) {
+
   
+
 const osc1 = audioCtx.createOscillator();
+
   
+
 const osc2 = audioCtx.createOscillator();
+
   
+
 const mod = audioCtx.createOscillator();
+
   
+
 const modGain = audioCtx.createGain();
+
   
+
 const masterGain = audioCtx.createGain();
-  
 
   
+
+
+
+  
+
 osc1.type = 'sine';
+
   
+
 osc1.frequency.setValueAtTime(1800, startTime);
-  
 
   
+
+
+
+  
+
 osc2.type = 'sine';
+
   
+
 osc2.frequency.setValueAtTime(2150, startTime);
-  
 
   
+
+
+
+  
+
 mod.type = 'sine';
+
   
+
 mod.frequency.setValueAtTime(30, startTime);
+
   
+
 modGain.gain.setValueAtTime(200, startTime);
-  
 
   
+
+
+
+  
+
 mod.connect(osc1.frequency);
+
   
+
 mod.connect(osc2.frequency);
-  
 
   
+
+
+
+  
+
 masterGain.gain.setValueAtTime(0.01, startTime);
+
   
+
 masterGain.gain.linearRampToValueAtTime(0.35, startTime + 0.02);
+
   
+
 masterGain.gain.exponentialRampToValueAtTime(0.001, startTime + dur);
-  
 
   
+
+
+
+  
+
 osc1.connect(masterGain);
+
   
+
 osc2.connect(masterGain);
+
   
+
 masterGain.connect(audioCtx.destination);
-  
 
   
+
+
+
+  
+
 mod.start(startTime);
+
   
+
 osc1.start(startTime);
+
   
+
 osc2.start(startTime);
-  
 
   
+
+
+
+  
+
 mod.stop(startTime + dur);
+
   
+
 osc1.stop(startTime + dur);
+
   
+
 osc2.stop(startTime + dur);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 if (isDoubleTone) {
+
   
+
 playSingleWhistle(now, 0.18);
+
   
+
 playSingleWhistle(now + 0.22, 0.65);
+
   
+
 } else {
+
   
+
 playSingleWhistle(now, 0.22);
-  
-}
-  
-}
-  
 
   
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 function playTurnoverSound() {
+
   
+
 generateWhistleSound(0.22, false);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function playTrySound() {
+
   
+
 generateWhistleSound(0.85, true);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 const WINNING_TRIES = 5;
-  
 
   
+
+
+
+  
+
 const COLORS_META = [
+
   
+
 { name: '赤', key: 'red', hex: '#ff2a6d' },
+
   
+
 { name: '青', key: 'blue', hex: '#00f2fe' },
+
   
+
 { name: '黄', key: 'yellow', hex: '#ffeaa7' },
+
   
+
 { name: '紫', key: 'purple', hex: '#a29bfe' },
+
   
+
 { name: '緑', key: 'green', hex: '#00b894' },
+
   
+
 { name: '橙', key: 'orange', hex: '#ff7675' }
-  
-];
-  
 
   
+
+];
+
+  
+
+
+
+  
+
 const PASS_TABLE = {
+
   
+
 'Inside': { red: {val: -1, label: '-1'}, blue: {val: 0, label: '0'},yellow: {val: 1, label: '1'}, purple: {val: 1, label: '1'}, green: {val: 1, label: '1'}, orange: {val: 1, label: '1'} },
+
   
+
 'Middle': { red: {val: 2, label: '2'}, blue: {val: -1, label: '-1'},yellow: {val: 0, label: '0'}, purple: {val: 0, label: '0'}, green: {val: 1, label: '1'}, orange: {val: '1OP', isOffload: true, label: '1op'} },
+
   
+
 'Short': { red: {val: 2, label: '2'}, blue: {val: 3, label: '3'}, yellow: {val: -1, label: '-1'},purple: {val: 0, label: '0'}, green: {val: 0, label: '0'}, orange: {val: 1, label: '1'} },
+
   
+
 'Outside': { red: {val: 2, label: '2'}, blue: {val: 2, label: '2'}, yellow: {val: 3, label: '3'}, purple: {val: -1, label: '-1'}, green: {val: -1, label: '-1'}, orange: {val: 0, label: '0'} },
+
   
+
 'Edge': { red: {val: 0, label: '0'}, blue: {val: '1OP', isOffload: true, label: '1op'}, yellow: {val: -2, label: '-2'}, purple: {val: 5, label: '5'}, green: {val: 3, label: '3' }, orange: {val: -1, label: '-1'} },
-  
 
   
+
+
+
+  
+
 'Inside_Left': { red: {val: 2, label: '2'}, blue: {val: 1, label: '1'}, yellow: {val: 0, label: '0'}, purple: {val: 1, label: '1'}, green: {val: 1, label: '1'}, orange: {val: -1, label: '-1'} },
+
   
+
 'Inside_Right':{ red: {val: -1, label: '-1'}, blue: {val: 0, label: '0'}, yellow: {val: 1, label: '1'}, purple: {val: 2, label: '2'}, green: {val: 0, label: '0'}, orange: {val: '1OP', isOffload: true, label: '1op'} },
+
   
+
 'Outside_Left':{ red: {val: 0, label: '0'}, blue: {val: '1OP', isOffload: true, label: '1op'}, yellow: {val: 4, label: '4'}, purple: {val: -1, label: '-1'}, green: {val: -2, label: '-2'}, orange: {val: 3, label: '3'} },
+
   
+
 'Outside_Right':{ red: {val: 1, label: '1'}, blue: {val: 2, label: '2'}, yellow: {val: -1, label: '-1'}, purple: {val: 4, label: '4'}, green: {val: 2, label: '2'}, orange: {val: 0, label: '0'} }
-  
-};
-  
 
   
+
+};
+
+  
+
+
+
+  
+
 const TOTAL_LINES = 13;
+
   
+
 const CENTER_LINE_INDEX = Math.floor(TOTAL_LINES / 2);
+
   
+
 let linePositionsY = [];
+
   
+
 let ballX = 2;
+
   
+
 let ballY = CENTER_LINE_INDEX;
+
   
+
 let currentAttacker = 'P1';
+
   
+
 let currentPhase = 1;
+
   
+
 let maxPhases = 5;
+
   
+
 let p1Tries = 0;
+
   
+
 let comTries = 0;
-  
 
   
+
+
+
+  
+
 let p1JackalCount = 2;
+
   
+
 let comJackalCount = 2;
+
   
+
 let pendingPlayData = null; 
+
   
+
 let isJackalWindowOpen = false;
-  
 
   
+
+
+
+  
+
 let currentAvailableOptions = [];
+
   
+
 const X_POS = [10, 30, 50, 70, 90];
-  
 
   
+
+
+
+  
+
 function setupBoard() {
+
   
+
 linePositionsY = new Array(TOTAL_LINES);
+
   
+
 const container = document.getElementById('field-container');
+
   
+
 container.innerHTML = '';
-  
 
   
+
+
+
+  
+
 ['10%', '30%', '50%', '70%', '90%'].forEach(leftPos => {
+
   
+
 const vLine = document.createElement('div');
+
   
+
 vLine.className = 'v-line';
+
   
+
 vLine.style.left = leftPos;
+
   
+
 container.appendChild(vLine);
-  
-});
-  
 
   
+
+});
+
+  
+
+
+
+  
+
 const token = document.createElement('div');
+
   
+
 token.id = 'ball-token';
+
   
+
 container.appendChild(token);
-  
 
   
+
+
+
+  
+
 for (let i = 0; i < TOTAL_LINES; i++) {
+
   
+
 linePositionsY[i] = (i / (TOTAL_LINES - 1)) * 100;
+
   
+
 const hLine = document.createElement('div');
+
   
+
 hLine.className = (i === CENTER_LINE_INDEX) ? 'h-line center-line' : 'h-line';
+
   
+
 hLine.style.top = linePositionsY[i] + '%';
+
   
+
 container.appendChild(hLine);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 updateAvailableChannels();
-  
-updateDisplayImmediate();
-  
-}
-  
 
   
+
+updateDisplayImmediate();
+
+  
+
+}
+
+  
+
+
+
+  
+
 function updateAvailableChannels() {
+
   
+
 const channelSelect = document.getElementById('channel-select');
+
   
+
 channelSelect.innerHTML = '';
-  
 
   
+
+
+
+  
+
 if (ballX === 0) {
+
   
+
 currentAvailableOptions = [
+
   
+
 { label: 'Inside (左HL)', x: 1, key: 'Inside' },
+
   
+
 { label: 'Middle (CL)', x: 2, key: 'Middle' },
+
   
+
 { label: 'Outside (右HL)', x: 3, key: 'Outside' },
+
   
+
 { label: 'Edge (右EL)', x: 4, key: 'Edge' }
+
   
+
 ];
+
   
+
 } else if (ballX === 4) {
+
   
+
 currentAvailableOptions = [
+
   
+
 { label: 'Inside (右HL)', x: 3, key: 'Inside' },
+
   
+
 { label: 'Middle (CL)', x: 2, key: 'Middle' },
+
   
+
 { label: 'Outside (左HL)', x: 1, key: 'Outside' },
+
   
+
 { label: 'Edge (左EL)', x: 0, key: 'Edge' }
+
   
+
 ];
+
   
+
 } else if (ballX === 1) {
+
   
+
 currentAvailableOptions = [
+
   
+
 { label: 'Short (左EL)', x: 0, key: 'Short' },
+
   
+
 { label: 'Inside (CL)', x: 2, key: 'Inside' },
+
   
+
 { label: 'Middle (右HL)', x: 3, key: 'Middle' },
+
   
+
 { label: 'Outside (右EL)', x: 4, key: 'Outside' }
+
   
+
 ];
+
   
+
 } else if (ballX === 3) {
+
   
+
 currentAvailableOptions = [
+
   
+
 { label: 'Short (右EL)', x: 4, key: 'Short' },
+
   
+
 { label: 'Inside (CL)', x: 2, key: 'Inside' },
+
   
+
 { label: 'Middle (左HL)', x: 1, key: 'Middle' },
+
   
+
 { label: 'Outside (左EL)', x: 0, key: 'Outside' }
+
   
+
 ];
+
   
+
 } else {
+
   
+
 currentAvailableOptions = [
+
   
+
 { label: 'Inside (左HL)', x: 1, key: 'Inside_Left' },
+
   
+
 { label: 'Inside (右HL)', x: 3, key: 'Inside_Right' },
+
   
+
 { label: 'Outside (左EL)', x: 0, key: 'Outside_Left' },
+
   
+
 { label: 'Outside (右EL)', x: 4, key: 'Outside_Right' }
+
   
+
 ];
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 currentAvailableOptions.forEach(optData => {
+
   
+
 const opt = document.createElement('option');
+
   
+
 opt.value = JSON.stringify(optData);
+
   
+
 opt.innerText = optData.label;
+
   
+
 channelSelect.appendChild(opt);
-  
-});
-  
 
   
+
+});
+
+  
+
+
+
+  
+
 renderChannelGuidePanel();
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function renderChannelGuidePanel() {
+
   
+
 const guideList = document.getElementById('channel-guide-list');
+
   
+
 guideList.innerHTML = '';
-  
 
   
+
+
+
+  
+
 currentAvailableOptions.forEach(opt => {
+
   
+
 const table = PASS_TABLE[opt.key];
+
   
+
 const itemDiv = document.createElement('div');
+
   
+
 itemDiv.className = 'channel-guide-item';
-  
 
   
+
+
+
+  
+
 const nameSpan = document.createElement('div');
+
   
+
 nameSpan.className = 'channel-guide-name';
+
   
+
 nameSpan.innerText = opt.label;
+
   
+
 itemDiv.appendChild(nameSpan);
-  
 
   
+
+
+
+  
+
 const colorsContainer = document.createElement('div');
+
   
+
 colorsContainer.className = 'channel-guide-colors';
-  
 
   
+
+
+
+  
+
 COLORS_META.forEach(c => {
+
   
+
 let cell = table[c.key];
+
   
+
 let span = document.createElement('span');
+
   
+
 span.style.background = c.hex;
+
   
+
 span.style.color = '#000';
+
   
+
 span.style.padding = '1px 2px';
+
   
+
 span.style.borderRadius = '2px';
+
   
+
 span.style.fontSize = '9.5px';
+
   
+
 span.style.fontWeight = 'bold';
+
   
+
 span.style.width = '19px';
+
   
+
 span.style.textAlign = 'center';
+
   
+
 span.style.display = 'inline-block';
+
   
+
 span.innerText = cell ? cell.label : '-';
+
   
+
 colorsContainer.appendChild(span);
-  
-});
-  
 
   
+
+});
+
+  
+
+
+
+  
+
 itemDiv.appendChild(colorsContainer);
+
   
+
 guideList.appendChild(itemDiv);
-  
-});
-  
-}
-  
 
   
+
+});
+
+  
+
+}
+
+  
+
+
+
+  
+
 function updateDisplayImmediate() {
+
   
+
 const token = document.getElementById('ball-token');
+
   
+
 token.style.left = X_POS[ballX] + '%';
+
   
+
 token.style.top = linePositionsY[ballY] + '%';
-  
 
   
-if (currentAttacker === 'COM') {
+
+
+
   
+
+if (currentAttacker === 'COM') {
+
+  
+
 token.classList.add('com-ball');
+
   
+
 document.getElementById('current-turn').innerText = 'COM';
+
   
+
 document.getElementById('current-turn').style.color = '#ff2a6d';
+
   
+
 } else {
+
   
+
 token.classList.remove('com-ball');
+
   
+
 document.getElementById('current-turn').innerText = 'YOU';
+
   
+
 document.getElementById('current-turn').style.color = '#00f2fe';
-  
-}
-  
 
   
-document.getElementById('phase-num').innerText = currentPhase + '/5';
+
+}
+
   
+
+
+
+  
+
+document.getElementById('phase-num').innerText = currentPhase + '/5';
+
+  
+
 document.getElementById('score-text').innerText = `${p1Tries} - ${comTries}`;
+
   
+
 document.getElementById('jackal-count').innerHTML = `YOU:${p1JackalCount}<br>COM:${comJackalCount}`;
-  
 
   
+
+
+
+  
+
 const mainBtn = document.getElementById('roll-btn');
+
   
+
 if (currentAttacker === 'COM' && p1JackalCount > 0 && isJackalWindowOpen) {
+
   
+
 mainBtn.innerText = "JACKAL!";
+
   
+
 mainBtn.classList.add('is-jackal');
+
   
+
 mainBtn.disabled = false;
+
   
+
 } else if (currentAttacker === 'COM') {
+
   
+
 mainBtn.innerText = "COM THINKING...";
+
   
+
 mainBtn.classList.remove('is-jackal');
+
   
+
 mainBtn.disabled = true;
+
   
+
 } else {
+
   
+
 mainBtn.innerText = "EXECUTE!";
+
   
+
 mainBtn.classList.remove('is-jackal');
+
   
+
 mainBtn.disabled = false;
-  
-}
-  
-}
-  
 
   
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 function animatePassingMovement(newX, newY, tempSteps, onComplete) {
+
   
+
 const token = document.getElementById('ball-token');
+
   
+
 const startX = ballX;
+
   
+
 const step = (newX > startX) ? 1 : -1;
+
   
+
 const diff = Math.abs(newX - startX);
-  
 
   
+
+
+
+  
+
 if (diff === 0) {
+
   
+
 token.style.top = linePositionsY[newY] + '%';
+
   
+
 ballY = newY;
+
   
+
 if (tempSteps !== 0) playGainSound(tempSteps > 0);
+
   
+
 scheduleGameTimeout(onComplete, 300);
-  
-return;
-  
-}
-  
 
   
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
 let currentX = startX;
+
   
+
 let count = 0;
-  
 
   
+
+
+
+  
+
 function moveOneStep() {
+
   
+
 if (count < diff) {
+
   
+
 currentX += step;
+
   
+
 token.style.left = X_POS[currentX] + '%';
+
   
+
 ballX = currentX;
+
   
+
 count++;
-  
 
   
+
+
+
+  
+
 playPassSound();
-  
 
   
+
+
+
+  
+
 scheduleGameTimeout(() => {
+
   
+
 moveOneStep();
+
   
+
 }, 400);
+
   
+
 } else {
+
   
+
 token.style.top = linePositionsY[newY] + '%';
+
   
+
 ballY = newY;
+
   
+
 if (tempSteps !== 0) playGainSound(tempSteps > 0);
+
   
+
 scheduleGameTimeout(onComplete, 400);
-  
-}
-  
-}
-  
 
   
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 moveOneStep();
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function selectCpuOption() {
+
   
+
 const isCloseToGoal = (ballY >= TOTAL_LINES - 3);
-  
 
   
+
+
+
+  
+
 if (isCloseToGoal && Math.random() < 0.6) {
+
   
+
 const aggressiveOpts = currentAvailableOptions.filter(o => o.key.includes('Edge') || o.key.includes('Outside') || o.key.includes('Short'));
+
   
+
 if (aggressiveOpts.length > 0) {
+
   
+
 return aggressiveOpts[Math.floor(Math.random() * aggressiveOpts.length)];
+
   
+
 }
+
   
+
 }
+
   
+
 return currentAvailableOptions[Math.floor(Math.random() * currentAvailableOptions.length)];
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function handleMainButton() {
+
   
+
 if (currentAttacker === 'COM' && isJackalWindowOpen) {
+
   
+
 triggerJackal();
+
   
+
 } else if (currentAttacker === 'P1') {
-  
-executePlay();
-  
-}
-  
-}
-  
 
   
+
+executePlay();
+
+  
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 function executePlay() {
+
   
+
 initAudio();
-  
 
   
+
+
+
+  
+
 let selectedOption;
+
   
+
 if (currentAttacker === 'P1') {
+
   
+
 selectedOption = JSON.parse(document.getElementById('channel-select').value);
+
   
+
 } else {
+
   
+
 selectedOption = selectCpuOption();
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 const diceIndex = Math.floor(Math.random() * 6);
+
   
+
 const rolledMeta = COLORS_META[diceIndex];
+
   
+
 const cellData = PASS_TABLE[selectedOption.key][rolledMeta.key];
-  
 
   
+
+
+
+  
+
 document.getElementById('dice-color-box').style.backgroundColor = rolledMeta.hex;
+
   
+
 const textBox = document.getElementById('dice-text-box');
+
   
+
 textBox.innerText = cellData.isOffload ? '1OP (OFFLOAD)' : cellData.label;
-  
 
   
+
+
+
+  
+
 let tempSteps = 0;
+
   
+
 const result = cellData.val;
-  
 
   
+
+
+
+  
+
 if (typeof result === 'number') {
+
   
+
 tempSteps = result;
+
   
+
 } else if (result === '1OP') {
+
   
+
 tempSteps = 1;
+
   
+
 } else {
+
   
+
 const cleanVal = parseInt(result);
+
   
+
 tempSteps = !isNaN(cleanVal) ? cleanVal : 0;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 pendingPlayData = {
+
   
+
 selectedOption,
+
   
+
 cellData,
+
   
+
 tempSteps,
+
   
+
 isTO: (cellData.isTO || cellData.label === 'TO'),
+
   
+
 isOffload: cellData.isOffload
+
   
+
 };
-  
 
   
+
+
+
+  
+
 if (currentAttacker === 'COM') {
+
   
+
 lockControls(true);
+
   
+
 let targetY = ballY + tempSteps;
-  
-let targetX = selectedOption.x;
-  
 
   
+
+let targetX = selectedOption.x;
+
+  
+
+
+
+  
+
 let isComTry = (targetY >= TOTAL_LINES - 1);
+
   
+
 let isPushedBackToOwnGoal = (targetY <= 0);
-  
 
   
+
+
+
+  
+
 if (targetY < 0) targetY = 0;
+
   
+
 if (targetY >= TOTAL_LINES) targetY = TOTAL_LINES - 1;
-  
 
   
+
+
+
+  
+
 if (tempSteps > 0) {
-  
-document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${tempSteps}前進！ゲインライン突破！`;
-  
-} else if (tempSteps < 0) {
-  
-document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${Math.abs(tempSteps)}後退！激しいディフェンス！`;
-  
-} else {
-  
-document.getElementById('log').innerText = `【${selectedOption.label}】➔ 0 ゲインできない！`;
-  
-}
-  
 
   
-animatePassingMovement(targetX, targetY, tempSteps, () => {
+
+document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${tempSteps}前進！ゲインライン突破！`;
+
   
+
+} else if (tempSteps < 0) {
+
+  
+
+document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${Math.abs(tempSteps)}後退！激しいディフェンス！`;
+
+  
+
+} else {
+
+  
+
+document.getElementById('log').innerText = `【${selectedOption.label}】➔ 0 ゲインできない！`;
+
+  
+
+}
+
+  
+
+
+
+  
+
+animatePassingMovement(targetX, targetY, tempSteps, () => {
+
+  
+
 if (isComTry || isPushedBackToOwnGoal || cellData.isOffload) {
+
   
+
 isJackalWindowOpen = false;
+
   
+
 updateDisplayImmediate();
+
   
+
 proceedAfterPlay(pendingPlayData, isPushedBackToOwnGoal);
+
   
+
 } else {
+
   
+
 isJackalWindowOpen = true;
+
   
+
 document.getElementById('log').innerText = `ブレイクダウン！ジャッカル？！（2秒以内）`;
-  
-updateDisplayImmediate();
-  
 
   
+
+updateDisplayImmediate();
+
+  
+
+
+
+  
+
 window.jackalTimer = scheduleGameTimeout(() => {
+
   
+
 if (isJackalWindowOpen) {
+
   
+
 isJackalWindowOpen = false;
+
   
+
 updateDisplayImmediate();
+
   
+
 proceedAfterPlay(pendingPlayData, isPushedBackToOwnGoal);
-  
-}
-  
-}, 2000);
-  
-}
-  
-});
-  
 
   
-} else {
+
+}
+
   
+
+}, 2000);
+
+  
+
+}
+
+  
+
+});
+
+  
+
+
+
+  
+
+} else {
+
+  
+
 processPlayResult(pendingPlayData);
-  
-}
-  
-}
-  
 
   
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 // プレイヤー側のジャッカル発動
+
   
+
 function triggerJackal() {
+
   
+
 if (!isJackalWindowOpen || !pendingPlayData || currentAttacker !== 'COM') return;
-  
 
   
-clearTimeout(window.jackalTimer);
+
+
+
   
+
+cancelGameTimeout(window.jackalTimer);
+window.jackalTimer = null;
 isJackalWindowOpen = false;
-  
 
   
+
+
+
+  
+
 const steps = pendingPlayData.tempSteps;
-  
 
   
-let successChance = 1 / 6;
+
+
+
   
+
+let successChance = 1 / 6;
+
+  
+
 if (steps === -2) successChance = 4 / 6;
+
   
+
 else if (steps === -1) successChance = 3 / 6;
+
   
+
 else if (steps === 0) successChance = 2 / 6;
+
   
+
 else if (steps > 0) successChance = 1 / 6;
-  
 
   
+
+
+
+  
+
 const roll = Math.random();
-  
-const isSuccess = roll < successChance;
-  
 
   
+
+const isSuccess = roll < successChance;
+
+  
+
+
+
+  
+
 if (isSuccess) {
+
   
+
 playTurnoverSound();
+
   
+
 document.getElementById('log').innerText = `🔥 ジャッカル成功！！ボールを奪い取った！`;
-  
-pendingPlayData = null;
-  
 
   
-scheduleGameTimeout(() => {
+
+pendingPlayData = null;
+
   
+
+
+
+  
+
+scheduleGameTimeout(() => {
+
+  
+
 switchTurn("ジャッカル成功によるターンオーバー！");
+
   
+
 }, 1800);
+
   
+
 } else {
+
   
+
 if (p1JackalCount > 0) {
+
   
+
 p1JackalCount--;
-  
-}
-  
-updateDisplayImmediate();
-  
 
   
-playTurnoverSound();
+
+}
+
   
+
+updateDisplayImmediate();
+
+  
+
+
+
+  
+
+playTurnoverSound();
+
+  
+
 document.getElementById('log').innerText = `💥 ジャッカル失敗（ペナルティ）！相手のアタックがリセット！`;
-  
-pendingPlayData = null;
-  
 
   
+
+pendingPlayData = null;
+
+  
+
+
+
+  
+
 scheduleGameTimeout(() => {
+
   
+
 currentPhase = 1;
+
   
+
 document.getElementById('phase-num').innerText = currentPhase + '/5';
+
   
+
 updateDisplayImmediate();
+
   
+
 updateAvailableChannels();
+
   
+
 document.getElementById('log').innerText = `ペナルティによりCOMの攻撃フェイズがリセット！再アタック！`;
+
   
+
 scheduleGameTimeout(() => {
+
   
+
 executePlay();
+
   
+
 }, 1500);
+
   
+
 }, 1800);
-  
-}
-  
-}
-  
 
   
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 // CPU側のジャッカル処理
+
   
+
 function triggerCpuJackal(tempSteps) {
+
   
+
 let successChance = 1 / 6;
+
   
+
 if (tempSteps === -2) successChance = 4 / 6;
+
   
+
 else if (tempSteps === -1) successChance = 3 / 6;
+
   
+
 else if (tempSteps === 0) successChance = 2 / 6;
+
   
+
 else if (tempSteps > 0) successChance = 1 / 6;
-  
 
   
+
+
+
+  
+
 const roll = Math.random();
+
   
+
 const isSuccess = roll < successChance;
-  
 
   
+
+
+
+  
+
 document.getElementById('log').innerText = `🚨 COMがジャッカルを狙ってきた！！`;
-  
 
   
-scheduleGameTimeout(() => {
+
+
+
   
+
+scheduleGameTimeout(() => {
+
+  
+
 if (isSuccess) {
+
   
+
 playTurnoverSound();
+
   
+
 document.getElementById('log').innerText = `🔥 COMのジャッカル成功！！ボールを奪われた！`;
-  
-pendingPlayData = null;
-  
 
   
-scheduleGameTimeout(() => {
+
+pendingPlayData = null;
+
   
+
+
+
+  
+
+scheduleGameTimeout(() => {
+
+  
+
 switchTurn("COMのジャッカル成功によるターンオーバー！");
+
   
+
 }, 2000);
+
   
+
 } else {
+
   
+
 comJackalCount--;
-  
-updateDisplayImmediate();
-  
 
   
-playTurnoverSound();
+
+updateDisplayImmediate();
+
   
+
+
+
+  
+
+playTurnoverSound();
+
+  
+
 document.getElementById('log').innerText = `💥 COMのジャッカル失敗（ペナルティ）！リセットして攻撃継続！`;
-  
-pendingPlayData = null;
-  
 
   
-scheduleGameTimeout(() => {
+
+pendingPlayData = null;
+
   
+
+
+
+  
+
+scheduleGameTimeout(() => {
+
+  
+
 currentPhase = 1;
+
   
+
 document.getElementById('phase-num').innerText = currentPhase + '/5';
+
   
+
 lockControls(false);
+
   
+
 updateDisplayImmediate();
+
   
+
 updateAvailableChannels();
+
   
+
 document.getElementById('log').innerText = `COMのノットロールアウェイ！フェイズが1にリセット！`;
+
   
+
 }, 2200);
+
   
+
 }
+
   
+
 }, 1200);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function proceedAfterPlay(playData, isPushedBackToOwnGoal) {
-  
-pendingPlayData = null;
-  
-isJackalWindowOpen = false;
-  
-updateDisplayImmediate();
-  
 
   
+
+pendingPlayData = null;
+
+  
+
+isJackalWindowOpen = false;
+
+  
+
+updateDisplayImmediate();
+
+  
+
+
+
+  
+
 const { cellData, isTO, isOffload } = playData;
-  
 
   
+
+
+
+  
+
 updateAvailableChannels();
-  
 
   
+
+
+
+  
+
 if (checkTryCondition()) return;
-  
 
   
+
+
+
+  
+
 if (isPushedBackToOwnGoal) {
+
   
+
 playTurnoverSound();
+
   
+
 switchTurnToGoalLine("自陣ゴールに押し戻された！相手のアタックでリスタート！");
-  
-return;
-  
-}
-  
 
   
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
 if (isTO) {
-  
-playTurnoverSound();
-  
-switchTurn("TURNOVER! スティールされた！");
-  
-return;
-  
-}
-  
 
   
-if (isOffload) {
+
+playTurnoverSound();
+
   
+
+switchTurn("TURNOVER! スティールされた！");
+
+  
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
+if (isOffload) {
+
+  
+
 document.getElementById('log').innerText = `オフロードパス発生！`;
-  
-scheduleGameTimeout(() => {
-  
-const offloadOutcomes = ['ERROR', 2, 2, 3, 3, 4];
-  
-const opRollIndex = Math.floor(Math.random() * 6);
-  
-const opResult = offloadOutcomes[opRollIndex];
-  
 
   
+
+scheduleGameTimeout(() => {
+
+  
+
+const offloadOutcomes = ['ERROR', 2, 2, 3, 3, 4];
+
+  
+
+const opRollIndex = Math.floor(Math.random() * 6);
+
+  
+
+const opResult = offloadOutcomes[opRollIndex];
+
+  
+
+
+
+  
+
 if (opResult === 'ERROR') {
+
   
+
 playTurnoverSound();
+
   
+
 switchTurn("Knock forward ハンドリングエラー...");
+
   
+
 } else {
+
   
+
 const opGain = opResult;
+
   
+
 let opTargetY = ballY + opGain;
+
   
+
 if (opTargetY < 0) opTargetY = 0;
+
   
+
 if (opTargetY >= TOTAL_LINES) opTargetY = TOTAL_LINES - 1;
-  
 
   
+
+
+
+  
+
 playGainSound(true);
+
   
+
 document.getElementById('log').innerText = `オフロード成功！ ＋${opGain} GAIN!!`;
+
   
+
 ballY = opTargetY;
+
   
+
 document.getElementById('ball-token').style.top = linePositionsY[ballY] + '%';
-  
 
   
+
+
+
+  
+
 scheduleGameTimeout(() => {
+
   
+
 if (checkTryCondition()) return;
+
   
+
 nextPhase();
+
   
+
 }, 600);
+
   
+
 }
+
   
+
 }, 600);
+
   
+
 return;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 nextPhase();
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function processPlayResult(playData) {
+
   
+
 pendingPlayData = null;
+
   
+
 isJackalWindowOpen = false;
+
   
+
 updateDisplayImmediate();
-  
 
   
+
+
+
+  
+
 const { selectedOption, cellData, tempSteps, isTO, isOffload } = playData;
-  
 
   
+
+
+
+  
+
 let targetY = ballY - tempSteps;
+
   
+
 let targetX = selectedOption.x;
-  
 
   
+
+
+
+  
+
 let isPushedBackToOwnGoal = (targetY >= TOTAL_LINES - 1);
+
   
+
 let isP1Try = (targetY <= 0);
-  
 
   
+
+
+
+  
+
 if (targetY < 0) targetY = 0;
+
   
+
 if (targetY >= TOTAL_LINES) targetY = TOTAL_LINES - 1;
-  
 
   
+
+
+
+  
+
 lockControls(true);
-  
 
   
+
+
+
+  
+
 if (tempSteps > 0) {
+
   
+
 document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${tempSteps}前進！ゲインライン突破！`;
+
   
+
 } else if (tempSteps < 0) {
+
   
+
 document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${Math.abs(tempSteps)}後退！激しいディフェンス！`;
+
   
+
 } else {
+
   
+
 document.getElementById('log').innerText = `【${selectedOption.label}】➔ 0 ゲインできない！`;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 animatePassingMovement(targetX, targetY, tempSteps, () => {
+
   
+
 updateAvailableChannels();
-  
 
   
+
+
+
+  
+
 if (checkTryCondition()) return;
-  
 
   
+
+
+
+  
+
 if (isPushedBackToOwnGoal) {
+
   
+
 playTurnoverSound();
+
   
+
 switchTurnToGoalLine("自陣ゴールに押し戻された！相手のアタックでリスタート！");
-  
-return;
-  
-}
-  
 
   
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
 let cpuWantsJackal = false;
+
   
+
 // 修正: 5フェイズ目ではなく、かつ中盤以降（合計4得点以上 または どちらかが3得点以上）のときのみCOMがジャッカルを検討する
+
   
+
 const isMidOrLateGame = (p1Tries >= 3 || comTries >= 3 || (p1Tries + comTries) >= 4);
-  
 
   
+
+
+
+  
+
 if (comJackalCount > 0 && currentPhase < maxPhases && isMidOrLateGame && !isP1Try && !isTO && !isOffload) {
+
   
+
 if (tempSteps === -2 && Math.random() < 0.8) cpuWantsJackal = true;
+
   
+
 else if (tempSteps === -1 && Math.random() < 0.5) cpuWantsJackal = true;
+
   
+
 else if (targetY <= 2 && Math.random() < 0.7) cpuWantsJackal = true;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 if (cpuWantsJackal) {
+
   
+
 triggerCpuJackal(tempSteps);
-  
-return;
-  
-}
-  
 
   
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
 if (isTO) {
+
   
+
 playTurnoverSound();
+
   
+
 switchTurn("TURNOVER! スティールされた！");
-  
-return;
-  
-}
-  
 
   
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
 if (isOffload) {
+
   
+
 document.getElementById('log').innerText = `【${selectedOption.label}】➔ 1前進、さらにオフロードパス！`;
+
   
+
 scheduleGameTimeout(() => {
+
   
+
 const offloadOutcomes = ['ERROR', 2, 2, 3, 3, 4];
+
   
+
 const opRollIndex = Math.floor(Math.random() * 6);
+
   
+
 const opResult = offloadOutcomes[opRollIndex];
-  
 
   
+
+
+
+  
+
 if (opResult === 'ERROR') {
+
   
+
 playTurnoverSound();
+
   
+
 switchTurn("Knock forward ハンドリングエラー...");
+
   
+
 } else {
+
   
+
 const opGain = opResult;
+
   
+
 let opTargetY = ballY - opGain;
+
   
+
 if (opTargetY < 0) opTargetY = 0;
+
   
+
 if (opTargetY >= TOTAL_LINES) opTargetY = TOTAL_LINES - 1;
-  
 
   
+
+
+
+  
+
 playGainSound(true);
+
   
+
 document.getElementById('log').innerText = `オフロード成功！ ＋${opGain} GAIN!!`;
+
   
+
 ballY = opTargetY;
+
   
+
 document.getElementById('ball-token').style.top = linePositionsY[ballY] + '%';
-  
 
   
+
+
+
+  
+
 scheduleGameTimeout(() => {
+
   
+
 if (checkTryCondition()) return;
-  
-nextPhase();
-  
-}, 600);
-  
-}
-  
-}, 600);
-  
-return;
-  
-}
-  
 
   
+
 nextPhase();
+
   
+
+}, 600);
+
+  
+
+}
+
+  
+
+}, 600);
+
+  
+
+return;
+
+  
+
+}
+
+  
+
+
+
+  
+
+nextPhase();
+
+  
+
 });
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function nextPhase() {
+
   
+
 currentPhase++;
+
   
+
 if (currentPhase > maxPhases) {
+
   
+
 playTurnoverSound();
+
   
+
 switchTurn("アタックフェイズリミット！");
+
   
+
 return;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 document.getElementById('phase-num').innerText = currentPhase + '/5';
-  
 
   
+
+
+
+  
+
 if (currentAttacker === 'P1') {
-  
-lockControls(false);
-  
-} else {
-  
-document.getElementById('log').innerText = `COMの攻撃ターン...思考中`;
-  
-scheduleGameTimeout(() => { executePlay(); }, 1200);
-  
-}
-  
-}
-  
 
   
+
+lockControls(false);
+
+  
+
+} else {
+
+  
+
+document.getElementById('log').innerText = `COMの攻撃ターン...思考中`;
+
+  
+
+scheduleGameTimeout(() => { executePlay(); }, 1200);
+
+  
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
+
 
 function checkTryCondition() {
+
     if (
+
         (currentAttacker === 'P1' && ballY <= 0) ||
+
         (currentAttacker === 'COM' && ballY >= TOTAL_LINES - 1)
+
     ) {
+
         // 既存のトライ音を再生
+
         playTrySound();
 
+
+
         // 既存の得点処理
+
         if (currentAttacker === 'P1') {
+
             p1Tries++;
+
         } else {
+
             comTries++;
+
         }
+
+
 
         document.getElementById('score-text').innerText =
+
             `${p1Tries} - ${comTries}`;
 
+
+
         // 5トライ目かどうかを判定
+
         const isFinal =
+
             p1Tries >= WINNING_TRIES ||
+
             comTries >= WINNING_TRIES;
 
+
+
         // YOU / COM に応じた演出色とメッセージ
+
         const isP1 = currentAttacker === 'P1';
+
         const winner = isP1 ? 'P1' : 'COM';
 
+
+
         const celebration = document.getElementById('try-celebration');
+
         const title = celebration.querySelector('.try-title');
+
         const subtitle = celebration.querySelector('.try-subtitle');
 
+
+
         celebration.style.setProperty(
+
             '--try-color',
+
             isP1 ? '#00f2fe' : '#ff2a6d'
+
         );
 
+
+
         if (isFinal) {
+
             title.innerText = isP1 ? 'VICTORY!!' : 'DEFEAT...';
+
             subtitle.innerText = 'FULL TIME';
+
             celebration.style.setProperty(
+
                 '--try-color',
+
                 isP1 ? '#ffeaa7' : '#ff2a6d'
+
             );
+
         } else {
+
             title.innerText = 'TRY!!';
+
             subtitle.innerText = isP1 ? 'YOU SCORED!' : 'COM SCORED!';
+
         }
+
+
 
         // アニメーションを毎回最初から再生
+
         celebration.classList.remove('show');
+
         void celebration.offsetWidth;
+
         celebration.classList.add('show');
 
+
+
         if (isFinal) {
+
             // 演出後に既存の試合終了モーダルを表示
+
             scheduleGameTimeout(() => {
+
                 showGameSetModal(winner);
+
             }, 1700);
 
+
+
             return true;
+
         }
 
+
+
         // 通常トライは従来どおり2秒後にキックオフ
+
         document.getElementById('log').innerText =
+
             `🎉 TRY!! ${isP1 ? 'YOU' : 'COM'} トライ！！`;
 
+
+
         scheduleGameTimeout(() => {
+
             resetKickOff();
+
         }, 2000);
 
+
+
         return true;
+
     }
 
+
+
     return false;
+
 }
+
+
+
 
 
 function switchTurn(reasonText) {
+
   
+
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
+
   
+
 pendingPlayData = null;
+
   
+
 isJackalWindowOpen = false;
+
   
+
 document.getElementById('log').innerText = `${reasonText} 攻守交代！`;
-  
 
   
+
+
+
+  
+
 scheduleGameTimeout(() => {
-  
-currentPhase = 1;
-  
-updateDisplayImmediate();
-  
-updateAvailableChannels();
-  
 
   
+
+currentPhase = 1;
+
+  
+
+updateDisplayImmediate();
+
+  
+
+updateAvailableChannels();
+
+  
+
+
+
+  
+
 if (currentAttacker === 'COM') {
+
   
+
 lockControls(true);
+
   
+
 document.getElementById('log').innerText = `COMの攻撃ターン...`;
+
   
+
 scheduleGameTimeout(() => { executePlay(); }, 1200);
+
   
+
 } else {
+
   
+
 lockControls(false);
+
   
+
 document.getElementById('log').innerText = `あなたの攻撃ターン！`;
+
   
+
 }
+
   
+
 }, 1800);
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function switchTurnToGoalLine(reasonText) {
+
   
+
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
+
   
+
 pendingPlayData = null;
+
   
+
 isJackalWindowOpen = false;
+
   
+
 ballY = (currentAttacker === 'COM') ? TOTAL_LINES - 3 : 2;
+
   
+
 ballX = 2;
-  
 
   
+
+
+
+  
+
 document.getElementById('log').innerText = reasonText;
-  
 
   
+
+
+
+  
+
 scheduleGameTimeout(() => {
+
   
+
 currentPhase = 1;
+
   
+
 updateDisplayImmediate();
+
   
+
 updateAvailableChannels();
-  
 
   
+
+
+
+  
+
 if (currentAttacker === 'COM') {
+
   
+
 lockControls(true);
+
   
+
 document.getElementById('log').innerText = `COMのゴール付近アタック！ピンチ！`;
+
   
+
 scheduleGameTimeout(() => { executePlay(); }, 1200);
+
   
+
 } else {
+
   
+
 lockControls(false);
+
   
+
 document.getElementById('log').innerText = `相手ゴール付近からのトライチャンス！`;
+
   
+
 }
+
   
+
 }, 2000);
+
   
+
 }
-  
 
   
 
+
+
   
+
+
+
+  
+
 function resetKickOff(nextAttacker = null) {
+
   
+
     ballX = 2;
+
   
+
     ballY = CENTER_LINE_INDEX;
-  
-    currentPhase = 1;
-  
 
   
+
+    currentPhase = 1;
+
+  
+
+
+
+  
+
     // 指定があればその攻撃側で開始。
+
   
+
     // 指定がなければ、従来どおり攻撃側を交代する。
+
   
+
     currentAttacker = nextAttacker ||
+
   
+
         (currentAttacker === 'P1' ? 'COM' : 'P1');
-  
 
   
+
+
+
+  
+
     pendingPlayData = null;
+
   
+
     isJackalWindowOpen = false;
+
   
+
     window.jackalTimer = null;
-  
 
   
+
+
+
+  
+
     updateDisplayImmediate();
+
   
+
     updateAvailableChannels();
-  
 
   
+
+
+
+  
+
     if (currentAttacker === 'COM') {
+
   
+
         lockControls(true);
+
   
+
         document.getElementById('log').innerText =
+
   
+
             'COMのアタックで再開！';
-  
 
   
+
+
+
+  
+
         scheduleGameTimeout(() => {
+
   
+
             executePlay();
+
   
+
         }, 1200);
+
   
+
     } else {
+
   
+
         lockControls(false);
+
   
+
         document.getElementById('log').innerText =
+
   
+
             'あなたのアタックで再開！';
+
   
+
     }
+
   
+
 }
-  
 
   
 
+
+
   
+
+
+
+  
+
 function lockControls(isLock) {
+
   
+
 document.getElementById('channel-select').disabled = isLock;
+
   
+
 document.getElementById('roll-btn').disabled = isLock;//
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function showGameSetModal(winner) {
+
   
+
     clearGameTimers();
+
   
+
     lockControls(true);
-  
-    isJackalWindowOpen = false;
-  
 
   
+
+    isJackalWindowOpen = false;
+
+  
+
+
+
+  
+
     const modal = document.getElementById('modal-overlay');
+
   
+
   
+
   
+
   // 安全装置：modal-headerが存在する場合のみ非表示にする
+
   
+
   const modalHeader = document.getElementById('modal-header');
+
   
+
   if(modalHeader){
+
   
+
     modalHeader.style.display = 'none';
+
   
+
   }
+
   
+
   
+
   
+
   // 🔽 ここを追加（titleの定義が抜けていました）
+
   
+
   const title = document.getElementById('modal-title');
+
   
+
   title.innerText = "NO SIDE!!";
+
   
+
   
+
   
+
   const body = document.getElementById('modal-body');
+
   
+
   const isP1Win = (winner === 'P1');
-  
 
   
+
+
+
+  
+
   body.innerHTML = `
+
   
+
   <div style="text-align: center; padding: 10px;">
+
   
+
   <h2 style="color: ${isP1Win ? '#00f2fe' : '#ff2a6d'}; margin: 0 0 10px 0;">
+
   
+
   ${isP1Win ? 'VICTORY!' : 'DEFEAT...'}
+
   
+
   </h2>
+
   
+
   <p style="font-size: 11px; margin-bottom: 15px;">
+
   
+
   ${isP1Win ? '5トライ先取！見事CPUを撃破！' : 'COMに5トライを奪われました...'}
+
   
+
   </p>
+
   
+
   <button class="restart-btn" onclick="restartGame()">RESTART GAME</button>
+
   
+
   </div>
+
   
+
   `;
+
   
+
   modal.style.display = 'flex';
+
   
+
 }
-  
 
   
 
+
+
   
+
+
+
+  
+
 function restartGame() {
+
   
+
     // 前の試合のタイマーをすべて無効化
+
   
+
     clearGameTimers();
-  
 
   
+
+
+
+  
+
     p1Tries = 0;
+
   
+
     comTries = 0;
+
   
+
     p1JackalCount = 2;
+
   
+
     comJackalCount = 2;
-  
 
   
+
+
+
+  
+
     currentAttacker = 'P1';
+
   
+
     currentPhase = 1;
+
   
+
     pendingPlayData = null;
+
   
+
     isJackalWindowOpen = false;
-  
 
   
+
+
+
+  
+
     document.getElementById('modal-overlay').style.display = 'none';
+
   
+
     restoreTutorialModalText();
-  
 
   
+
+
+
+  
+
     // 新しい試合は必ずYOUから開始
+
   
+
     resetKickOff('P1');
+
   
+
 }
-  
 
   
 
+
+
   
+
+
+
+  
+
 function restoreTutorialModalText() {
+
   
+
 // 通常時はヘッダーを再度表示する
+
   
+
 document.getElementById('modal-header').style.display = 'flex';
+
   
+
 document.getElementById('modal-title').innerText = "DICE RUGBY TACTICS";
+
   
+
 document.getElementById('modal-body').innerHTML = `
+
   
+
 <div class="tutorial-section">
+
   
+
 <h4>【対戦ルール】</h4>
+
   
+
 <p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>
+
   
+
 ・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
+
   
+
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
+
   
+
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
+
   
+
   ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
+
   
+
 ・<strong>「１！」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！
+
   
+
   その確率は、＋4が1/6、＋3が2/6、＋2が2/6、ハンドリングエラー（攻守交替）が1/6となります。</p>
-  
-</div>
-  
 
   
-<div class="tutorial-section">
+
+</div>
+
   
+
+
+
+  
+
+<div class="tutorial-section">
+
+  
+
 <h4>【ジャッカルシステム（お互いに2回）】</h4>
+
   
+
 <p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時は不可）<br>
+
   
+
 ・<strong>成功確率</strong>：-2は4/6、-1は3/6、0は2/6、前進時は1/6。<br>
+
   
+
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
+
   
+
 ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+
   
+
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
-  
-</div>
-  
 
   
+
+</div>
+
+  
+
+
+
+  
+
 <div class="tutorial-section">
+
   
+
 <h4>【勝利条件】</h4>
+
   
+
 <p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！</p>
+
   
+
 </div>
+
   
+
 `;
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function openTutorialModal() {
+
   
+
 restoreTutorialModalText();
+
   
+
 document.getElementById('modal-overlay').style.display = 'flex';
-  
-}
-  
 
   
+
+}
+
+  
+
+
+
+  
+
 function closeTutorialModal(event) {
-  
-if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
-  
-document.getElementById('modal-overlay').style.display = 'none';
-  
-}
-  
-}
-  
 
   
+
+if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
+
+  
+
+document.getElementById('modal-overlay').style.display = 'none';
+
+  
+
+}
+
+  
+
+}
+
+  
+
+
+
+  
+
 window.addEventListener('DOMContentLoaded', () => {
+
   
+
 setupBoard();
+
   
+
 });
+
  
+
 /* ===== スマホ画面消灯時の停止処理 ===== */
+
+
 
 
 function stopGameOnHidden() {
@@ -3171,4 +6249,5 @@ document.addEventListener('visibilitychange', stopGameOnHidden);
 window.addEventListener('pagehide', stopGameOnHidden);
 
  
+
 </script></body></html>
