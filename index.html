@@ -1179,77 +1179,78 @@ let audioCtx = null;
   
 
   
+
 let gameTimers = new Set();
-  
 let gameSessionId = 0;
-  
 
-  
-// ゲーム内タイマーを一元管理する
-  
+// ゲーム用タイマーを管理する
 function scheduleGameTimeout(callback, delay) {
-  
-    const sessionId = gameSessionId;
-  
-    let timerId;
-  
+    const timer = {
+        id: null,
+        cancelled: false,
+        sessionId: gameSessionId,
+        callback: callback
+    };
 
-  
-    timerId = setTimeout(() => {
-  
-        gameTimers.delete(timerId);
-  
+    function run() {
+        timer.id = null;
 
-  
-        // 別の試合に切り替わっていたら、古い処理を実行しない
-  
-        if (sessionId !== gameSessionId) return;
-  
+        if (timer.cancelled || timer.sessionId !== gameSessionId) {
+            gameTimers.delete(timer);
+            return;
+        }
 
-  
-        callback();
-  
-    }, delay);
-  
+        // 画面が非表示なら、ゲーム処理を進めず少し待つ
+        if (document.visibilityState === 'hidden') {
+            timer.id = setTimeout(run, 250);
+            return;
+        }
 
-  
-    gameTimers.add(timerId);
-  
-    return timerId;
-  
+        gameTimers.delete(timer);
+        timer.callback();
+    }
+
+    timer.id = setTimeout(run, delay);
+    gameTimers.add(timer);
+
+    return timer;
 }
-  
 
-  
-// 試合中の予約処理をすべて取り消す
-  
+// 個別のタイマーをキャンセルする
+function cancelGameTimeout(timer) {
+    if (!timer) return;
+
+    timer.cancelled = true;
+
+    if (timer.id !== null) {
+        clearTimeout(timer.id);
+        timer.id = null;
+    }
+
+    gameTimers.delete(timer);
+}
+
+// ゲーム終了・リスタート時に全タイマーを消去する
 function clearGameTimers() {
-  
     gameSessionId++;
-  
 
-  
-    for (const timerId of gameTimers) {
-  
-        clearTimeout(timerId);
-  
+    for (const timer of gameTimers) {
+        timer.cancelled = true;
+
+        if (timer.id !== null) {
+            clearTimeout(timer.id);
+            timer.id = null;
+        }
     }
-  
 
-  
     gameTimers.clear();
-  
 
-  
     if (window.jackalTimer) {
-  
-        clearTimeout(window.jackalTimer);
-  
+        cancelGameTimeout(window.jackalTimer);
         window.jackalTimer = null;
-  
     }
-  
 }
+
   
 
   
@@ -1276,7 +1277,7 @@ audioCtx.resume();
 // パス音
   
 function playPassSound() {
-  
+if (document.visibilityState === 'hidden') return;
 initAudio();
   
 const bufferSize = audioCtx.sampleRate * 0.12;
@@ -1342,7 +1343,7 @@ whiteNoise.start(now);
 // ゲイン音
   
 function playGainSound(isPositive) {
-  
+  if (document.visibilityState === 'hidden') return;
 initAudio();
   
 const osc = audioCtx.createOscillator();
@@ -1393,6 +1394,7 @@ osc.stop(now + 0.2);
   
 function generateWhistleSound(duration, isDoubleTone = false) {
   
+if (document.visibilityState === 'hidden') return;if (document.visibilityState === 'hidden') return;
 initAudio();
   
 const now = audioCtx.currentTime;
@@ -3151,14 +3153,10 @@ setupBoard();
  
 /* ===== スマホ画面消灯時の停止処理 ===== */
 
+
 function stopGameOnHidden() {
     if (document.visibilityState === 'hidden') {
-        // COMなどの予約済み処理を停止
-        if (typeof clearGameTimers === 'function') {
-            clearGameTimers();
-        }
-
-        // 効果音を一時停止
+        // タイマーは消去しない。ゲームを一時停止させる
         if (
             typeof audioCtx !== 'undefined' &&
             audioCtx &&
@@ -3169,14 +3167,8 @@ function stopGameOnHidden() {
     }
 }
 
-document.addEventListener(
-    'visibilitychange',
-    stopGameOnHidden
-);
+document.addEventListener('visibilitychange', stopGameOnHidden);
+window.addEventListener('pagehide', stopGameOnHidden);
 
-window.addEventListener(
-    'pagehide',
-    stopGameOnHidden
-);
  
 </script></body></html>
