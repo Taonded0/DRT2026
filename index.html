@@ -133,6 +133,23 @@ text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
 }
 
 
+/* キーボードフォーカスの可視化（アクセシビリティ向上） */
+button:focus-visible,
+.rule-btn:focus-visible,
+#controls button:focus-visible {
+  outline: 3px solid rgba(0, 242, 254, 0.7);
+  outline-offset: 2px;
+}
+
+/* アニメーションを嫌うユーザーへの配慮 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 
 #game-container {
