@@ -4348,14 +4348,21 @@ document.getElementById('modal-overlay').style.display = 'flex';
 }
 
 function closeTutorialModal(event) {
+    if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
+        // モーダルのヘッダーが非表示になっている＝試合終了（ゲームセット）状態か判定
+        const modalHeader = document.getElementById('modal-header');
+        const isGameSet = modalHeader && modalHeader.style.display === 'none';
 
-if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
-
-document.getElementById('modal-overlay').style.display = 'none';
-
+        if (isGameSet) {
+            // 試合終了時は外側（または閉じるボタン）を押したらリスタートを実行する
+            restartGame();
+        } else {
+            // 通常時（ルール説明モーダルなど）はそのまま閉じる
+            document.getElementById('modal-overlay').style.display = 'none';
+        }
+    }
 }
 
-}
 
 window.addEventListener('DOMContentLoaded', () => {
 
