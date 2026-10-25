@@ -1222,13 +1222,13 @@ playPassSound();
 
 scheduleGameTimeout(() => {
 moveOneStep();
-}, 200);
+}, 250);
 } else {
 token.style.top = linePositionsY[newY] + '%';
 ballY = newY;
 if (tempSteps !== 0) playGainSound(tempSteps > 0);
 
-scheduleGameTimeout(onComplete, 200);
+scheduleGameTimeout(onComplete, 250);
 }
 }
 
