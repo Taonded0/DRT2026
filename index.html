@@ -643,8 +643,6 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* ===== 修正ここまで ===== */
-
 /* ===== トライ・セレブレーション演出 ===== */
 
 #try-celebration {
@@ -771,7 +769,6 @@ body {
     }
 }
 
-/* ===== セレブレーション演出ここまで ===== */
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
 </div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>SCORE</span> <span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff7675; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 <select id="channel-select"></select>
@@ -1020,7 +1017,7 @@ const PASS_TABLE = {
 'Edge': { red: {val: 5, label: '5'}, blue: {val: '1＋', isOffload: true, label: '1＋'}, yellow: {val: -2, label: '-2'}, purple: {val: -1, label: '-1'}, green: {val: 0, label: '0' }, orange: {val: 3, label: '3'} },
 'Inside_Left': { red: {val: -1, label: '-1'}, blue: {val: 0, label: '0'}, yellow: {val: 1, label: '1'}, purple: {val: 1, label: '1'}, green: {val: 1, label: '1'}, orange: {val: 1, label: '1'} },
 'Inside_Right':{ red: {val: 0, label: '0'}, blue: {val: 1, label: '1'}, yellow: {val: 0, label: '0'}, purple: {val: -1, label: '-1'}, green: {val: 2, label: '2'}, orange: {val: 2, label: '2'} },
-'Outside_Left':{ red: {'1＋', isOffload: true, label: '1＋'}, blue: {val:0, label: '0'}, yellow: {val: -1, label: '-1'}, purple: {val: 3, label: '3'}, green: {val: 2, label: '2'}, orange: {val: 0, label: '0'} },
+'Outside_Left':{ red: {val: '1＋', isOffload: true, label: '1＋'}, blue: {val:0, label: '0'}, yellow: {val: -1, label: '-1'}, purple: {val: 3, label: '3'}, green: {val: 2, label: '2'}, orange: {val: 0, label: '0'} },
 'Outside_Right':{ red: {val: 1, label: '1'}, blue: {val: 2, label: '2'}, yellow: {val: 3, label: '3'}, purple: {val: 0, label: '0'}, green: {val: 0, label: '0'}, orange: {val: -1, label: '-1'} }
 };
 
@@ -1139,7 +1136,7 @@ const colorsContainer = document.createElement('div');
 colorsContainer.className = 'channel-guide-colors';
 
 COLORS_META.forEach(c => {
-let cell = table[c.key];
+let cell = table ? table[c.key] : null;
 let span = document.createElement('span');
 span.style.background = c.hex;
 span.style.color = '#000';
@@ -1832,7 +1829,7 @@ document.getElementById('modal-body').innerHTML = `
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
   ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
 ・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！
-  その確率は、＋4が1/6、＋3が2/6、＋2义2/6、ハンドリングエラー（攻守交替）が1/6となります。</p>
+  その確率は、＋4が1/6、＋3が2/6、＋2が2/6、ハンドリングエラー（攻守交替）が1/6となります。</p>
 </div>
 <div class="tutorial-section">
 <h4>【ジャッカルシステム（お互いに2回）】</h4>
