@@ -1002,11 +1002,13 @@ const WINNING_TRIES = 5;
 
 const COLORS_META = [
 { name: '赤', key: 'red', hex: '#ff2a6d' },
-{ name: '青', key: 'blue', hex: '#00f2fe' },
 { name: '黄', key: 'yellow', hex: '#ffeaa7' },
-{ name: '紫', key: 'purple', hex: '#a29bfe' },
+{ name: '橙', key: 'orange', hex: '#ff7675' },
 { name: '緑', key: 'green', hex: '#00b894' },
-{ name: '橙', key: 'orange', hex: '#ff7675' }
+{ name: '青', key: 'blue', hex: '#00f2fe' },
+{ name: '紫', key: 'purple', hex: '#a29bfe' }
+
+
 ];
 
 const PASS_TABLE = {
@@ -1014,7 +1016,7 @@ const PASS_TABLE = {
 'Middle': { red: {val: 2, label: '2'}, blue: {val: -1, label: '-1'},yellow: {val: 0, label: '0'}, purple: {val: 0, label: '0'}, green: {val: 1, label: '1'}, orange: {val: '1＋', isOffload: true, label: '1＋'} },
 'Short': { red: {val: 0, label: '0'}, blue: {val: 1, label: '1'}, yellow: {val: 1, label: '1'},purple: {val: 4, label: '4'}, green: {val: -1, label: '-1'}, orange: {val: 0, label: '0'} },
 'Outside': { red: {val: 1, label: '1'}, blue: {val: 2, label: '2'}, yellow: {val: 3, label: '3'}, purple: {val: 0, label: '0'}, green: {val: 0, label: '0'}, orange: {val: -1, label:'-1 '} },
-'Edge': { red: {val: 5, label: '5'}, blue: {val: '1＋', isOffload: true, label: '1＋'}, yellow: {val: -2, label: '-2'}, purple: {val: -1, label: '-1'}, green: {val: 0, label: '0' }, orange: {val: 3, label: '3'} },
+'Edge': { red: {val: 5, label: '5'}, blue: {val: '1＋', isOffload: true, label: '1＋'}, yellow: {val: -2, label: '-2'}, purple: {val: 3, label: '3'}, green: {val: -1, label: '-1' }, orange: {val: 0, label: '0'} },
 'Inside_Left': { red: {val: -1, label: '-1'}, blue: {val: 0, label: '0'}, yellow: {val: 1, label: '1'}, purple: {val: 1, label: '1'}, green: {val: 1, label: '1'}, orange: {val: 1, label: '1'} },
 'Inside_Right':{ red: {val: 0, label: '0'}, blue: {val: 1, label: '1'}, yellow: {val: 0, label: '0'}, purple: {val: -1, label: '-1'}, green: {val: 2, label: '2'}, orange: {val: 2, label: '2'} },
 'Outside_Left':{ red: {val: '1＋', isOffload: true, label: '1＋'}, blue: {val:0, label: '0'}, yellow: {val: -1, label: '-1'}, purple: {val: 3, label: '3'}, green: {val: 2, label: '2'}, orange: {val: 0, label: '0'} },
