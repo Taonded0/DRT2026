@@ -224,8 +224,7 @@ flex-direction: column;
 justify-content: space-around;
 text-align: left;
 box-sizing: border-box;
-flex-shrink: 0;
-}
+flex-shrink: 0;}
 
 .control-col-right {
 flex: 1;
@@ -251,7 +250,7 @@ label { font-size: 10px; color: #00f2fe; font-weight: 700; letter-spacing: 0.5px
 
 select {
 font-family: inherit;
-font-size: 11px;
+font-size: 14px;
 font-weight: 700;
 padding: 2px 4px;
 border-radius: 4px;
@@ -364,7 +363,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 margin-bottom: 2px;
-font-size: 11px;
+font-size: 10.5px;
 }
 
 .channel-guide-name { color: #ffffff; width: 88px; overflow: hidden; white-space: nowrap; font-weight: 500; }
@@ -1075,38 +1074,38 @@ channelSelect.innerHTML = '';
 
 if (ballX === 0) {
 currentAvailableOptions = [
-{ label: 'Inside (左HL)', x: 1, key: 'Inside' },
-{ label: 'Middle (CL)', x: 2, key: 'Middle' },
-{ label: 'Outside (右HL)', x: 3, key: 'Outside' },
-{ label: 'Edge (右EL)', x: 4, key: 'Edge' }
+{ label: 'RAM (左HL)', x: 1, key: 'Inside' },
+{ label: 'BLITZ (CL)', x: 2, key: 'Middle' },
+{ label: 'SWEEP (右HL)', x: 3, key: 'Outside' },
+{ label: 'SPEAR (右EL)', x: 4, key: 'Edge' }
 ];
 } else if (ballX === 4) {
 currentAvailableOptions = [
-{ label: 'Inside (右HL)', x: 3, key: 'Inside' },
-{ label: 'Middle (CL)', x: 2, key: 'Middle' },
-{ label: 'Outside (左HL)', x: 1, key: 'Outside' },
-{ label: 'Edge (左EL)', x: 0, key: 'Edge' }
+{ label: 'RAM (右HL)', x: 3, key: 'Inside' },
+{ label: 'BLITZ (CL)', x: 2, key: 'Middle' },
+{ label: 'SWEEP (左HL)', x: 1, key: 'Outside' },
+{ label: 'SPEAR (左EL)', x: 0, key: 'Edge' }
 ];
 } else if (ballX === 1) {
 currentAvailableOptions = [
-{ label: 'Short (左EL)', x: 0, key: 'Short' },
-{ label: 'Inside (CL)', x: 2, key: 'Inside' },
-{ label: 'Middle (右HL)', x: 3, key: 'Middle' },
-{ label: 'Outside (右EL)', x: 4, key: 'Outside' }
+{ label: 'FLANK (左EL)', x: 0, key: 'Short' },
+{ label: 'RAM (CL)', x: 2, key: 'Inside' },
+{ label: 'BLITZ (右HL)', x: 3, key: 'Middle' },
+{ label: 'SWEEP (右EL)', x: 4, key: 'Outside' }
 ];
 } else if (ballX === 3) {
 currentAvailableOptions = [
-{ label: 'Short (右EL)', x: 4, key: 'Short' },
-{ label: 'Inside (CL)', x: 2, key: 'Inside' },
-{ label: 'Middle (左HL)', x: 1, key: 'Middle' },
-{ label: 'Outside (左EL)', x: 0, key: 'Outside' }
+{ label: 'FLANK (右EL)', x: 4, key: 'Short' },
+{ label: 'RAM (CL)', x: 2, key: 'Inside' },
+{ label: 'BLITZ (左HL)', x: 1, key: 'Middle' },
+{ label: 'SWEEP (左EL)', x: 0, key: 'Outside' }
 ];
 } else {
 currentAvailableOptions = [
-{ label: 'Inside (左HL)', x: 1, key: 'Inside_Left' },
-{ label: 'Inside (右HL)', x: 3, key: 'Inside_Right' },
-{ label: 'Outside (左EL)', x: 0, key: 'Outside_Left' },
-{ label: 'Outside (右EL)', x: 4, key: 'Outside_Right' }
+{ label: 'RAM (左HL)', x: 1, key: 'Inside_Left' },
+{ label: 'BUSTER (右HL)', x: 3, key: 'Inside_Right' },
+{ label: 'ARROW (左EL)', x: 0, key: 'Outside_Left' },
+{ label: 'SWEEP (右EL)', x: 4, key: 'Outside_Right' }
 ];
 }
 
