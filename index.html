@@ -250,7 +250,7 @@ label { font-size: 10px; color: #00f2fe; font-weight: 700; letter-spacing: 0.5px
 
 select {
 font-family: inherit;
-font-size: 13.5px;
+font-size: 14px;
 font-weight: 700;
 padding: 2px 4px;
 border-radius: 4px;
@@ -1075,36 +1075,36 @@ channelSelect.innerHTML = '';
 if (ballX === 0) {
 currentAvailableOptions = [
 { label: 'CRUSH (左HL)', x: 1, key: 'Inside' },
-{ label: 'BLITZ (CL)', x: 2, key: 'Middle' },
+{ label: 'AXE (CL)', x: 2, key: 'Middle' },
 { label: 'SABER (右HL)', x: 3, key: 'Outside' },
-{ label: 'FALCON (右EL)', x: 4, key: 'Edge' }
+{ label: 'LANCE (右EL)', x: 4, key: 'Edge' }
 ];
 } else if (ballX === 4) {
 currentAvailableOptions = [
 { label: 'CRUSH (右HL)', x: 3, key: 'Inside' },
-{ label: 'BLITZ (CL)', x: 2, key: 'Middle' },
+{ label: 'AXE (CL)', x: 2, key: 'Middle' },
 { label: 'SABER (左HL)', x: 1, key: 'Outside' },
-{ label: 'FALCON (左EL)', x: 0, key: 'Edge' }
+{ label: 'LANCE (左EL)', x: 0, key: 'Edge' }
 ];
 } else if (ballX === 1) {
 currentAvailableOptions = [
-{ label: 'LANCE (左EL)', x: 0, key: 'Short' },
+{ label: 'DAGGER (左EL)', x: 0, key: 'Short' },
 { label: 'CRUSH (CL)', x: 2, key: 'Inside' },
-{ label: 'BLITZ (右HL)', x: 3, key: 'Middle' },
+{ label: 'AXE (右HL)', x: 3, key: 'Middle' },
 { label: 'SABER (右EL)', x: 4, key: 'Outside' }
 ];
 } else if (ballX === 3) {
 currentAvailableOptions = [
-{ label: 'LANCE (右EL)', x: 4, key: 'Short' },
+{ label: 'DAGGER (右EL)', x: 4, key: 'Short' },
 { label: 'CRUSH (CL)', x: 2, key: 'Inside' },
-{ label: 'BLITZ (左HL)', x: 1, key: 'Middle' },
+{ label: 'AXE (左HL)', x: 1, key: 'Middle' },
 { label: 'SABER (左EL)', x: 0, key: 'Outside' }
 ];
 } else {
 currentAvailableOptions = [
 { label: 'CRUSH (左HL)', x: 1, key: 'Inside_Left' },
-{ label: 'BUSTER (右HL)', x: 3, key: 'Inside_Right' },
-{ label: 'ARROW (左EL)', x: 0, key: 'Outside_Left' },
+{ label: 'MAUL (右HL)', x: 3, key: 'Inside_Right' },
+{ label: 'BOW (左EL)', x: 0, key: 'Outside_Left' },
 { label: 'SABER (右EL)', x: 4, key: 'Outside_Right' }
 ];
 }
