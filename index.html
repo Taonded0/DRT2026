@@ -1199,6 +1199,9 @@ const startX = ballX;
 const step = (newX > startX) ? 1 : -1;
 const diff = Math.abs(newX - startX);
 
+//
+requestAnimationFrame(() => {
+
 if (diff === 0) {
 token.style.top = linePositionsY[newY] + '%';
 ballY = newY;
@@ -1231,7 +1234,10 @@ scheduleGameTimeout(onComplete, 300);
 }
 
 moveOneStep();
+
+}); //
 }
+
 
 function selectCpuOption() {
 const isCloseToGoal = (ballY >= TOTAL_LINES - 3);
