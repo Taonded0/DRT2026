@@ -778,10 +778,9 @@ body {
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
 ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
-・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！
-その確率は、＋4が1/6、＋3が2/6、＋2が2/6、ハンドリングエラー（攻守交替）が1/6となります。<br>
-・<strong>「1R」</strong>は、1進んだ後にフェイズ数がリセット（1に戻る）され、継続してアタックできます！</p>
-</div><div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時、1R時は不可）<br>
+・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！<br>
+・<strong>「1A」</strong>（アドバンテージ）は、1進んだ後にフェイズ数がリセット（1に戻る）され、継続してアタックできます！</p>
+</div><div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時、1A時は不可）<br>
 ・<strong>成功確率</strong>：-2は4/6、-1は3/6、0は2/6、前進時は1/6。<br>
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
 ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
@@ -1018,7 +1017,7 @@ const PASS_TABLE = {
 'Edge': { red: {val: 5, label: '5'}, blue: {val: '1＋', isOffload: true, label: '1＋'}, yellow: {val: -2, label: '-2'}, purple: {val: 3, label: '3'}, green: {val: -1, label: '-1' }, orange: {val: 0, label: '0'} },
 'Inside_Left': { red: {val: -1, label: '-1'}, blue: {val: 0, label: '0'}, yellow: {val: 1, label: '1'}, purple: {val: 1, label: '1'}, green: {val: 1, label: '1'}, orange: {val: 1, label: '1'} },
 'Inside_Right':{ red: {val: 0, label: '0'}, blue: {val: 1, label: '1'}, yellow: {val: 0, label: '0'}, purple: {val: -1, label: '-1'}, green: {val: 2, label: '2'}, orange: {val: 2, label: '2'} },
-// ★ここでADEPT(Outside_Left)のredを「1R（フェイズリセット）」に変更
+// ★ADEPT(Outside_Left)のredを「1A（アドバンテージ）」に変更
 'Outside_Left':{ red: {val: 1, isAdvantage: true, label: '1A'}, blue: {val:0, label: '0'}, yellow: {val: -1, label: '-1'}, purple: {val: 4, label: '4'}, green: {val: 2, label: '2'}, orange: {val: 0, label: '0'} },
 'Outside_Right':{ red: {val: 1, label: '1'}, blue: {val: 2, label: '2'}, yellow: {val: 3, label: '3'}, purple: {val: 0, label: '0'}, green: {val: 0, label: '0'}, orange: {val: -1, label: '-1'} }
 };
@@ -1278,8 +1277,8 @@ document.getElementById('dice-color-box').style.backgroundColor = rolledMeta.hex
 const textBox = document.getElementById('dice-text-box');
 if (cellData.isOffload) {
     textBox.innerText = '1＋ (OFFLOAD)';
-} else if (cellData.isResetPhase) {
-    textBox.innerText = '1R (RESET)';
+} else if (cellData.isAdvantage) {
+    textBox.innerText = '1A (ADVANTAGE)';
 } else {
     textBox.innerText = cellData.label;
 }
@@ -1300,7 +1299,7 @@ cellData,
 tempSteps,
 isTO: (cellData.isTO || cellData.label === 'TO'),
 isOffload: cellData.isOffload,
-isResetPhase: cellData.isResetPhase // ★1Rフラグを追加
+isAdvantage: cellData.isAdvantage
 };
 
 if (currentAttacker === 'COM') {
@@ -1322,7 +1321,7 @@ document.getElementById('log').innerText = `【${selectedOption.label}】➔ 0 �
 }
 
 animatePassingMovement(targetX, targetY, tempSteps, () => {
-if (isComTry || isPushedBackToOwnGoal || cellData.isOffload || cellData.isResetPhase) {
+if (isComTry || isPushedBackToOwnGoal || cellData.isOffload || cellData.isAdvantage) {
 isJackalWindowOpen = false;
 updateDisplayImmediate();
 proceedAfterPlay(pendingPlayData, isPushedBackToOwnGoal);
@@ -1442,7 +1441,7 @@ pendingPlayData = null;
 isJackalWindowOpen = false;
 updateDisplayImmediate();
 
-const { cellData, isTO, isOffload, isResetPhase } = playData;
+const { cellData, isTO, isOffload, isAdvantage } = playData;
 updateAvailableChannels();
 
 if (checkTryCondition()) return;
@@ -1459,18 +1458,18 @@ switchTurn("TURNOVER! スティールされた！");
 return;
 }
 
-// ★1R（フェイズリセット）の処理
-if (isResetPhase) {
-    currentPhase = 1; // フェイズを1にリセット
+// ★1A（アドバンテージによるフェイズリセット）処理
+if (isAdvantage) {
+    currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
     playGainSound(true);
-    document.getElementById('log').innerText = `【1R】突破＆フェイズリセット！アタック継続！`;
+    document.getElementById('log').innerText = `🔥 アドバンテージ！フェイズリセットでアタック継続！`;
     
     scheduleGameTimeout(() => {
       if (currentAttacker === 'P1') {
         lockControls(false);
       } else {
-        document.getElementById('log').innerText = `COMのフェイズリセット攻撃...`;
+        document.getElementById('log').innerText = `COMがアドバンテージを獲得...`;
         scheduleGameTimeout(() => { executePlay(); }, 1200);
       }
     }, 800);
@@ -1517,7 +1516,7 @@ pendingPlayData = null;
 isJackalWindowOpen = false;
 updateDisplayImmediate();
 
-const { selectedOption, cellData, tempSteps, isTO, isOffload, isResetPhase } = playData;
+const { selectedOption, cellData, tempSteps, isTO, isOffload, isAdvantage } = playData;
 
 let targetY = ballY - tempSteps;
 let targetX = selectedOption.x;
@@ -1551,8 +1550,8 @@ return;
 let cpuWantsJackal = false;
 const isMidOrLateGame = (p1Tries >= 3 || comTries >= 3 || (p1Tries + comTries) >= 4);
 
-// 1R時はジャッカル不可
-if (comJackalCount > 0 && currentPhase < maxPhases && isMidOrLateGame && !isP1Try && !isTO && !isOffload && !isResetPhase) {
+// 1A（アドバンテージ）時はジャッカル不可
+if (comJackalCount > 0 && currentPhase < maxPhases && isMidOrLateGame && !isP1Try && !isTO && !isOffload && !isAdvantage) {
 if (tempSteps === -2 && Math.random() < 0.8) cpuWantsJackal = true;
 else if (tempSteps === -1 && Math.random() < 0.5) cpuWantsJackal = true;
 else if (targetY <= 2 && Math.random() < 0.7) cpuWantsJackal = true;
@@ -1569,12 +1568,12 @@ switchTurn("TURNOVER! スティールされた！");
 return;
 }
 
-// ★プレイヤー側の1R（フェイズリセット）処理
-if (isResetPhase) {
+// ★プレイヤー側の1A（アドバンテージ）処理
+if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
     playGainSound(true);
-    document.getElementById('log').innerText = `【1R】突破＆フェイズリセット！アタック継続！`;
+    document.getElementById('log').innerText = `🔥 アドバンテージ！フェイズリセットでアタック継続！`;
     
     scheduleGameTimeout(() => {
         lockControls(false);
@@ -1857,11 +1856,11 @@ document.getElementById('modal-body').innerHTML = `
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
   ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
 ・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！<br>
-・<strong>「1R」</strong>は、1進んだ後にフェイズ数がリセット（1に戻る）され、継続してアタックできます！</p>
+・<strong>「1A」</strong>（アドバンテージ）は、1進んだ後にフェイズ数がリセット（1に戻る）され、継続してアタックできます！</p>
 </div>
 <div class="tutorial-section">
 <h4>【ジャッカルシステム（お互いに2回）】</h4>
-<p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時、1R時は不可）<br>
+<p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時、1A時は不可）<br>
 ・<strong>成功確率</strong>：-2は4/6、-1は3/6、0は2/6、前進時は1/6。<br>
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br> 
 ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
