@@ -1356,9 +1356,9 @@ const steps = pendingPlayData.tempSteps;
 let successChance = 1 / 6;
 
 if (steps === -2) successChance = 4 / 6;
-else if (steps === -1) successChance = 3 / 6;
-else if (steps === 0) successChance = 2 / 6;
-else if (steps > 0) successChance = 1 / 6;
+else if (steps === -1) successChance = 4 / 6;
+else if (steps === 0) successChance = 3 / 6;
+else if (steps > 0) successChance = 2 / 6;
 
 const roll = Math.random();
 const isSuccess = roll < successChance;
@@ -1399,9 +1399,9 @@ function triggerCpuJackal(tempSteps) {
 let successChance = 1 / 6;
 
 if (tempSteps === -2) successChance = 4 / 6;
-else if (tempSteps === -1) successChance = 3 / 6;
-else if (tempSteps === 0) successChance = 2 / 6;
-else if (tempSteps > 0) successChance = 1 / 6;
+else if (tempSteps === -1) successChance = 4 / 6;
+else if (tempSteps === 0) successChance = 3 / 6;
+else if (tempSteps > 0) successChance = 2 / 6;
 
 const roll = Math.random();
 const isSuccess = roll < successChance;
