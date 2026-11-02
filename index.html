@@ -778,8 +778,8 @@ body {
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
 ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
-・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！<br>
-・<strong>「1A」</strong>（アドバンテージ）は、1進んだ後にフェイズ数がリセット（1に戻る）され、継続してアタックできます！</p>
+・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス4マス）できます！しかしハンドリングエラーのリスクも！<br>
+・<strong>「１A」</strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
 </div><div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時、1A時は不可）<br>
 ・<strong>成功確率</strong>：-2は4/6、-1は3/6、0は2/6、前進時は1/6。<br>
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
@@ -1463,13 +1463,13 @@ if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
     playGainSound(true);
-    document.getElementById('log').innerText = `🔥 アドバンテージ！フェイズリセットでアタック継続！`;
+    document.getElementById('log').innerText = `アドバンテージ！フェイズが１にリセット！`;
     
     scheduleGameTimeout(() => {
       if (currentAttacker === 'P1') {
         lockControls(false);
       } else {
-        document.getElementById('log').innerText = `COMがアドバンテージを獲得...`;
+        document.getElementById('log').innerText = `COMのアドバンテージ...`;
         scheduleGameTimeout(() => { executePlay(); }, 1200);
       }
     }, 800);
@@ -1573,7 +1573,7 @@ if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
     playGainSound(true);
-    document.getElementById('log').innerText = `🔥 アドバンテージ！フェイズリセットでアタック継続！`;
+    document.getElementById('log').innerText = `アドバンテージ！フェイズが１にリセット！`;
     
     scheduleGameTimeout(() => {
         lockControls(false);
@@ -1855,8 +1855,8 @@ document.getElementById('modal-body').innerHTML = `
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
   ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
-・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進できます！<br>
-・<strong>「1A」</strong>（アドバンテージ）は、1進んだ後にフェイズ数がリセット（1に戻る）され、継続してアタックできます！</p>
+・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス４マス）できます！しかし、ハンドリングエラーのリスクも！<br>
+・<strong>「１A」</strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
 </div>
 <div class="tutorial-section">
 <h4>【ジャッカルシステム（お互いに2回）】</h4>
