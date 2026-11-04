@@ -14,7 +14,7 @@ body {
   background: #090a0f;
   background-image:
     radial-gradient(circle at 50% 10%, rgba(0, 242, 254, 0.15) 0%, transparent 60%),
-    radial-gradient(circle at 80% 80%, rgba(255, 42, 109, 0.12) 0%, transparent 50%);
+    radial-gradient(circle at 80% 80%, rgba(255, 0, 127, 0.15) 0%, transparent 50%);
   color: #e2e8f0;
   text-align: center;
   margin: 0;
@@ -143,11 +143,12 @@ color: #00f2fe;
 text-shadow: 0 0 6px rgba(0, 242, 254, 0.8);
 }
 
+/* ボトム側インゴール（ネオンピンク） */
 .ingoal-bottom {
-background: linear-gradient(0deg, rgba(255, 42, 109, 0.4) 0%, rgba(255, 42, 109, 0.05) 100%);
-border-top: 1.5px solid #ff2a6d;
-color: #ff2a6d;
-text-shadow: 0 0 6px rgba(255, 42, 109, 0.8);
+background: linear-gradient(0deg, rgba(255, 0, 127, 0.5) 0%, rgba(255, 0, 127, 0.05) 100%);
+border-top: 1.5px solid #ff007f;
+color: #ff3399;
+text-shadow: 0 0 8px rgba(255, 0, 127, 0.9), 0 0 15px rgba(255, 0, 127, 0.6);
 }
 
 #field-container {
@@ -190,10 +191,10 @@ background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #00f2fe 70%, #006699
 border: 1px solid #ffffff;
 }
 
-/* ★ CPUボールのネオンピンク発色強化 */
+/* CPUボールのネオンピンク発色 */
 #ball-token.com-ball {
-box-shadow: 0 0 12px #ff2a6d, 0 0 22px #ff2a6d;
-background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #ff2a6d 75%, #a00037 100%);
+box-shadow: 0 0 15px #ff007f, 0 0 30px #ff007f;
+background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #ff3399 65%, #cc0066 100%);
 border: 1px solid #ffffff;
 }
 
@@ -283,11 +284,11 @@ transition: all 0.2s;
 margin-top: 4px;
 }
 
-/* ★ ジャッカルボタンのネオンピンク化 */
+/* ジャッカルボタンのネオンピンク化 */
 #controls button#roll-btn.is-jackal {
-background: linear-gradient(135deg, #ff2a6d 0%, #ff007f 100%);
+background: linear-gradient(135deg, #ff3399 0%, #ff007f 100%);
 color: #ffffff;
-box-shadow: 0 0 14px rgba(255, 42, 109, 0.7);
+box-shadow: 0 0 15px rgba(255, 0, 127, 0.8);
 }
 
 #controls button#roll-btn:disabled {
@@ -429,7 +430,7 @@ font-family: inherit;
 font-size: 12px;
 }
 
-/* ===== スマートフォン対応 ===== */
+/* スマートフォン対応 */
 
 * {
     box-sizing: border-box;
@@ -598,7 +599,7 @@ body {
     }
 }
 
-/* ===== スマートフォン：モーダルのスクロール修正 ===== */
+/* スマートフォン：モーダルのスクロール修正 */
 
 #modal-overlay {
     position: fixed;
@@ -647,7 +648,7 @@ body {
     overflow-wrap: anywhere;
 }
 
-/* ===== トライ・セレブレーション演出 ===== */
+/* トライ・セレブレーション演出 */
 
 #try-celebration {
     --try-color: #00f2fe;
@@ -763,8 +764,6 @@ body {
     }
 }
 
-/* 動きを減らす設定の端末では演出を簡略化 */
-
 @media (prefers-reduced-motion: reduce) {
     #try-celebration.show,
     #try-celebration.show::before,
@@ -774,7 +773,7 @@ body {
 }
 
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
-</div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>SCORE</span> <span id="score-container" style="display:flex; align-items:center; gap:4px;"><span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span><span id="deuce-badge" style="display:none; font-size:8.5px; background:rgba(255,42,109,0.2); border:1px solid #ff2a6d; color:#ff2a6d; padding:0 3px; border-radius:2px; font-weight:bold; letter-spacing:0.5px;">DEUCE</span></span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff7675; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
+</div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>SCORE</span> <span id="score-container" style="display:flex; align-items:center; gap:4px;"><span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span><span id="deuce-badge" style="display:none; font-size:8.5px; background:rgba(255,0,127,0.25); border:1px solid #ff007f; color:#ff3399; padding:0 3px; border-radius:2px; font-weight:bold; letter-spacing:0.5px;">DEUCE</span></span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff3399; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 <select id="channel-select"></select>
 <button id="roll-btn" onclick="handleMainButton()">EXECUTE!</button>
 </div></div><div id="channel-guide-panel"><div id="channel-guide-title">DICE MATRIX</div><div id="channel-guide-list"></div></div><div id="dice-result-container"><div id="dice-color-box"></div><div id="dice-text-box">-</div></div><div id="log">5トライ先取で勝利！（4-4時はデュース）</div></div></div><div id="modal-overlay" onclick="closeTutorialModal(event)"><div id="modal-content" onclick="event.stopPropagation()"><div id="modal-header"><span id="modal-title">DICE RUGBY TACTICS RULES</span>
@@ -1006,7 +1005,7 @@ generateWhistleSound(0.85, true);
 const WINNING_TRIES = 5;
 
 const COLORS_META = [
-{ name: '赤', key: 'red', hex: '#ff2a6d' },
+{ name: '赤', key: 'red', hex: '#ff3399' },
 { name: '橙', key: 'orange', hex: '#ff7675' }, 
 { name: '黄', key: 'yellow', hex: '#ffeaa7' },
 { name: '緑', key: 'green', hex: '#00b894' },
@@ -1169,7 +1168,7 @@ token.style.top = linePositionsY[ballY] + '%';
 if (currentAttacker === 'COM') {
 token.classList.add('com-ball');
 document.getElementById('current-turn').innerText = 'COM';
-document.getElementById('current-turn').style.color = '#ff2a6d';
+document.getElementById('current-turn').style.color = '#ff3399';
 } else {
 token.classList.remove('com-ball');
 document.getElementById('current-turn').innerText = 'YOU';
@@ -1411,10 +1410,10 @@ executePlay();
 function triggerCpuJackal(tempSteps) {
 let successChance = 1 / 6;
 
-if (tempSteps === -2) successChance = 4 / 6;
-else if (tempSteps === -1) successChance = 4 / 6;
-else if (tempSteps === 0) successChance = 3 / 6;
-else if (tempSteps > 0) successChance = 2 / 6;
+if (steps === -2) successChance = 4 / 6;
+else if (steps === -1) successChance = 4 / 6;
+else if (steps === 0) successChance = 3 / 6;
+else if (steps > 0) successChance = 2 / 6;
 
 const roll = Math.random();
 const isSuccess = roll < successChance;
@@ -1692,7 +1691,7 @@ function checkTryCondition() {
 
         celebration.style.setProperty(
             '--try-color',
-            isP1 ? '#00f2fe' : '#ff2a6d'
+            isP1 ? '#00f2fe' : '#ff3399'
         );
 
         if (isFinal) {
@@ -1701,7 +1700,7 @@ function checkTryCondition() {
 
             celebration.style.setProperty(
                 '--try-color',
-                isP1 ? '#ffeaa7' : '#ff2a6d'
+                isP1 ? '#ffeaa7' : '#ff3399'
             );
         } else {
             title.innerText = 'TRY!!';
@@ -1838,7 +1837,7 @@ function showGameSetModal(winner) {
 
   body.innerHTML = `
   <div style="text-align: center; padding: 10px;">
-  <h2 style="color: ${isP1Win ? '#00f2fe' : '#ff2a6d'}; margin: 0 0 10px 0;">
+  <h2 style="color: ${isP1Win ? '#00f2fe' : '#ff3399'}; margin: 0 0 10px 0;">
   ${isP1Win ? 'VICTORY!' : 'DEFEAT...'}
   </h2>
   <p style="font-size: 11px; margin-bottom: 15px;">
@@ -1883,8 +1882,8 @@ document.getElementById('modal-body').innerHTML = `
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
   ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
-・<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス４マス）できます！しかし、ハンドリングエラーのリスクも！<br>
-・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
+・<strong><span><span>「１＋」</span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス４マス）できます！しかし、ハンドリングエラーのリスクも！<br>
+・<strong><span><span>「１A」</span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
 </div>
 <div class="tutorial-section">
 <h4>【ジャッカルシステム（お互いに2回）】</h4>
