@@ -769,23 +769,23 @@ body {
 }
 
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
-</div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>SCORE</span> <span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff7675; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
+</div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>SCORE</span> <span id="score-container" style="display:flex; align-items:center; gap:4px;"><span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span><span id="deuce-badge" style="display:none; font-size:8.5px; background:rgba(255,42,109,0.2); border:1px solid #ff2a6d; color:#ff2a6d; padding:0 3px; border-radius:2px; font-weight:bold; letter-spacing:0.5px;">DEUCE</span></span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff7675; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 <select id="channel-select"></select>
 <button id="roll-btn" onclick="handleMainButton()">EXECUTE!</button>
-</div></div><div id="channel-guide-panel"><div id="channel-guide-title">DICE MATRIX</div><div id="channel-guide-list"></div></div><div id="dice-result-container"><div id="dice-color-box"></div><div id="dice-text-box">-</div></div><div id="log">5トライ先取で勝利！</div></div></div><div id="modal-overlay" onclick="closeTutorialModal(event)"><div id="modal-content" onclick="event.stopPropagation()"><div id="modal-header"><span id="modal-title">DICE RUGBY TACTICS RULES</span>
+</div></div><div id="channel-guide-panel"><div id="channel-guide-title">DICE MATRIX</div><div id="channel-guide-list"></div></div><div id="dice-result-container"><div id="dice-color-box"></div><div id="dice-text-box">-</div></div><div id="log">5トライ先取で勝利！（4-4時はデュース）</div></div></div><div id="modal-overlay" onclick="closeTutorialModal(event)"><div id="modal-content" onclick="event.stopPropagation()"><div id="modal-header"><span id="modal-title">DICE RUGBY TACTICS RULES</span>
 <button class="close-btn" onclick="closeTutorialModal()">✕ CLOSE</button>
 </div><div id="modal-body"><div class="tutorial-section"><h4>【対戦ルール】</h4><p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
 ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
-・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス4マス）できます！しかしハンドリングエラーのリスクも！<br>
-・<strong>「１A」</strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
+・<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス4マス）できます！しかしハンドリングエラーのリスクも！<br>
+・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
 </div><div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※ゴールライン到達時およびオフロードパス時、1A時は不可）<br>
 ・<strong>成功確率</strong>：相手のアタックが後退した時は2/3、0は1/2、前進時は1/3。<br>
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
 ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
-</div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！</p></div></div></div></div>
+</div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
   <div id="try-celebration" aria-hidden="true">
   <div class="try-title">TRY!!</div>
@@ -1017,7 +1017,6 @@ const PASS_TABLE = {
 'Edge': { red: {val: 5, label: '5'}, blue: {val: '1＋', isOffload: true, label: '1＋'}, yellow: {val: -2, label: '-2'}, purple: {val: 3, label: '3'}, green: {val: -1, label: '-1' }, orange: {val: 0, label: '0'} },
 'Inside_Left': { red: {val: -1, label: '-1'}, blue: {val: 0, label: '0'}, yellow: {val: 1, label: '1'}, purple: {val: 1, label: '1'}, green: {val: 1, label: '1'}, orange: {val: 1, label: '1'} },
 'Inside_Right':{ red: {val: 0, label: '0'}, blue: {val: 1, label: '1'}, yellow: {val: 0, label: '0'}, purple: {val: -1, label: '-1'}, green: {val: 2, label: '2'}, orange: {val: 2, label: '2'} },
-// ★ADEPT(Outside_Left)のredを「1A（アドバンテージ）」に変更
 'Outside_Left':{ red: {val: 1, isAdvantage: true, label: '1A'}, blue: {val:0, label: '0'}, yellow: {val: -1, label: '-1'}, purple: {val: 4, label: '4'}, green: {val: 2, label: '2'}, orange: {val: 0, label: '0'} },
 'Outside_Right':{ red: {val: 1, label: '1'}, blue: {val: 2, label: '2'}, yellow: {val: 3, label: '3'}, purple: {val: 0, label: '0'}, green: {val: 0, label: '0'}, orange: {val: -1, label: '-1'} }
 };
@@ -1173,7 +1172,16 @@ document.getElementById('current-turn').style.color = '#00f2fe';
 }
 
 document.getElementById('phase-num').innerText = currentPhase + '/5';
+
+// スコアとDEUCEバッジの制御
 document.getElementById('score-text').innerText = `${p1Tries} - ${comTries}`;
+const deuceBadge = document.getElementById('deuce-badge');
+if (p1Tries >= 4 && comTries >= 4 && p1Tries === comTries) {
+    deuceBadge.style.display = 'inline-block';
+} else {
+    deuceBadge.style.display = 'none';
+}
+
 document.getElementById('jackal-count').innerHTML = `YOU:${p1JackalCount}<br>COM:${comJackalCount}`;
 
 const mainBtn = document.getElementById('roll-btn');
@@ -1458,7 +1466,7 @@ switchTurn("TURNOVER! スティールされた！");
 return;
 }
 
-// ★1A（アドバンテージによるフェイズリセット）処理
+// 1A（アドバンテージによるフェイズリセット）処理
 if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
@@ -1568,7 +1576,7 @@ switchTurn("TURNOVER! スティールされた！");
 return;
 }
 
-// ★プレイヤー側の1A（アドバンテージ）処理
+// プレイヤー側の1A（アドバンテージ）処理
 if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
@@ -1636,12 +1644,12 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 }
 
+// ★トライ条件・勝敗判定（デュース機能追加・バッジ連動）
 function checkTryCondition() {
     if (
         (currentAttacker === 'P1' && ballY <= 0) ||
         (currentAttacker === 'COM' && ballY >= TOTAL_LINES - 1)
     ) {
-
         playTrySound();
 
         if (currentAttacker === 'P1') {
@@ -1650,12 +1658,25 @@ function checkTryCondition() {
             comTries++;
         }
 
-        document.getElementById('score-text').innerText =
-            `${p1Tries} - ${comTries}`;
+        updateDisplayImmediate();
 
-        const isFinal =
-            p1Tries >= WINNING_TRIES ||
-            comTries >= WINNING_TRIES;
+        // 勝敗・デュース判定
+        let isFinal = false;
+        const diff = Math.abs(p1Tries - comTries);
+
+        // 両者4点以上でデュースモード
+        if (p1Tries >= 4 && comTries >= 4) {
+            if (diff >= 2) {
+                isFinal = true;
+            } else if (p1Tries === 4 && comTries === 4) {
+                document.getElementById('log').innerText = `🔥 DEUCE! 2点差がつくまで延長戦！`;
+            }
+        } else {
+            // 通常時：5点先取
+            if (p1Tries >= WINNING_TRIES || comTries >= WINNING_TRIES) {
+                isFinal = true;
+            }
+        }
 
         const isP1 = currentAttacker === 'P1';
         const winner = isP1 ? 'P1' : 'COM';
@@ -1693,8 +1714,10 @@ function checkTryCondition() {
             return true;
         }
 
-        document.getElementById('log').innerText =
-            `🎉 TRY!! ${isP1 ? 'YOU' : 'COM'} トライ！！`;
+        if (!(p1Tries === 4 && comTries === 4)) {
+            document.getElementById('log').innerText =
+                `🎉 TRY!! ${isP1 ? 'YOU' : 'COM'} トライ！！`;
+        }
 
         scheduleGameTimeout(() => {
             resetKickOff();
@@ -1814,7 +1837,7 @@ function showGameSetModal(winner) {
   ${isP1Win ? 'VICTORY!' : 'DEFEAT...'}
   </h2>
   <p style="font-size: 11px; margin-bottom: 15px;">
-  ${isP1Win ? '5トライ先取！見事CPUを撃破！' : 'COMに5トライを奪われました...'}
+  ${isP1Win ? '見事デュース・激闘を制して勝利！' : 'COMに勝利を奪われました...'}
   </p>
   <button class="restart-btn" onclick="restartGame()">RESTART GAME</button>
   </div>
@@ -1855,8 +1878,8 @@ document.getElementById('modal-body').innerHTML = `
 ・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
 ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
   ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
-・<strong>「１＋」</strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス４マス）できます！しかし、ハンドリングエラーのリスクも！<br>
-・<strong>「１A」</strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
+・<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス４マス）できます！しかし、ハンドリングエラーのリスクも！<br>
+・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
 </div>
 <div class="tutorial-section">
 <h4>【ジャッカルシステム（お互いに2回）】</h4>
@@ -1868,7 +1891,7 @@ document.getElementById('modal-body').innerHTML = `
 </div>
 <div class="tutorial-section">
 <h4>【勝利条件】</h4>
-<p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！</p>
+<p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p>
 </div>
 `;
 }
