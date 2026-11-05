@@ -73,7 +73,6 @@ text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
   justify-content: center;
 }
 
-/* キーボードフォーカスの可視化（アクセシビリティ向上） */
 button:focus-visible,
 .rule-btn:focus-visible,
 #controls button:focus-visible {
@@ -81,7 +80,6 @@ button:focus-visible,
   outline-offset: 2px;
 }
 
-/* アニメーションを嫌うユーザーへの配慮 */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -120,8 +118,6 @@ flex-shrink: 0;
 overflow: hidden;
 }
 
-/* 上下インゴール */
-
 .ingoal-zone {
 width: 100%;
 height: 18px;
@@ -143,7 +139,6 @@ color: #00f2fe;
 text-shadow: 0 0 6px rgba(0, 242, 254, 0.8);
 }
 
-/* ボトム側インゴール（ネオンピンク） */
 .ingoal-bottom {
 background: linear-gradient(0deg, rgba(255, 0, 127, 0.5) 0%, rgba(255, 0, 127, 0.05) 100%);
 border-top: 1.5px solid #ff007f;
@@ -191,7 +186,6 @@ background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #00f2fe 70%, #006699
 border: 1px solid #ffffff;
 }
 
-/* CPUボールのネオンピンク発色 */
 #ball-token.com-ball {
 box-shadow: 0 0 15px #ff007f, 0 0 30px #ff007f;
 background: radial-gradient(ellipse at 35% 35%, #ffffff 0%, #ff3399 65%, #cc0066 100%);
@@ -229,7 +223,8 @@ flex-direction: column;
 justify-content: space-around;
 text-align: left;
 box-sizing: border-box;
-flex-shrink: 0;}
+flex-shrink: 0;
+}
 
 .control-col-right {
 flex: 1;
@@ -284,7 +279,6 @@ transition: all 0.2s;
 margin-top: 4px;
 }
 
-/* ジャッカルボタンのネオンピンク化 */
 #controls button#roll-btn.is-jackal {
 background: linear-gradient(135deg, #ff3399 0%, #ff007f 100%);
 color: #ffffff;
@@ -430,8 +424,6 @@ font-family: inherit;
 font-size: 12px;
 }
 
-/* スマートフォン対応 */
-
 * {
     box-sizing: border-box;
 }
@@ -513,15 +505,13 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-/* チュートリアル・試合終了モーダル */
-
 #modal-overlay {
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
     height: 100dvh;
-    padding: 12px;
+    padding: 12px 8px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     align-items: center;
@@ -546,109 +536,6 @@ body {
 .tutorial-section {
     overflow-wrap: anywhere;
 }
-
-@media (max-width: 300px) {
-    #game-header,
-    #controls,
-    #board-wrapper {
-        width: calc(100vw - 16px);
-    }
-    #controls {
-        padding: 4px;
-    }
-    .control-row {
-        gap: 4px;
-    }
-    .control-col-left {
-        font-size: 9px;
-        padding: 3px;
-    }
-    .control-col-right {
-        padding: 4px;
-    }
-    #dice-color-box {
-        width: 34%;
-    }
-    .channel-guide-name {
-        width: 76px;
-        font-size: 10px;
-    }
-    #channel-guide-list .channel-guide-item {
-        min-width: 0;
-    }
-    #channel-guide-list .channel-guide-colors {
-        gap: 1px;
-        min-width: 0;
-    }
-    #channel-guide-list .channel-guide-colors span {
-        width: 17px !important;
-        padding-inline: 1px !important;
-        font-size: 8px !important;
-    }
-    #modal-title {
-        font-size: 11px;
-    }
-}
-
-@media (max-height: 500px) {
-    #modal-overlay {
-        align-items: flex-start;
-    }
-    #modal-content {
-        margin-block: auto;
-    }
-}
-
-/* スマートフォン：モーダルのスクロール修正 */
-
-#modal-overlay {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    box-sizing: border-box;
-    padding: 12px 8px;
-    display: none;
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    touch-action: pan-y;
-}
-
-#modal-content {
-    box-sizing: border-box;
-    width: min(300px, 100%);
-    max-width: 100%;
-    max-height: calc(100vh - 24px);
-    max-height: calc(100dvh - 24px);
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: contain;
-    touch-action: pan-y;
-    flex-shrink: 1;
-    margin: 0;
-}
-
-#modal-header {
-    flex-shrink: 0;
-}
-
-#modal-body {
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
-
-.tutorial-section {
-    overflow-wrap: anywhere;
-}
-
-/* トライ・セレブレーション演出 */
 
 #try-celebration {
     --try-color: #00f2fe;
@@ -791,17 +678,17 @@ body {
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
-  <div id="try-celebration" aria-hidden="true">
+<div id="try-celebration" aria-hidden="true">
   <div class="try-title">TRY!!</div>
   <div class="try-subtitle">INCREDIBLE PLAY!</div>
 </div>
 
-  <script>
+<script>
 let audioCtx = null;
 let gameTimers = new Set();
 let gameSessionId = 0;
+let isProcessing = false; // 二重実行・フリーズ防止のための排他制御フラグ
 
-// ゲーム用タイマーを管理する
 function scheduleGameTimeout(callback, delay) {
     const timer = {
         id: null,
@@ -818,9 +705,9 @@ function scheduleGameTimeout(callback, delay) {
             return;
         }
 
-        // 画面が非表示なら、ゲーム処理を進めず少し待つ
+        // タブ非表示時は即時実行またはわずかなウェイトに留めてデッドロックを防ぐ
         if (document.visibilityState === 'hidden') {
-            timer.id = setTimeout(run, 250);
+            timer.id = setTimeout(run, 100);
             return;
         }
 
@@ -834,7 +721,6 @@ function scheduleGameTimeout(callback, delay) {
     return timer;
 }
 
-// 個別のタイマーをキャンセルする
 function cancelGameTimeout(timer) {
     if (!timer) return;
 
@@ -848,7 +734,6 @@ function cancelGameTimeout(timer) {
     gameTimers.delete(timer);
 }
 
-// ゲーム終了・リスタート時に全タイマーを消去する
 function clearGameTimers() {
     gameSessionId++;
 
@@ -880,7 +765,6 @@ audioCtx.resume();
 }
 }
 
-// パス音
 function playPassSound() {
 if (document.visibilityState === 'hidden') return;
 initAudio();
@@ -915,7 +799,6 @@ gainNode.connect(audioCtx.destination);
 whiteNoise.start(now);
 }
 
-// ゲイン音
 function playGainSound(isPositive) {
   if (document.visibilityState === 'hidden') return;
 
@@ -943,7 +826,6 @@ osc.start(now);
 osc.stop(now + 0.2);
 }
 
-// 共通ホイッスル生成エンジン
 function generateWhistleSound(duration, isDoubleTone = false) {
 if (document.visibilityState === 'hidden') return;
 initAudio();
@@ -1025,9 +907,8 @@ const PASS_TABLE = {
 'Outside_Right':{ red: {val: 1, label: '1'}, blue: {val: 2, label: '2'}, yellow: {val: 3, label: '3'}, purple: {val: 0, label: '0'}, green: {val: 0, label: '0'}, orange: {val: -1, label: '-1'} }
 };
 
-// 横ライン数を15本に変更
 const TOTAL_LINES = 15;
-const CENTER_LINE_INDEX = Math.floor(TOTAL_LINES / 2); // 7
+const CENTER_LINE_INDEX = Math.floor(TOTAL_LINES / 2);
 let linePositionsY = [];
 let ballX = 2;
 let ballY = CENTER_LINE_INDEX;
@@ -1177,7 +1058,6 @@ document.getElementById('current-turn').style.color = '#00f2fe';
 
 document.getElementById('phase-num').innerText = currentPhase + '/5';
 
-// スコアとDEUCEバッジの制御
 document.getElementById('score-text').innerText = `${p1Tries} - ${comTries}`;
 const deuceBadge = document.getElementById('deuce-badge');
 if (p1Tries >= 4 && comTries >= 4 && p1Tries === comTries) {
@@ -1194,8 +1074,8 @@ if (currentAttacker === 'COM' && p1JackalCount > 0 && isJackalWindowOpen) {
 mainBtn.innerText = "JACKAL!";
 mainBtn.classList.add('is-jackal');
 mainBtn.disabled = false;
-} else if (currentAttacker === 'COM') {
-mainBtn.innerText = "COM THINKING...";
+} else if (currentAttacker === 'COM' || isProcessing) {
+mainBtn.innerText = currentAttacker === 'COM' && !isJackalWindowOpen ? "COM THINKING..." : "PROCESSING...";
 mainBtn.classList.remove('is-jackal');
 mainBtn.disabled = true;
 } else {
@@ -1212,7 +1092,6 @@ const step = (newX > startX) ? 1 : -1;
 const diff = Math.abs(newX - startX);
 
 requestAnimationFrame(() => {
-
 if (diff === 0) {
 token.style.top = linePositionsY[newY] + '%';
 ballY = newY;
@@ -1245,7 +1124,6 @@ scheduleGameTimeout(onComplete, 300);
 }
 
 moveOneStep();
-
 });
 }
 
@@ -1263,6 +1141,7 @@ return currentAvailableOptions[Math.floor(Math.random() * currentAvailableOption
 }
 
 function handleMainButton() {
+if (isProcessing) return; // 処理中の重複入力を完全にブロック
 if (currentAttacker === 'COM' && isJackalWindowOpen) {
 triggerJackal();
 } else if (currentAttacker === 'P1') {
@@ -1271,6 +1150,10 @@ executePlay();
 }
 
 function executePlay() {
+if (isProcessing) return;
+isProcessing = true;
+lockControls(true);
+
 initAudio();
 let selectedOption;
 
@@ -1315,7 +1198,6 @@ isAdvantage: cellData.isAdvantage
 };
 
 if (currentAttacker === 'COM') {
-lockControls(true);
 let targetY = ballY + tempSteps;
 let targetX = selectedOption.x;
 let isComTry = (targetY >= TOTAL_LINES - 1);
@@ -1335,13 +1217,16 @@ document.getElementById('log').innerText = `【${selectedOption.label}】➔ 0 �
 animatePassingMovement(targetX, targetY, tempSteps, () => {
 if (isComTry || isPushedBackToOwnGoal || cellData.isOffload || cellData.isAdvantage) {
 isJackalWindowOpen = false;
+isProcessing = false;
 updateDisplayImmediate();
 proceedAfterPlay(pendingPlayData, isPushedBackToOwnGoal);
 } else {
 isJackalWindowOpen = true;
 document.getElementById('log').innerText = `ブレイクダウン！ジャッカル？！（2秒以内）`;
+isProcessing = false;
 updateDisplayImmediate();
 
+if (window.jackalTimer) cancelGameTimeout(window.jackalTimer);
 window.jackalTimer = scheduleGameTimeout(() => {
 if (isJackalWindowOpen) {
 isJackalWindowOpen = false;
@@ -1356,12 +1241,14 @@ processPlayResult(pendingPlayData);
 }
 }
 
-// プレイヤー側のジャッカル発動
 function triggerJackal() {
-if (!isJackalWindowOpen || !pendingPlayData || currentAttacker !== 'COM') return;
+if (isProcessing || !isJackalWindowOpen || !pendingPlayData || currentAttacker !== 'COM') return;
+isProcessing = true;
 
-cancelGameTimeout(window.jackalTimer);
-window.jackalTimer = null;
+if (window.jackalTimer) {
+    cancelGameTimeout(window.jackalTimer);
+    window.jackalTimer = null;
+}
 isJackalWindowOpen = false;
 
 const steps = pendingPlayData.tempSteps;
@@ -1381,6 +1268,7 @@ document.getElementById('log').innerText = `🔥 ジャッカル成功！！ボ�
 pendingPlayData = null;
 
 scheduleGameTimeout(() => {
+isProcessing = false;
 switchTurn("ジャッカル成功によるターンオーバー！");
 }, 1800);
 } else {
@@ -1400,20 +1288,20 @@ updateAvailableChannels();
 document.getElementById('log').innerText = `ペナルティによりCOMの攻撃フェイズがリセット！再アタック！`;
 
 scheduleGameTimeout(() => {
+isProcessing = false;
 executePlay();
 }, 1500);
 }, 1800);
 }
 }
 
-// CPU側のジャッカル処理
 function triggerCpuJackal(tempSteps) {
 let successChance = 1 / 6;
 
-if (steps === -2) successChance = 4 / 6;
-else if (steps === -1) successChance = 4 / 6;
-else if (steps === 0) successChance = 3 / 6;
-else if (steps > 0) successChance = 2 / 6;
+if (tempSteps === -2) successChance = 4 / 6;
+else if (tempSteps === -1) successChance = 4 / 6;
+else if (tempSteps === 0) successChance = 3 / 6;
+else if (tempSteps > 0) successChance = 2 / 6;
 
 const roll = Math.random();
 const isSuccess = roll < successChance;
@@ -1427,6 +1315,7 @@ document.getElementById('log').innerText = `🔥 COMのジャッカル成功！�
 pendingPlayData = null;
 
 scheduleGameTimeout(() => {
+isProcessing = false;
 switchTurn("COMのジャッカル成功によるターンオーバー！");
 }, 2000);
 } else {
@@ -1439,6 +1328,7 @@ pendingPlayData = null;
 scheduleGameTimeout(() => {
 currentPhase = 1;
 document.getElementById('phase-num').innerText = currentPhase + '/5';
+isProcessing = false;
 lockControls(false);
 updateDisplayImmediate();
 updateAvailableChannels();
@@ -1470,7 +1360,6 @@ switchTurn("TURNOVER! スティールされた！");
 return;
 }
 
-// 1A（アドバンテージによるフェイズリセット）処理
 if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
@@ -1478,6 +1367,7 @@ if (isAdvantage) {
     document.getElementById('log').innerText = `アドバンテージ！フェイズが１にリセット！`;
     
     scheduleGameTimeout(() => {
+      isProcessing = false;
       if (currentAttacker === 'P1') {
         lockControls(false);
       } else {
@@ -1498,10 +1388,11 @@ const opResult = offloadOutcomes[opRollIndex];
 
 if (opResult === 'ERROR') {
 playTurnoverSound();
+isProcessing = false;
 switchTurn("Knock forward ハンドリングエラー...");
 } else {
 const opGain = opResult;
-let opTargetY = ballY + opGain;
+let opTargetY = ballY + (currentAttacker === 'P1' ? -opGain : opGain);
 
 if (opTargetY < 0) opTargetY = 0;
 if (opTargetY >= TOTAL_LINES) opTargetY = TOTAL_LINES - 1;
@@ -1513,6 +1404,7 @@ document.getElementById('ball-token').style.top = linePositionsY[ballY] + '%';
 
 scheduleGameTimeout(() => {
 if (checkTryCondition()) return;
+isProcessing = false;
 nextPhase();
 }, 600);
 }
@@ -1520,6 +1412,7 @@ nextPhase();
 return;
 }
 
+isProcessing = false;
 nextPhase();
 }
 
@@ -1538,8 +1431,6 @@ let isP1Try = (targetY <= 0);
 if (targetY < 0) targetY = 0;
 if (targetY >= TOTAL_LINES) targetY = TOTAL_LINES - 1;
 
-lockControls(true);
-
 if (tempSteps > 0) {
 document.getElementById('log').innerText = `【${selectedOption.label}】➔ ${tempSteps}前進！ゲインライン突破！`;
 } else if (tempSteps < 0) {
@@ -1555,6 +1446,7 @@ if (checkTryCondition()) return;
 
 if (isPushedBackToOwnGoal) {
 playTurnoverSound();
+isProcessing = false;
 switchTurnToGoalLine("自陣ゴールに押し戻された！相手のアタックでリスタート！");
 return;
 }
@@ -1562,7 +1454,6 @@ return;
 let cpuWantsJackal = false;
 const isMidOrLateGame = (p1Tries >= 3 || comTries >= 3 || (p1Tries + comTries) >= 4);
 
-// 1A（アドバンテージ）時はジャッカル不可
 if (comJackalCount > 0 && currentPhase < maxPhases && isMidOrLateGame && !isP1Try && !isTO && !isOffload && !isAdvantage) {
 if (tempSteps === -2 && Math.random() < 0.8) cpuWantsJackal = true;
 else if (tempSteps === -1 && Math.random() < 0.5) cpuWantsJackal = true;
@@ -1576,11 +1467,11 @@ return;
 
 if (isTO) {
 playTurnoverSound();
+isProcessing = false;
 switchTurn("TURNOVER! スティールされた！");
 return;
 }
 
-// プレイヤー側の1A（アドバンテージ）処理
 if (isAdvantage) {
     currentPhase = 1;
     document.getElementById('phase-num').innerText = currentPhase + '/5';
@@ -1588,6 +1479,7 @@ if (isAdvantage) {
     document.getElementById('log').innerText = `アドバンテージ！フェイズが１にリセット！`;
     
     scheduleGameTimeout(() => {
+        isProcessing = false;
         lockControls(false);
     }, 800);
     return;
@@ -1603,6 +1495,7 @@ const opResult = offloadOutcomes[opRollIndex];
 
 if (opResult === 'ERROR') {
 playTurnoverSound();
+isProcessing = false;
 switchTurn("Knock forward ハンドリングエラー...");
 } else {
 const opGain = opResult;
@@ -1618,6 +1511,7 @@ document.getElementById('ball-token').style.top = linePositionsY[ballY] + '%';
 
 scheduleGameTimeout(() => {
 if (checkTryCondition()) return;
+isProcessing = false;
 nextPhase();
 }, 600);
 }
@@ -1625,6 +1519,7 @@ nextPhase();
 return;
 }
 
+isProcessing = false;
 nextPhase();
 });
 }
@@ -1648,7 +1543,6 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 }
 
-// トライ条件・勝敗判定（デュース機能追加・バッジ連動）
 function checkTryCondition() {
     if (
         (currentAttacker === 'P1' && ballY <= 0) ||
@@ -1664,11 +1558,9 @@ function checkTryCondition() {
 
         updateDisplayImmediate();
 
-        // 勝敗・デュース判定
         let isFinal = false;
         const diff = Math.abs(p1Tries - comTries);
 
-        // 両者4点以上でデュースモード
         if (p1Tries >= 4 && comTries >= 4) {
             if (diff >= 2) {
                 isFinal = true;
@@ -1676,7 +1568,6 @@ function checkTryCondition() {
                 document.getElementById('log').innerText = `🔥 DEUCE! 2点差がつくまで延長戦！`;
             }
         } else {
-            // 通常時：5点先取
             if (p1Tries >= WINNING_TRIES || comTries >= WINNING_TRIES) {
                 isFinal = true;
             }
@@ -1737,6 +1628,7 @@ function switchTurn(reasonText) {
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
 pendingPlayData = null;
 isJackalWindowOpen = false;
+isProcessing = false;
 
 document.getElementById('log').innerText = `${reasonText} 攻守交代！`;
 
@@ -1760,6 +1652,7 @@ function switchTurnToGoalLine(reasonText) {
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
 pendingPlayData = null;
 isJackalWindowOpen = false;
+isProcessing = false;
 
 ballY = (currentAttacker === 'COM') ? TOTAL_LINES - 3 : 2;
 ballX = 2;
@@ -1793,6 +1686,7 @@ function resetKickOff(nextAttacker = null) {
     pendingPlayData = null;
     isJackalWindowOpen = false;
     window.jackalTimer = null;
+    isProcessing = false;
 
     updateDisplayImmediate();
     updateAvailableChannels();
@@ -1821,6 +1715,7 @@ function showGameSetModal(winner) {
     clearGameTimers();
     lockControls(true);
     isJackalWindowOpen = false;
+    isProcessing = true;
 
     const modal = document.getElementById('modal-overlay');
 
@@ -1863,6 +1758,7 @@ function restartGame() {
 
     pendingPlayData = null;
     isJackalWindowOpen = false;
+    isProcessing = false;
 
     document.getElementById('modal-overlay').style.display = 'none';
     restoreTutorialModalText();
