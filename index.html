@@ -666,9 +666,9 @@ body {
 </div></div><div id="channel-guide-panel"><div id="channel-guide-title">DICE MATRIX</div><div id="channel-guide-list"></div></div><div id="dice-result-container"><div id="dice-color-box"></div><div id="dice-text-box">-</div></div><div id="log">5トライ先取で勝利！（4-4時はデュース）</div></div></div><div id="modal-overlay" onclick="closeTutorialModal(event)"><div id="modal-content" onclick="event.stopPropagation()"><div id="modal-header"><span id="modal-title">DICE RUGBY TACTICS RULES</span>
 <button class="close-btn" onclick="closeTutorialModal()">✕ CLOSE</button>
 </div><div id="modal-body"><div class="tutorial-section"><h4>【対戦ルール】</h4><p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
-・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）自陣インゴールまで押し戻されると攻守交代！<br>
-・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
-ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
+・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トラインラインまで押し戻される(自陣トラインライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
+・フィールドの縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
+ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
 ・<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス4マス）できます！しかしハンドリングエラーのリスクも！<br>
 ・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
  </div><div id="modal-body"><div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>・<strong>BAREL（バレル）</strong>：ゲイン率67％！トライライン直前の堅いディフェンスを突き破る！<br>
@@ -1780,9 +1780,9 @@ document.getElementById('modal-body').innerHTML = `
 <h4>【対戦ルール】</h4>
 <p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>
 ・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
-・5フェイズ経過、ジャッカル（ボール奪取）、自陣インゴールまで押し戻されると攻守交代！<br>
-・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
-  ボールの位置で選択できるアタックが変わります！ダイスの出目を予測、５フェイズ以内にトライを獲りきれ！。<br>
+・5フェイズ経過、ジャッカル（ボール奪取）、自陣トライラインまで押し戻される（自陣トライライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
+・フィールドの縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
+  ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
 ・<strong><span><span>「１＋」</span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス４マス）できます！しかし、ハンドリングエラーのリスクも！<br>
 ・<strong><span><span>「１A」</span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p>
 </div>
