@@ -1861,4 +1861,17 @@ function stopGameOnHidden() {
 
 document.addEventListener('visibilitychange', stopGameOnHidden);
 window.addEventListener('pagehide', suspendGameAudio);
+// Service Workerの登録
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => {
+        console.log('ServiceWorker registered: ', reg);
+      })
+      .catch((err) => {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
+}
+
 </script></body></html>
