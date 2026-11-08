@@ -1790,49 +1790,55 @@ function restartGame() {
 }
 
 function restoreTutorialModalText() {
-    // 【修正】安全のためここでもヘッダーを表示状態にする
     const modalHeader = document.getElementById('modal-header');
     if (modalHeader) {
         modalHeader.style.display = 'flex';
     }
 
-    document.getElementById('modal-title').innerText = "DICE RUGBY TACTICS";
+    const modalTitle = document.getElementById('modal-title');
+    if (modalTitle) {
+        modalTitle.innerText = "DICE RUGBY TACTICS";
+    }
 
-    document.getElementById('modal-body').innerHTML = `
-    <div class="tutorial-section">
-    <h4>【対戦ルール】</h4>
-    <p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>
-    ・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
-    ・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トライラインまで押し戻される（自陣トライライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
-    ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
-      ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
-    ・<strong><span><span>「１＋」</span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大＋４マス）！ハンドリングエラーのリスクも！<br>
-    ・<strong><span><span>「１A」</span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、アタック継続！</p>
-    </div>
-    <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
-    ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
-    ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
-    ・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
-    ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
-    ・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
-    ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
-    ・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
-      </p></div>
+    const modalBody = document.getElementById('modal-body');
+    if (modalBody) {
+        modalBody.innerHTML = `
+        <div class="tutorial-section">
+        <h4>【対戦ルール】</h4>
+        <p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>
+        ・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
+        ・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トライラインまで押し戻される（自陣トライライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
+        ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
+          ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
+        ・<strong><span><span>「１＋」</span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大＋４マス）！ハンドリングエラーのリスクも！<br>
+        ・<strong><span><span>「１A」</span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、アタック継続！</p>
+        </div>
+        <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
+        ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
+        ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
+        ・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
+        ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
+        ・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
+        ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
+        ・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
+          </p></div>
 
-    <div class="tutorial-section">
-    <h4>【ジャッカルシステム（お互いに2回）】</h4>
-    <p>・相手のアタックフェイズ後に可能！（※トライライン到達時、1＋時、1A時は不可）<br>
-    ・<strong>成功率</strong>：後退時は2/3、 0は1/2、前進時は1/3。<br>
-    ・<strong>成功時</strong>：権利消費なしでボール奪取！<br> 
-    ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
-    ・<strong>COMもジャッカルを狙ってきます！</strong></p>
-    </div>
-    <div class="tutorial-section">
-    <h4>【勝利条件】</h4>
-    <p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p>
-    </div>
-    `;
+        <div class="tutorial-section">
+        <h4>【ジャッカルシステム（お互いに2回）】</h4>
+        <p>・相手のアタックフェイズ後に可能！（※トライライン到達時、1＋時、1A時は不可）<br>
+        ・<strong>成功率</strong>：後退時は2/3、 0は1/2、前進時は1/3。<br>
+        ・<strong>成功時</strong>：権利消費なしでボール奪取！<br> 
+        ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+        ・<strong>COMもジャッカルを狙ってきます！</strong></p>
+        </div>
+        <div class="tutorial-section">
+        <h4>【勝利条件】</h4>
+        <p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p>
+        </div>
+        `;
+    }
 }
+
 
 function openTutorialModal() {
     restoreTutorialModalText();
