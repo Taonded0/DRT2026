@@ -1614,9 +1614,13 @@ function checkTryCondition() {
             subtitle.innerText = isP1 ? 'YOU SCORED!' : 'COM SCORED!';
         }
 
+        // ▼【修正】二重の requestAnimationFrame でアニメーションを確実に再発動させる
         celebration.classList.remove('show');
-        void celebration.offsetWidth;
-        celebration.classList.add('show');
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                celebration.classList.add('show');
+            });
+        });
 
         if (isFinal) {
             scheduleGameTimeout(() => {
@@ -1639,6 +1643,7 @@ function checkTryCondition() {
 
     return false;
 }
+
 
 function switchTurn(reasonText) {
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
