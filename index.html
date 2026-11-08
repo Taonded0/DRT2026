@@ -545,7 +545,7 @@ body {
 }
 
 /* ==========================================
-   🔥【完全独立・絶対不滅の演出用レイヤー】
+   🔥【完全同期型の強制描画トライ演出レイヤー】
    ========================================== */
 #pwa-safe-celebration-layer {
     position: fixed;
@@ -554,17 +554,17 @@ body {
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    z-index: 2147483647; /* 最上位に強制固定 */
-    display: none; /* デフォルトは完全に存在を隠す */
+    z-index: 2147483647;
+    display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    background: rgba(5, 7, 12, 0.5);
+    background: rgba(5, 7, 12, 0.6);
 }
 
-#pwa-safe-celebration-layer.show-anim {
-    display: flex;
+#pwa-safe-celebration-layer.active {
+    display: flex !important;
 }
 
 .pwa-burst-fx {
@@ -574,14 +574,28 @@ body {
     border-radius: 50%;
     background: radial-gradient(circle, #ffffff 0%, var(--celeb-color, #00f2fe) 30%, transparent 70%);
     box-shadow: 0 0 60px 25px var(--celeb-color, #00f2fe), 0 0 120px 50px var(--celeb-color, #00f2fe);
-    animation: pwa-burst-anim 1.2s ease-out forwards;
+    transform: scale(0.1);
+    opacity: 1;
+    transition: transform 0.9s cubic-bezier(0.1, 1, 0.3, 1), opacity 0.9s ease-out;
+}
+
+#pwa-safe-celebration-layer.active .pwa-burst-fx {
+    transform: scale(25);
+    opacity: 0;
 }
 
 .pwa-text-fx {
     position: relative;
     z-index: 2;
     text-align: center;
-    animation: pwa-text-anim 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transform: scale(0.2);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-out;
+}
+
+#pwa-safe-celebration-layer.active .pwa-text-fx {
+    transform: scale(1);
+    opacity: 1;
 }
 
 #pwa-main-title {
@@ -607,19 +621,6 @@ body {
     text-shadow: 0 0 12px var(--celeb-color, #00f2fe);
 }
 
-@keyframes pwa-burst-anim {
-    0% { transform: scale(0.1); opacity: 1; }
-    60% { opacity: 0.8; }
-    100% { transform: scale(25); opacity: 0; }
-}
-
-@keyframes pwa-text-anim {
-    0% { transform: scale(0.2) rotate(-10deg); opacity: 0; }
-    40% { transform: scale(1.1) rotate(2deg); opacity: 1; }
-    75% { transform: scale(1) rotate(0deg); opacity: 1; }
-    100% { transform: scale(1.05); opacity: 0; }
-}
-
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
 </div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>TRY</span> <span id="score-container" style="display:flex; align-items:center; gap:4px;"><span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span><span id="deuce-badge" style="display:none; font-size:6px; background:rgba(255,0,127,0.25); border:1px solid #ff007f; color:#ff3399; padding:0 3px; border-radius:2px; font-weight:bold; letter-spacing:0.5px;">DEUCE</span></span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff3399; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 <select id="channel-select"></select>
@@ -635,21 +636,21 @@ body {
 <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
 ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
 ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
-・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
+·<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
 ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
 ・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
 ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
-・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
+·<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
   </p></div>
 <div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※トラインライン到達時およびオフロードパス時、1A時は不可）<br>
-・<strong>成功確率</strong>：相手のアタックが後退した時は2/3、0は1/2、前進時は1/3。<br>
-・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
-·<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+·<strong>成功確率</strong>：相手のアタックが後退した時は2/3、0は1/2、前進時は1/3。<br>
+·<strong>成功時</strong>：権利消費なしでボール奪取！<br>
+・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
 <!-- ==========================================
-   🔥【完全独立・絶対不滅の演出用オーバーレイ】
+   🔥【強制描画対応】トライ演出用オーバーレイ
    ========================================== -->
 <div id="pwa-safe-celebration-layer">
   <div class="pwa-burst-fx"></div>
@@ -1485,7 +1486,7 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 
 // ==========================================
-// 🔥【絶対安心のPWA用演出コントローラー】
+// 🔥【PWA強制描画対策】完全同期型表示関数
 // ==========================================
 function showTryCelebration(isP1, isFinal) {
     const layer = document.getElementById('pwa-safe-celebration-layer');
@@ -1498,14 +1499,18 @@ function showTryCelebration(isP1, isFinal) {
 
     layer.style.setProperty('--celeb-color', color);
 
-    // 一度クラスを完全剥奪してアニメーションをリセット
-    layer.classList.remove('show-anim');
-    void layer.offsetWidth; // 強制再描画
-    layer.classList.add('show-anim');
+    // 強制的に一度完全に隠してからマルチフレームの requestAnimationFrame でOSに描画スレッドを強制解放させる
+    layer.classList.remove('active');
+    
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            layer.classList.add('active');
+        });
+    });
 
-    // 1.3秒後に非表示クラスを剥がす
+    // 1.3秒後に非表示にする
     scheduleGameTimeout(() => {
-        layer.classList.remove('show-anim');
+        layer.classList.remove('active');
     }, 1300);
 }
 
@@ -1542,7 +1547,7 @@ function checkTryCondition() {
         const isP1 = (currentAttacker === 'P1');
         const winner = isP1 ? 'P1' : 'COM';
 
-        // トライ演出を確実に発動
+        // 強制描画のトライ演出を発動
         showTryCelebration(isP1, isFinal);
 
         if (isFinal) {
@@ -1733,28 +1738,28 @@ function restoreTutorialModalText() {
         <h4>【対戦ルール】</h4>
         <p>・<strong>YOU</strong>: 画面上部に向かって攻撃！<br>
         ・<strong>COM</strong>: 画面下部に向かって攻撃！<br>
-        ・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トライラインまで押し戻される（自陣トライライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
+        ·5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トライラインまで押し戻される（自陣トライライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
         ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
           ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
-        ・<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大＋４マス）！ハンドリングエラーのリスクも！<br>
+        ·<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大＋４マス）！ハンドリングエラーのリスクも！<br>
         ・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、アタック継続！</p>
         </div>
         <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
-        ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
+        ·<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
         ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
         ・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
         ·<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
-        ・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
+        ·<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
         ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
         ・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
           </p></div>
 
         <div class="tutorial-section">
         <h4>【ジャッカルシステム（お互いに2回）】</h4>
-        <p>・相手のアタックフェイズ後に可能！（※トライライン到達時、1＋時、1A時は不可）<br>
+        <p>·相手のアタックフェイズ後に可能！（※トライライン到達時、1＋時、1A時は不可）<br>
         ・<strong>成功率</strong>：後退時は2/3、 0は1/2、前進時は1/3。<br>
         ・<strong>成功時</strong>：権利消費なしでボール奪取！<br> 
-        ・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+        ·<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
         ・<strong>COMもジャッカルを狙ってきます！</strong></p>
         </div>
         <div class="tutorial-section">
@@ -1766,9 +1771,8 @@ function restoreTutorialModalText() {
 }
 
 function openTutorialModal() {
-    // 🔥絶対安全対策：チュートリアルを開く時、万が一残っているセレブレーション表示があれば強制消去
     const layer = document.getElementById('pwa-safe-celebration-layer');
-    if (layer) layer.classList.remove('show-anim');
+    if (layer) layer.classList.remove('active');
 
     restoreTutorialModalText();
     document.getElementById('modal-overlay').style.display = 'flex';
@@ -1776,9 +1780,8 @@ function openTutorialModal() {
 
 function closeTutorialModal(event) {
     if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
-        // 🔥絶対安全対策：閉じる時も強制消去
         const layer = document.getElementById('pwa-safe-celebration-layer');
-        if (layer) layer.classList.remove('show-anim');
+        if (layer) layer.classList.remove('active');
 
         const modalHeader = document.getElementById('modal-header');
         const isGameSet = modalHeader && modalHeader.style.display === 'none';
