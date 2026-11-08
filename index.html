@@ -545,80 +545,79 @@ body {
 }
 
 /* ==========================================
-   🔥【PWA完全対応】常駐型セレブレーションレイヤー
+   🔥【完全独立・絶対不滅の演出用レイヤー】
    ========================================== */
-#try-celebration-overlay {
+#pwa-safe-celebration-layer {
     position: fixed;
-    inset: 0;
-    z-index: 99999;
-    display: flex;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 2147483647; /* 最上位に強制固定 */
+    display: none; /* デフォルトは完全に存在を隠す */
     flex-direction: column;
     align-items: center;
     justify-content: center;
     pointer-events: none;
-    background: rgba(5, 7, 12, 0.4);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
+    background: rgba(5, 7, 12, 0.5);
 }
 
-#try-celebration-overlay.active {
-    opacity: 1;
-    visibility: visible;
+#pwa-safe-celebration-layer.show-anim {
+    display: flex;
 }
 
-#celebration-burst-circle {
+.pwa-burst-fx {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background: radial-gradient(circle, #ffffff 0%, var(--try-color, #00f2fe) 30%, transparent 70%);
-    box-shadow: 0 0 50px 20px var(--try-color, #00f2fe), 0 0 100px 40px var(--try-color, #00f2fe);
-    transform: scale(0.1);
-    opacity: 0;
-    transition: transform 0.9s cubic-bezier(0.1, 1, 0.3, 1), opacity 0.9s ease-out;
+    background: radial-gradient(circle, #ffffff 0%, var(--celeb-color, #00f2fe) 30%, transparent 70%);
+    box-shadow: 0 0 60px 25px var(--celeb-color, #00f2fe), 0 0 120px 50px var(--celeb-color, #00f2fe);
+    animation: pwa-burst-anim 1.2s ease-out forwards;
 }
 
-#try-celebration-overlay.active #celebration-burst-circle {
-    transform: scale(22);
-    opacity: 0.9;
-}
-
-#celebration-text-box {
+.pwa-text-fx {
     position: relative;
     z-index: 2;
-    transform: scale(0.3);
-    opacity: 0;
-    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-out;
     text-align: center;
+    animation: pwa-text-anim 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-#try-celebration-overlay.active #celebration-text-box {
-    transform: scale(1);
-    opacity: 1;
-}
-
-#celebration-main-title {
+#pwa-main-title {
     margin: 0;
     padding: 0 10px;
     color: #ffffff;
     font-family: 'Orbitron', sans-serif;
-    font-size: clamp(40px, 12vw, 64px);
+    font-size: clamp(42px, 14vw, 68px);
     font-weight: 900;
     font-style: italic;
     letter-spacing: 2px;
-    -webkit-text-stroke: 1px var(--try-color, #00f2fe);
-    text-shadow: 0 0 10px var(--try-color, #00f2fe), 0 0 25px var(--try-color, #00f2fe), 0 0 50px var(--try-color, #00f2fe);
+    -webkit-text-stroke: 1px var(--celeb-color, #00f2fe);
+    text-shadow: 0 0 12px var(--celeb-color, #00f2fe), 0 0 30px var(--celeb-color, #00f2fe), 0 0 60px var(--celeb-color, #00f2fe);
 }
 
-#celebration-sub-title {
+#pwa-sub-title {
     margin-top: 8px;
-    color: var(--try-color, #00f2fe);
+    color: var(--celeb-color, #00f2fe);
     font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 900;
     letter-spacing: 3px;
-    text-shadow: 0 0 12px var(--try-color, #00f2fe);
+    text-shadow: 0 0 12px var(--celeb-color, #00f2fe);
+}
+
+@keyframes pwa-burst-anim {
+    0% { transform: scale(0.1); opacity: 1; }
+    60% { opacity: 0.8; }
+    100% { transform: scale(25); opacity: 0; }
+}
+
+@keyframes pwa-text-anim {
+    0% { transform: scale(0.2) rotate(-10deg); opacity: 0; }
+    40% { transform: scale(1.1) rotate(2deg); opacity: 1; }
+    75% { transform: scale(1) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1.05); opacity: 0; }
 }
 
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
@@ -645,18 +644,18 @@ body {
 <div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※トラインライン到達時およびオフロードパス時、1A時は不可）<br>
 ・<strong>成功確率</strong>：相手のアタックが後退した時は2/3、0は1/2、前進時は1/3。<br>
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
-・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+·<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
 <!-- ==========================================
-   🔥【PWA完全対応】最初からHTMLに固定配置された演出レイヤー
+   🔥【完全独立・絶対不滅の演出用オーバーレイ】
    ========================================== -->
-<div id="try-celebration-overlay">
-  <div id="celebration-burst-circle"></div>
-  <div id="celebration-text-box">
-    <h1 id="celebration-main-title">TRY!!</h1>
-    <div id="celebration-sub-title">YOU SCORED!</div>
+<div id="pwa-safe-celebration-layer">
+  <div class="pwa-burst-fx"></div>
+  <div class="pwa-text-fx">
+    <h1 id="pwa-main-title">TRY!!</h1>
+    <div id="pwa-sub-title">YOU SCORED!</div>
   </div>
 </div>
 
@@ -1240,10 +1239,10 @@ executePlay();
 function triggerCpuJackal(tempSteps) {
 let successChance = 1 / 6;
 
-if (steps === -2) successChance = 4 / 6;
-else if (steps === -1) successChance = 4 / 6;
-else if (steps === 0) successChance = 3 / 6;
-else if (steps > 0) successChance = 2 / 6;
+if (tempSteps === -2) successChance = 4 / 6;
+else if (tempSteps === -1) successChance = 4 / 6;
+else if (tempSteps === 0) successChance = 3 / 6;
+else if (tempSteps > 0) successChance = 2 / 6;
 
 const roll = Math.random();
 const isSuccess = roll < successChance;
@@ -1486,28 +1485,27 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 
 // ==========================================
-// 🔥【PWA完全対応】確実な常駐レイヤー制御関数
+// 🔥【絶対安心のPWA用演出コントローラー】
 // ==========================================
 function showTryCelebration(isP1, isFinal) {
-    const overlay = document.getElementById('try-celebration-overlay');
-    const mainTitle = document.getElementById('celebration-main-title');
-    const subTitle = document.getElementById('celebration-sub-title');
+    const layer = document.getElementById('pwa-safe-celebration-layer');
+    const mainTitle = document.getElementById('pwa-main-title');
+    const subTitle = document.getElementById('pwa-sub-title');
 
-    const tryColor = isFinal ? (isP1 ? '#ffeaa7' : '#ff3399') : (isP1 ? '#00f2fe' : '#ff3399');
+    const color = isFinal ? (isP1 ? '#ffeaa7' : '#ff3399') : (isP1 ? '#00f2fe' : '#ff3399');
     mainTitle.innerText = isFinal ? (isP1 ? 'VICTORY!!' : 'DEFEAT...') : 'TRY!!';
     subTitle.innerText = isFinal ? 'FULL TIME' : (isP1 ? 'YOU SCORED!' : 'COM SCORED!');
 
-    // CSS変数で色をセット
-    overlay.style.setProperty('--try-color', tryColor);
+    layer.style.setProperty('--celeb-color', color);
 
-    // クラスを外した状態で一度リフロー（再描画）を強制し、確実にアニメーションを走らせる
-    overlay.classList.remove('active');
-    void overlay.offsetWidth;
-    overlay.classList.add('active');
+    // 一度クラスを完全剥奪してアニメーションをリセット
+    layer.classList.remove('show-anim');
+    void layer.offsetWidth; // 強制再描画
+    layer.classList.add('show-anim');
 
-    // 1.3秒後にクラスを外して非表示に戻す
+    // 1.3秒後に非表示クラスを剥がす
     scheduleGameTimeout(() => {
-        overlay.classList.remove('active');
+        layer.classList.remove('show-anim');
     }, 1300);
 }
 
@@ -1544,7 +1542,7 @@ function checkTryCondition() {
         const isP1 = (currentAttacker === 'P1');
         const winner = isP1 ? 'P1' : 'COM';
 
-        // 確実な常駐レイヤーをトリガー
+        // トライ演出を確実に発動
         showTryCelebration(isP1, isFinal);
 
         if (isFinal) {
@@ -1745,7 +1743,7 @@ function restoreTutorialModalText() {
         ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
         ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
         ・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
-        ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
+        ·<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
         ・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
         ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
         ・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
@@ -1768,12 +1766,20 @@ function restoreTutorialModalText() {
 }
 
 function openTutorialModal() {
+    // 🔥絶対安全対策：チュートリアルを開く時、万が一残っているセレブレーション表示があれば強制消去
+    const layer = document.getElementById('pwa-safe-celebration-layer');
+    if (layer) layer.classList.remove('show-anim');
+
     restoreTutorialModalText();
     document.getElementById('modal-overlay').style.display = 'flex';
 }
 
 function closeTutorialModal(event) {
     if (!event || event.target.id === 'modal-overlay' || event.target.classList.contains('close-btn')) {
+        // 🔥絶対安全対策：閉じる時も強制消去
+        const layer = document.getElementById('pwa-safe-celebration-layer');
+        if (layer) layer.classList.remove('show-anim');
+
         const modalHeader = document.getElementById('modal-header');
         const isGameSet = modalHeader && modalHeader.style.display === 'none';
 
