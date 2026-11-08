@@ -680,10 +680,10 @@ body {
 ・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p></div>
 <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
 ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
-・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
+·<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
 ・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
 ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
-・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
+·<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
 ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
 ·<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
   </p></div>
@@ -694,10 +694,8 @@ body {
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
-<div id="try-celebration" aria-hidden="true">
-  <div class="try-title">TRY!!</div>
-  <div class="try-subtitle">INCREDIBLE PLAY!</div>
-</div>
+<!-- トライセレブレーション用のコンテナ（JSで中身を動的生成・破棄します） -->
+<div id="celebration-container"></div>
 
 <script>
 let audioCtx = null;
@@ -1592,38 +1590,18 @@ function checkTryCondition() {
         const isP1 = currentAttacker === 'P1';
         const winner = isP1 ? 'P1' : 'COM';
 
-        const celebration = document.getElementById('try-celebration');
-        const title = celebration.querySelector('.try-title');
-        const subtitle = celebration.querySelector('.try-subtitle');
+        // 【完全対策】セレブレーション要素を毎回HTMLコンテナ内に動的生成して確実にアニメーションさせる
+        const container = document.getElementById('celebration-container');
+        container.innerHTML = `
+        <div id="try-celebration" class="show" style="--try-color: ${isP1 ? '#00f2fe' : '#ff3399'};">
+          <div class="try-title">${isFinal ? (isP1 ? 'VICTORY!!' : 'DEFEAT...') : 'TRY!!'}</div>
+          <div class="try-subtitle">${isFinal ? 'FULL TIME' : (isP1 ? 'YOU SCORED!' : 'COM SCORED!')}</div>
+        </div>
+        `;
 
-        celebration.style.setProperty(
-            '--try-color',
-            isP1 ? '#00f2fe' : '#ff3399'
-        );
-
-        if (isFinal) {
-            title.innerText = isP1 ? 'VICTORY!!' : 'DEFEAT...';
-            subtitle.innerText = 'FULL TIME';
-
-            celebration.style.setProperty(
-                '--try-color',
-                isP1 ? '#ffeaa7' : '#ff3399'
-            );
-        } else {
-            title.innerText = 'TRY!!';
-            subtitle.innerText = isP1 ? 'YOU SCORED!' : 'COM SCORED!';
-        }
-
-        // セレブレーションのクラスを確実に再発動＆1.5秒後に完全に自動消去する安全対策
-        celebration.classList.remove('show');
-        void celebration.offsetWidth;
-        celebration.classList.add('show');
-
-        if (window.celebrationTimer) {
-            clearTimeout(window.celebrationTimer);
-        }
-        window.celebrationTimer = setTimeout(() => {
-            celebration.classList.remove('show');
+        // 1.5秒後に要素自体をきれい消去する
+        scheduleGameTimeout(() => {
+            container.innerHTML = '';
         }, 1500);
 
         if (isFinal) {
