@@ -544,6 +544,83 @@ body {
     overflow-wrap: anywhere;
 }
 
+/* ==========================================
+   🔥【PWA完全対応】常駐型セレブレーションレイヤー
+   ========================================== */
+#try-celebration-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    background: rgba(5, 7, 12, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease-out, visibility 0.25s ease-out;
+}
+
+#try-celebration-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#celebration-burst-circle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, var(--try-color, #00f2fe) 30%, transparent 70%);
+    box-shadow: 0 0 50px 20px var(--try-color, #00f2fe), 0 0 100px 40px var(--try-color, #00f2fe);
+    transform: scale(0.1);
+    opacity: 0;
+    transition: transform 0.9s cubic-bezier(0.1, 1, 0.3, 1), opacity 0.9s ease-out;
+}
+
+#try-celebration-overlay.active #celebration-burst-circle {
+    transform: scale(22);
+    opacity: 0.9;
+}
+
+#celebration-text-box {
+    position: relative;
+    z-index: 2;
+    transform: scale(0.3);
+    opacity: 0;
+    transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-out;
+    text-align: center;
+}
+
+#try-celebration-overlay.active #celebration-text-box {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#celebration-main-title {
+    margin: 0;
+    padding: 0 10px;
+    color: #ffffff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(40px, 12vw, 64px);
+    font-weight: 900;
+    font-style: italic;
+    letter-spacing: 2px;
+    -webkit-text-stroke: 1px var(--try-color, #00f2fe);
+    text-shadow: 0 0 10px var(--try-color, #00f2fe), 0 0 25px var(--try-color, #00f2fe), 0 0 50px var(--try-color, #00f2fe);
+}
+
+#celebration-sub-title {
+    margin-top: 8px;
+    color: var(--try-color, #00f2fe);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 0 0 12px var(--try-color, #00f2fe);
+}
+
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
 </div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>TRY</span> <span id="score-container" style="display:flex; align-items:center; gap:4px;"><span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span><span id="deuce-badge" style="display:none; font-size:6px; background:rgba(255,0,127,0.25); border:1px solid #ff007f; color:#ff3399; padding:0 3px; border-radius:2px; font-weight:bold; letter-spacing:0.5px;">DEUCE</span></span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff3399; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 <select id="channel-select"></select>
@@ -572,8 +649,16 @@ body {
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
-<!-- トライセレブレーション用の空コンテナ -->
-<div id="celebration-container"></div>
+<!-- ==========================================
+   🔥【PWA完全対応】最初からHTMLに固定配置された演出レイヤー
+   ========================================== -->
+<div id="try-celebration-overlay">
+  <div id="celebration-burst-circle"></div>
+  <div id="celebration-text-box">
+    <h1 id="celebration-main-title">TRY!!</h1>
+    <div id="celebration-sub-title">YOU SCORED!</div>
+  </div>
+</div>
 
 <script>
 let audioCtx = null;
@@ -1155,10 +1240,10 @@ executePlay();
 function triggerCpuJackal(tempSteps) {
 let successChance = 1 / 6;
 
-if (tempSteps === -2) successChance = 4 / 6;
-else if (tempSteps === -1) successChance = 4 / 6;
-else if (tempSteps === 0) successChance = 3 / 6;
-else if (tempSteps > 0) successChance = 2 / 6;
+if (steps === -2) successChance = 4 / 6;
+else if (steps === -1) successChance = 4 / 6;
+else if (steps === 0) successChance = 3 / 6;
+else if (steps > 0) successChance = 2 / 6;
 
 const roll = Math.random();
 const isSuccess = roll < successChance;
@@ -1401,101 +1486,28 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 
 // ==========================================
-// 🔥【動的クリーンアップ型】純JS演出エンジン
+// 🔥【PWA完全対応】確実な常駐レイヤー制御関数
 // ==========================================
 function showTryCelebration(isP1, isFinal) {
-    const container = document.getElementById('celebration-container');
-    container.innerHTML = ''; // 残存要素を完全消去
+    const overlay = document.getElementById('try-celebration-overlay');
+    const mainTitle = document.getElementById('celebration-main-title');
+    const subTitle = document.getElementById('celebration-sub-title');
 
     const tryColor = isFinal ? (isP1 ? '#ffeaa7' : '#ff3399') : (isP1 ? '#00f2fe' : '#ff3399');
-    const mainText = isFinal ? (isP1 ? 'VICTORY!!' : 'DEFEAT...') : 'TRY!!';
-    const subText = isFinal ? 'FULL TIME' : (isP1 ? 'YOU SCORED!' : 'COM SCORED!');
+    mainTitle.innerText = isFinal ? (isP1 ? 'VICTORY!!' : 'DEFEAT...') : 'TRY!!';
+    subTitle.innerText = isFinal ? 'FULL TIME' : (isP1 ? 'YOU SCORED!' : 'COM SCORED!');
 
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        pointer-events: none;
-        background: rgba(5, 7, 12, 0.4);
-        opacity: 0;
-        transition: opacity 0.2s ease-out;
-    `;
+    // CSS変数で色をセット
+    overlay.style.setProperty('--try-color', tryColor);
 
-    const burst = document.createElement('div');
-    burst.style.cssText = `
-        position: absolute;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: radial-gradient(circle, #ffffff 0%, ${tryColor} 30%, transparent 70%);
-        box-shadow: 0 0 50px 20px ${tryColor}, 0 0 100px 40px ${tryColor};
-        transform: scale(0.1);
-        opacity: 1;
-        transition: transform 0.9s cubic-bezier(0.1, 1, 0.3, 1), opacity 0.9s ease-out;
-    `;
+    // クラスを外した状態で一度リフロー（再描画）を強制し、確実にアニメーションを走らせる
+    overlay.classList.remove('active');
+    void overlay.offsetWidth;
+    overlay.classList.add('active');
 
-    const textWrap = document.createElement('div');
-    textWrap.style.cssText = `
-        position: relative;
-        z-index: 2;
-        transform: scale(0.3);
-        opacity: 0;
-        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease-out;
-        text-align: center;
-    `;
-
-    const titleEl = document.createElement('h1');
-    titleEl.innerText = mainText;
-    titleEl.style.cssText = `
-        margin: 0;
-        padding: 0 10px;
-        color: #ffffff;
-        font-family: 'Orbitron', sans-serif;
-        font-size: clamp(40px, 12vw, 64px);
-        font-weight: 900;
-        font-style: italic;
-        letter-spacing: 2px;
-        -webkit-text-stroke: 1px ${tryColor};
-        text-shadow: 0 0 10px ${tryColor}, 0 0 25px ${tryColor}, 0 0 50px ${tryColor};
-    `;
-
-    const subEl = document.createElement('div');
-    subEl.innerText = subText;
-    subEl.style.cssText = `
-        margin-top: 8px;
-        color: ${tryColor};
-        font-family: 'Orbitron', sans-serif;
-        font-size: 13px;
-        font-weight: 900;
-        letter-spacing: 3px;
-        text-shadow: 0 0 12px ${tryColor};
-    `;
-
-    textWrap.appendChild(titleEl);
-    textWrap.appendChild(subEl);
-    overlay.appendChild(burst);
-    overlay.appendChild(textWrap);
-    container.appendChild(overlay);
-
-    void overlay.offsetWidth; // リフロー発生
-
-    overlay.style.opacity = '1';
-    burst.style.transform = 'scale(22)';
-    burst.style.opacity = '0';
-    textWrap.style.transform = 'scale(1)';
-    textWrap.style.opacity = '1';
-
+    // 1.3秒後にクラスを外して非表示に戻す
     scheduleGameTimeout(() => {
-        overlay.style.opacity = '0';
-        textWrap.style.transform = 'scale(1.1)';
-        scheduleGameTimeout(() => {
-            container.innerHTML = '';
-        }, 200);
+        overlay.classList.remove('active');
     }, 1300);
 }
 
@@ -1532,6 +1544,7 @@ function checkTryCondition() {
         const isP1 = (currentAttacker === 'P1');
         const winner = isP1 ? 'P1' : 'COM';
 
+        // 確実な常駐レイヤーをトリガー
         showTryCelebration(isP1, isFinal);
 
         if (isFinal) {
