@@ -676,8 +676,8 @@ body {
 ・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トラインラインまで押し戻される(自陣トラインライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
 ・フィールドの縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
 ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
-・<strong><span>「１＋」</span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス4マス）できます！しかしハンドリングエラーのリスクも！<br>
-・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p></div>
+・<strong><span><span>「１＋」</span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大プラス4マス）できます！しかしハンドリングエラーのリスクも！<br>
+・<strong><span><span>「１A」</span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、継続してアタックできます！</p></div>
 <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
 ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
 ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
@@ -1614,7 +1614,6 @@ function checkTryCondition() {
             subtitle.innerText = isP1 ? 'YOU SCORED!' : 'COM SCORED!';
         }
 
-        // ▼【修正】二重の requestAnimationFrame でアニメーションを確実に再発動させる
         celebration.classList.remove('show');
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
@@ -1643,7 +1642,6 @@ function checkTryCondition() {
 
     return false;
 }
-
 
 function switchTurn(reasonText) {
 currentAttacker = (currentAttacker === 'P1') ? 'COM' : 'P1';
@@ -1783,7 +1781,6 @@ function restartGame() {
 
     document.getElementById('modal-overlay').style.display = 'none';
     
-    // 【修正】リセット時にモーダルヘッダーの表示を確実に戻す
     const modalHeader = document.getElementById('modal-header');
     if (modalHeader) {
         modalHeader.style.display = 'flex';
@@ -1815,8 +1812,8 @@ function restoreTutorialModalText() {
         ・5フェイズ経過、ジャッカル（ボール奪取）、オフロードパス失敗（ノックフォワード）、自陣トライラインまで押し戻される（自陣トライライン２つ前のラインから相手の攻撃で再開）と攻守交代！<br>
         ・フィールド縦ラインを端からエッジレーン（EL）、ハーフレーン（HL）、セントラルレーン（CL）と呼びます。
           ボールの位置によって選択できるアタックが変わります！カラーダイスの出目を予測、５フェイズ以内にトライを獲りきれ！<br>
-        ・<strong><span><span>「１＋」</span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大＋４マス）！ハンドリングエラーのリスクも！<br>
-        ・<strong><span><span>「１A」</span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、アタック継続！</p>
+        ・<strong><span><span><span>「１＋」</span></span></span></strong>は、１進んだ後にオフロードパスとして、自動抽選された結果によってさらに前進（最大＋４マス）！ハンドリングエラーのリスクも！<br>
+        ・<strong><span><span><span>「１A」</span></span></span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、アタック継続！</p>
         </div>
         <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
         ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
@@ -1843,7 +1840,6 @@ function restoreTutorialModalText() {
         `;
     }
 }
-
 
 function openTutorialModal() {
     restoreTutorialModalText();
