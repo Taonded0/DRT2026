@@ -544,10 +544,6 @@ body {
     overflow-wrap: anywhere;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  /* モーション軽減設定時はアニメーションを無効化 */
-}
-
 </style></head><body><div id="game-container"><div id="game-header"><div class="header-spacer"></div><div id="game-title">DICE RUGBY TACTICS</div><button class="rule-btn" onclick="openTutorialModal()">?</button>
 </div><div id="board-wrapper"><div class="ingoal-zone ingoal-top">TRY LINE</div><div id="field-container"><div class="v-line" style="left: 10%;"></div><div class="v-line" style="left: 30%;"></div><div class="v-line" style="left: 50%;"></div><div class="v-line" style="left: 70%;"></div><div class="v-line" style="left: 90%;"></div><div id="ball-token"></div></div><div class="ingoal-zone ingoal-bottom">TRY LINE</div></div><div id="controls"><div class="control-row"><div class="control-col-left"><div class="status-item"><span>ATTACKER</span> <span id="current-turn" style="color:#00f2fe; font-weight:bold;">YOU</span></div><div class="status-item"><span>PHASE</span> <span id="phase-num" style="color:#ffffff; font-weight:bold;">1/5</span></div><div class="status-item"><span>TRY</span> <span id="score-container" style="display:flex; align-items:center; gap:4px;"><span id="score-text" style="color:#00f2fe; font-weight:bold;">0 - 0</span><span id="deuce-badge" style="display:none; font-size:6px; background:rgba(255,0,127,0.25); border:1px solid #ff007f; color:#ff3399; padding:0 3px; border-radius:2px; font-weight:bold; letter-spacing:0.5px;">DEUCE</span></span></div><div class="status-item" style="align-items: flex-start;"><span>JACKAL</span> <span id="jackal-count" style="color:#ff3399; font-weight:bold; text-align:right; line-height:1.2;">YOU:2<br>COM:2</span></div></div><div class="control-col-right"><label id="channel-label">ATTACK CHANNEL</label>
 <select id="channel-select"></select>
@@ -563,16 +559,16 @@ body {
 <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
 ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
 ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
-·<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
+・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
 ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
-·<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
+・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
 ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
 ・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
   </p></div>
 <div class="tutorial-section"><h4>【ジャッカルシステム（お互いに2回）】</h4><p>・守備側の時、相手のアタック停止後に発動可能！（※トラインライン到達時およびオフロードパス時、1A時は不可）<br>
 ・<strong>成功確率</strong>：相手のアタックが後退した時は2/3、0は1/2、前進時は1/3。<br>
 ・<strong>成功時</strong>：権利消費なしでボール奪取！<br>
-·<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
+・<strong>失敗時</strong>：権利を1つ消費し、相手のアタックフェイズがリセットされて再攻撃！<br>
 ・<strong>COMも思考してジャッカルを狙ってきます！</strong></p>
 </div><div class="tutorial-section"><h4>【勝利条件】</h4><p>先に<strong>5トライ</strong>を取ったプレイヤーの勝利！<br><span style="color:#00f2fe; font-size:10px;">※4-4となった場合はデュースとなり、2点差がつくまで継続します。</span></p></div></div></div></div>
 
@@ -1405,17 +1401,16 @@ scheduleGameTimeout(() => { executePlay(); }, 1200);
 }
 
 // ==========================================
-// 🔥【絶対確実な純JS演出エンジン】トライセレブレーション
+// 🔥【動的クリーンアップ型】純JS演出エンジン
 // ==========================================
 function showTryCelebration(isP1, isFinal) {
     const container = document.getElementById('celebration-container');
-    container.innerHTML = ''; // 完全にクリーンアップ
+    container.innerHTML = ''; // 残存要素を完全消去
 
     const tryColor = isFinal ? (isP1 ? '#ffeaa7' : '#ff3399') : (isP1 ? '#00f2fe' : '#ff3399');
     const mainText = isFinal ? (isP1 ? 'VICTORY!!' : 'DEFEAT...') : 'TRY!!';
     const subText = isFinal ? 'FULL TIME' : (isP1 ? 'YOU SCORED!' : 'COM SCORED!');
 
-    // オーバーレイ要素をJSで動的構築
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed;
@@ -1431,7 +1426,6 @@ function showTryCelebration(isP1, isFinal) {
         transition: opacity 0.2s ease-out;
     `;
 
-    // 爆発エフェクト用サークル
     const burst = document.createElement('div');
     burst.style.cssText = `
         position: absolute;
@@ -1445,7 +1439,6 @@ function showTryCelebration(isP1, isFinal) {
         transition: transform 0.9s cubic-bezier(0.1, 1, 0.3, 1), opacity 0.9s ease-out;
     `;
 
-    // テキスト要素
     const textWrap = document.createElement('div');
     textWrap.style.cssText = `
         position: relative;
@@ -1489,22 +1482,19 @@ function showTryCelebration(isP1, isFinal) {
     overlay.appendChild(textWrap);
     container.appendChild(overlay);
 
-    // 強制ブラウザ再描画（リフロー）を挟んでからアニメーションをスタートさせる
-    void overlay.offsetWidth;
+    void overlay.offsetWidth; // リフロー発生
 
-    // アニメーション開始（フェードイン ＆ 拡大）
     overlay.style.opacity = '1';
     burst.style.transform = 'scale(22)';
     burst.style.opacity = '0';
     textWrap.style.transform = 'scale(1)';
     textWrap.style.opacity = '1';
 
-    // 1.3秒後にフェードアウトさせて消去
     scheduleGameTimeout(() => {
         overlay.style.opacity = '0';
         textWrap.style.transform = 'scale(1.1)';
         scheduleGameTimeout(() => {
-            container.innerHTML = ''; // 完全にDOMから消去して無害化
+            container.innerHTML = '';
         }, 200);
     }, 1300);
 }
@@ -1542,7 +1532,6 @@ function checkTryCondition() {
         const isP1 = (currentAttacker === 'P1');
         const winner = isP1 ? 'P1' : 'COM';
 
-        // 確実なJS演出エンジンを呼び出し
         showTryCelebration(isP1, isFinal);
 
         if (isFinal) {
@@ -1740,10 +1729,10 @@ function restoreTutorialModalText() {
         ・<strong><span>「１A」</span></strong>（アドバンテージ）は、１進んだ後にフェイズ数がリセット（１に戻る）され、アタック継続！</p>
         </div>
         <div class="tutorial-section"><h4>【アタックチャンネル】</h4><p>
-        ·<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
-        ·<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
+        ・<strong>BAREL（バレル）</strong>：ゲイン率67％、重いFWで前に出る！<br>
+        ・<strong>DRIVE（ドライブ）</strong>:CLのポイントからサイドアタック！<br>
         ・<strong>SPREAD（スプレッド）</strong>:BKへ展開、頼りになる万能型！<br>
-        ·<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
+        ・<strong>ADEPT（アデプト）</strong>:CLからゲームメイク、相手のペナルティを誘発させる！<br>
         ・<strong>CRUSH（クラッシュ）</strong>:フィールド中央が主戦場、オフロードパスの使い手！<br>
         ・<strong>SCOOT（スクート）</strong>:隙をついてブラインドサイドを駆け上がる！<br>
         ・<strong>BURST（バースト）</strong>:ELのモンスター、豪快ゆえに後退のリスクも。<br>  
